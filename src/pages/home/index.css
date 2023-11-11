@@ -1,0 +1,10 @@
+.home-container {
+    width: 100vw;
+    min-height: 100vh;
+    background-color: #e2e2e2;
+}
+.home-type-list {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

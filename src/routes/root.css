@@ -1,0 +1,82 @@
+.main {
+    display: flex;
+}
+.right {
+    /*padding: 20px;*/
+    width: calc(100vw);
+}
+
+/* 查询栏统一样式 */
+.search-module {
+    border-bottom: 1px solid #efefef;
+}
+.search-line {
+    display: flex;
+    flex-wrap: wrap;
+}
+.search-item {
+    padding: 6px 0;
+    display: flex;
+    align-items: center;
+}
+.search-item >span {
+    margin-right: 10px;
+    text-align: right;
+    min-width: 120px;
+}
+.select-input {
+    width: 196px;
+}
+.search-btn-line {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+.search-btn-line >button {
+    margin: 0 4px;
+}
+/* ----- */
+
+/* 弹框底部 */
+.modal-footer {
+    margin-top: 12px;
+    text-align: center;
+}
+.modal-footer >button {
+    margin: 0 4px;
+}
+/* ----- */
+
+/* 表单 */
+.form-row {
+    display: flex;
+    justify-content: space-between;
+}
+.form-title {
+    padding: 4px 0 8px;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    font-weight: 500;
+}
+.form-title::before {
+    margin-right: 4px;
+    content: "";
+    width: 4px;
+    height: 16px;
+    border-radius: 2px;
+    background-color: #0050b3;
+}
+/**/
+
+/* antd样式覆盖 */
+.ant-tabs-tab-remove {
+    margin-right: -12px !important;
+    margin-left: 0px !important;
+}
+.ant-tabs-nav .ant-tabs-tab {
+    padding: 2px 16px !important;
+}
+.ant-form-item .ant-form-item-label >label {
+    min-width: 90px;
+}

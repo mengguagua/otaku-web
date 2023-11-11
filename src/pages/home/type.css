@@ -1,0 +1,31 @@
+.type-container {
+    height: 400px !important;
+    padding: 10px;
+    font-size: 14px;
+    width: 100px;
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(0,0,0,.1);
+    border-bottom: 1px solid #e2e2e2;
+    color: #555;
+    border-radius: 3px;
+}
+.type-menu {
+    padding: 12px 0;
+    text-align: center;
+    border-bottom: 1px solid #e2e2e2;
+    cursor: pointer;
+}
+.type-menu:hover {
+    background-color: #f5f5f5;
+    color: #000;
+    text-decoration: none;
+}
+.type-menu-select {
+    padding: 12px 0;
+    text-align: center;
+    border-bottom: 1px solid #e2e2e2;
+    border-radius: 3px;
+    background-color: #334;
+    color: #fff;
+    cursor: pointer;
+}
