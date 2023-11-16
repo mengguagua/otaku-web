@@ -1,6 +1,5 @@
 import './index.css';
 import Type from './type';
-import Header from '../header/index';
 import List from './list';
 import React, {useEffect, useState} from "react";
 import {linkGetPublic} from "../../service/interface";
@@ -33,7 +32,6 @@ let home =() => {
   return(
     <>
       <div className={'home-container'}>
-        <Header/>
         <div className={'home-type-list'}>
           <Type changeType={changeType} currentKey={currentKey} ></Type>
           <List key={listData} listData={listData} searchData={searchData}></List>

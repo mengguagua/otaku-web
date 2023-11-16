@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
+import store from './store/store'
 // 路由官网：https://reactrouter.com/en/main/start/tutorial
 import { RouterProvider, } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
@@ -14,7 +15,6 @@ import './index.css'
 import router from './routes/router';
 // 设置redux store
 import { Provider } from 'react-redux'
-import store from './store/store'
 
 dayjs.locale('zh-cn');
 ReactDOM.createRoot(document.getElementById('root')).render(

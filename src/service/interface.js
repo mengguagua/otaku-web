@@ -11,3 +11,8 @@ export function menuList(req) {
 export function linkGetPublic(req) {
   return axios.post(`/otaku-web/link/getPublic`, req);
 }
+
+// 查询用户
+export function getUserInfo(req) {
+  return axios.post(`/otaku-web/auth/userInfo`, req);
+}

@@ -12,13 +12,13 @@ http://localhost:8888/otaku/
 - root.css 布局样式，公共样式内容。
 > 其它页面开发，如查询栏等，公共内容，不提取组件，通过公共样式实现样式统一
 - errorPage：router报错时候的跳转页面
-- pages文件夹：业务组件
+- pages文件夹：业务页面
 ### 添加页面操作顺序
 1、pages里新建带业务名称的文件夹A，在文件夹内新建index.jsx
 
 2、src/routes/router.jsx 文件内引入index.jsx，且声明路由
 
-3、src/routes/menu/menu.jsx 文件内声明新页面的菜单(若调用接口，则在数据库内添加)
+// 3、src/routes/menu/menu.jsx 文件内声明新页面的菜单(若调用接口，则在数据库内添加)
 
 ### 添加redux全局状态顺序
 1、在src/store下新增一个xxxSlice.js的状态切片(可参考loadingSlice) // 命名规则xxx为state状态名字
@@ -40,6 +40,7 @@ http://localhost:8888/otaku/
     import { useDispatch } from 'react-redux'
     // 导入redux切片的reducers
     import { openLoading, closeLoading } from '../store/loadingSlice'
+    const dispatch = useDispatch()
     // 业务逻辑里触发action
     dispatch(openLoading())
 ```

@@ -5,6 +5,12 @@
     /*padding: 20px;*/
     width: calc(100vw);
 }
+/* root 公共样式 */
+.root-cursor {
+    cursor: pointer;
+}
+
+
 
 /* 查询栏统一样式 */
 .search-module {

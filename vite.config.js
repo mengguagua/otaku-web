@@ -15,7 +15,7 @@ export default defineConfig({
       }
     }
   },
-  base: '/otaku/home/', // 资源定位更改为相对路径
+  base: '/otaku/', // 资源定位更改为相对路径
   server: {
     port: 8899,
     host: '0.0.0.0',
