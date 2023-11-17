@@ -33,8 +33,8 @@ let home =() => {
     <>
       <div className={'home-container'}>
         <div className={'home-type-list'}>
-          <Type changeType={changeType} currentKey={currentKey} ></Type>
-          <List key={listData} listData={listData} searchData={searchData}></List>
+          <Type changeType={changeType} currentKey={currentKey} />
+          <List key={listData} listData={listData} searchData={searchData}/>
         </div>
       </div>
     </>

@@ -64,7 +64,7 @@ axios.interceptors.response.use(
     }
     // 请求成功，但是操作不成功时显示后端返回的错误信息
     if (res.data.status !== 1) {
-      let errorMessage = res.data.message;
+      let errorMessage = res.data.data;
       if (errorMessage?.length > 60) { // 限制报错提示长度
         errorMessage = res.data.message.slice(0,58) + '...'
         console.log('ERROR：', res.data.message)

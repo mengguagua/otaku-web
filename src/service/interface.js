@@ -16,3 +16,8 @@ export function linkGetPublic(req) {
 export function getUserInfo(req) {
   return axios.post(`/otaku-web/auth/userInfo`, req);
 }
+
+// 登录
+export function authLogin(req) {
+  return axios.post(`/otaku-web/auth/login`, req);
+}
