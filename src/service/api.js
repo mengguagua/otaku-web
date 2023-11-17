@@ -28,18 +28,7 @@ axios.interceptors.request.use(
 // response响应拦截处理
 axios.interceptors.response.use(
   res => {
-    // debugger
     store.dispatch(closeLoading());
-    // 没登录，跳转登录
-    if (res.headers['permission-status'] && Number(res.headers['permission-status']) == 1) {
-      // window.location.href = res.headers['redirect-url'];
-      // return Promise.reject(res.data);
-    }
-    // 没接口权限
-    if (res.headers['permission-status'] && Number(res.headers['permission-status']) == 2) {
-      message.warning('无操作权限', 5);
-      return Promise.reject(res.data);
-    }
     // 文件下载统一处理
     if (res.config.method == 'get' && res.config.params.isBlobRequest) {
       if (res.data.type === 'application/json') {
@@ -75,8 +64,11 @@ axios.interceptors.response.use(
     return res.data;
   },
   err => {
-    // debugger
-    message.error('网络拥堵，稍后再试', 5);
+    if (err.response.data?.data?.message === "Unauthorized") {
+      message.warning('请先登录', 3);
+    } else {
+      message.error('网络拥堵，稍后再试', 5);
+    }
     store.dispatch(closeLoading());
     return Promise.reject(err);
   }

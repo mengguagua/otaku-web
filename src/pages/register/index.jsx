@@ -5,7 +5,7 @@ import {useNavigate} from "react-router-dom";
 import {Form, Input, Button, Alert} from "antd";
 // 暂时用阿里智慧验证码
 import { SmartCaptcha } from '@pansy/smart-captcha';
-import { authLogin } from "../../service/interface";
+import { userCreate } from "../../service/interface";
 import md5 from 'md5';
 
 let index =() => {
@@ -33,16 +33,14 @@ let index =() => {
       return false;
     }
     let md5Code = md5(values.password);
-    let resp = await authLogin({
+    await userCreate({
       phone: values.phone,
       password: md5Code,
     });
-    // todo 设置token
-    goHome();
+    navigate('/otaku/login/');
   }
 
   let isSuccess = (data) => {
-
     setCanLogin(true);
   }
 
@@ -54,7 +52,7 @@ let index =() => {
           <div className={'login-row'}>
             <div onClick={goHome} className={'root-cursor'}>Link</div>
             <Icon icon="fe:arrow-up" color="#333" rotate={1} />
-            <span style={{color: '#333'}}>login</span>
+            <span style={{color: '#333'}}>注册</span>
           </div>
           {
             warningMessage.length > 0 ? <Alert message={warningMessage} type="warning" showIcon closable style={{marginTop: '4px'}} onClose={() => {setWarningMessage('')}} /> : ''
@@ -77,13 +75,11 @@ let index =() => {
               <Form.Item label="" name="password">
                 <div>
                   <span className={'login-label'}>密码</span>
-                  <Input.Password style={{width: 320}} placeholder={'输入密码'}/>
+                  <Input style={{width: 320}} placeholder={'输入密码'}/>
                 </div>
               </Form.Item>
-              {/* 严格模式，会渲染两次。上线后就正常 */}
               <SmartCaptcha style={{marginLeft: '90px', marginBottom: '10px'}} onSuccess={isSuccess}/>
-              <Button type="primary" htmlType="submit" style={{marginLeft: '90px'}} disabled={!canLogin}> 登 录 </Button>
-              <div className={'login-forget'}>我忘记了密码</div>
+              <Button type="primary" htmlType="submit" style={{marginLeft: '90px'}} disabled={!canLogin}> 注 册 </Button>
             </div>
           </Form>
         </div>

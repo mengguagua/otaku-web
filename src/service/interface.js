@@ -6,18 +6,19 @@ import axios from './api';
 export function menuList(req) {
   return axios.get(`/otaku-web/link/getPublic`, {params: req});
 }
-
 // 查询公共link
 export function linkGetPublic(req) {
   return axios.post(`/otaku-web/link/getPublic`, req);
 }
-
 // 查询用户
 export function getUserInfo(req) {
   return axios.post(`/otaku-web/auth/userInfo`, req);
 }
-
 // 登录
 export function authLogin(req) {
   return axios.post(`/otaku-web/auth/login`, req);
+}
+// 注册
+export function userCreate(req) {
+  return axios.post(`/otaku-web/user/create`, req);
 }

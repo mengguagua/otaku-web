@@ -24,6 +24,9 @@ let index =() => {
   let goLogin = () => {
     navigate('login/');
   }
+  let goRegister = () => {
+    navigate('register/');
+  }
 
   let goHome = () => {
     navigate('home/');
@@ -35,6 +38,9 @@ let index =() => {
       <div className={'header-container'}>
         <Icon icon="line-md:coffee-half-empty-twotone-loop" color="#333" width={40} />
         <div style={{fontSize: '24px',cursor: 'pointer'}} onClick={goHome}>LINK</div>
+        {
+          userInfo?.data?.name ? '' : <div className={'header-register'} onClick={goRegister}>注册</div>
+        }
         <div className={'header-user'} onClick={goLogin}>{userInfo?.data?.name || '登录'}</div>
       </div>
     </>

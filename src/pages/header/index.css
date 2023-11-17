@@ -16,3 +16,9 @@
     font-weight: 400;
     cursor: pointer;
 }
+.header-register {
+    position: absolute;
+    right: 60px;
+    font-weight: 400;
+    cursor: pointer;
+}
