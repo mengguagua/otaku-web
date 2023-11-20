@@ -1,0 +1,39 @@
+.login-container {
+    margin: auto;
+    min-height: 400px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 14px;
+    width: 820px;
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(0,0,0,.1);
+    border-bottom: 1px solid #e2e2e2;
+    color: #778087;
+    border-radius: 3px;
+}
+.login-row {
+    display: flex;
+    align-items: center;
+    padding-bottom: 10px;
+    font-size: 16px;
+    border-bottom: 1px solid #e2e2e2
+}
+.form-block {
+    padding: 20px 0 0 20px;
+}
+.login-label {
+    display: inline-block;
+    width: 80px;
+    margin-right: 10px;
+    text-align: right;
+}
+.login-forget {
+    margin-top: 10px;
+    margin-left: 90px;
+    color: #778087;
+    cursor: pointer;
+}
+.login-forget:hover {
+    color: #4d5256;
+    text-decoration: underline;
+}

@@ -11,7 +11,7 @@ export const fetchData = createAsyncThunk('userSlice/fetchData', async () => {
 
 // 创建一个初始状态
 const initialState = {
-  data: [],
+  data: {},
   loading: false,
   error: null,
 };
@@ -19,7 +19,13 @@ const initialState = {
 export const userSlice = createSlice({
   name: 'user',
   initialState,
-  reducers: {},
+  reducers: {
+    setToken: (state,data) => {
+      // console.log(state, data)
+      state.data = {...state, token: data?.payload};
+      localStorage.setItem('BearerToken', data?.payload);
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchData.pending, (state) => {
@@ -28,7 +34,7 @@ export const userSlice = createSlice({
       })
       .addCase(fetchData.fulfilled, (state, action) => {
         state.loading = false;
-        state.data = action.payload;
+        state.data = {...state.data, ...action.payload};
       })
       .addCase(fetchData.rejected, (state, action) => {
         state.loading = false;
@@ -36,4 +42,5 @@ export const userSlice = createSlice({
       });
   }
 })
+export const { setToken } = userSlice.actions
 export default userSlice.reducer
