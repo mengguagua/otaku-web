@@ -12,7 +12,7 @@
 }
 .header-user {
     position: absolute;
-    right: 20px;
+    right: 100px;
     font-weight: 400;
     cursor: pointer;
 }
@@ -21,4 +21,8 @@
     right: 60px;
     font-weight: 400;
     cursor: pointer;
+}
+.header-logout {
+    display: inline-block;
+    margin-left: 8px;
 }

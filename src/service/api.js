@@ -13,10 +13,19 @@ axios.interceptors.request.use(
     if (config.method === 'get') {
       config.params = Object.assign({ t: Date.now() }, config.params);
     }
-    config.headers = {
-      'X-Requested-With': 'XMLHttpRequest',
-      'redirectUrl': location.href
-    };
+    let state = store.getState();
+    let token = '';
+    let BearerToken = localStorage.getItem('BearerToken');
+    if (state?.user?.data?.token || BearerToken) {
+      config.headers = {
+        'authorization': `Bearer ${token || BearerToken}`,
+        'X-Requested-With': 'XMLHttpRequest',
+      };
+    } else {
+      config.headers = {
+        'X-Requested-With': 'XMLHttpRequest',
+      };
+    }
     return config;
   },
   error => {
@@ -65,7 +74,7 @@ axios.interceptors.response.use(
   },
   err => {
     if (err.response.data?.data?.message === "Unauthorized") {
-      message.warning('请先登录', 3);
+      // message.warning('请先登录', 3);
     } else {
       message.error('网络拥堵，稍后再试', 5);
     }

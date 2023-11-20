@@ -7,8 +7,12 @@ import {Form, Input, Button, Alert} from "antd";
 import { SmartCaptcha } from '@pansy/smart-captcha';
 import { authLogin } from "../../service/interface";
 import md5 from 'md5';
+import { setToken } from '../../store/userSlice'
+import {useDispatch} from "react-redux";
+import {openLoading} from "../../store/loadingSlice";
 
 let index =() => {
+  const dispatch = useDispatch()
   const navigate = useNavigate();
 
   let [canLogin, setCanLogin] = useState(false);
@@ -37,7 +41,7 @@ let index =() => {
       phone: values.phone,
       password: md5Code,
     });
-    // todo 设置token
+    dispatch(setToken(resp?.data?.access_token));
     goHome();
   }
 
