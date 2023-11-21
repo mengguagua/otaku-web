@@ -7,9 +7,8 @@ import {Form, Input, Button, Alert} from "antd";
 import { SmartCaptcha } from '@pansy/smart-captcha';
 import { authLogin } from "../../service/interface";
 import md5 from 'md5';
-import { setToken } from '../../store/userSlice'
+import { setToken, fetchData } from '../../store/userSlice'
 import {useDispatch} from "react-redux";
-import {openLoading} from "../../store/loadingSlice";
 
 let index =() => {
   const dispatch = useDispatch()
@@ -42,6 +41,7 @@ let index =() => {
       password: md5Code,
     });
     dispatch(setToken(resp?.data?.access_token));
+    dispatch(fetchData());
     goHome();
   }
 

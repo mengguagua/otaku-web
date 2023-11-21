@@ -3,11 +3,16 @@ import Type from './type';
 import List from './list';
 import React, {useEffect, useState} from "react";
 import {linkGetPublic} from "../../service/interface";
+import { Icon } from '@iconify/react';
+import {useSelector} from "react-redux";
 
 let home =() => {
+  let [showFlag, setShowFlag] = useState(false);
   let [listData, setListData] = useState([]);
   let [currentKey, setCurrentKey] = useState('全部');
-
+  const userInfo = useSelector((state) => {
+    return state.user;
+  });
   useEffect(()=> {
     searchData();
   }, [])
@@ -36,6 +41,21 @@ let home =() => {
           <Type changeType={changeType} currentKey={currentKey} />
           <List key={listData} listData={listData} searchData={searchData}/>
         </div>
+        {
+          !!userInfo?.data?.sub ?
+            <div className={'home-switch'} onClick={() => {setShowFlag(!showFlag)}}>
+              {
+                showFlag ? <Icon icon="line-md:person-remove-filled" width="40" /> :
+                  <Icon icon="line-md:person-add-filled" width="40" />
+              }
+            </div> : ''
+        }
+        {
+          showFlag ?
+          <div className={'home-type-list'}>
+            <List key={listData} listData={listData} searchData={searchData}/>
+          </div> : ''
+        }
       </div>
     </>
   );

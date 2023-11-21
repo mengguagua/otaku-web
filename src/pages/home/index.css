@@ -1,10 +1,67 @@
 .home-container {
+    display: flex;
+    justify-content: center;
     width: 100vw;
-    min-height: 100vh;
+    min-height: calc(100vh - 44px);
     background-color: #e2e2e2;
+    padding-bottom: 40px;
 }
 .home-type-list {
     display: flex;
     justify-content: center;
     padding-top: 20px;
+    animation-name: animationList;
+    animation-duration: 300ms;
+}
+.home-empty-list {
+    margin-top: 20px;
+    min-height: 80vh;
+    padding: 10px;
+    box-sizing: border-box;
+    width: 500px;
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(0,0,0,.1);
+    border-bottom: 1px solid #e2e2e2;
+    border-radius: 3px;
+    animation-name: animationList2;
+    animation-duration: 300ms;
+}
+.home-type-list> :nth-child(1) {
+    margin-right: 10px;
+}
+.home-switch {
+    display: flex;
+    align-items: center;
+    margin: 20px 10px 0;
+    min-height: 80vh;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(0,0,0,.1);
+    border-bottom: 1px solid #e2e2e2;
+    border-radius: 3px;
+    cursor: pointer;
+}
+/* 动画名称 */
+@keyframes animationList {
+    0% {
+        width: 0;
+    }
+    100% {
+        width: 500px;
+    }
+}
+@keyframes animationList2 {
+    0% {
+        width: 500px;
+        opacity: 1;
+    }
+    40% {
+        width: 200px;
+        opacity: 0.4;
+    }
+    100% {
+        width: 0;
+        opacity: 0;
+    }
 }
