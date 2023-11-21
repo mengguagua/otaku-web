@@ -1,7 +1,7 @@
 import {Menu} from "antd";
 import './menu.css';
 import {useNavigate} from "react-router-dom";
-import {menuList} from '../../service/interface';
+// import {menuList} from '../../service/interface';
 
 const menus = [
   {
@@ -102,11 +102,11 @@ let LeftMenu = ({keys, setKeys, activeKey, setActiveKey, tabItems, setTabItems})
   }
   // 默认调用接口
   let queryMenu = () => {
-    menuList().then((resp) => {
-      let menu = deleteEmptyChildren(resp?.data);
-      // 使用前端的静态菜单就注释下面一行
-      // setMenus(menu)
-    });
+    // menuList().then((resp) => {
+    //   let menu = deleteEmptyChildren(resp?.data);
+    //   // 使用前端的静态菜单就注释下面一行
+    //   // setMenus(menu)
+    // });
   };
   return (
     <div className={'left'}>
