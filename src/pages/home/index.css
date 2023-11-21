@@ -1,10 +1,77 @@
 .home-container {
+    display: flex;
+    justify-content: center;
     width: 100vw;
-    min-height: 100vh;
+    min-height: calc(100vh - 44px);
     background-color: #e2e2e2;
+    padding-bottom: 40px;
 }
 .home-type-list {
     display: flex;
     justify-content: center;
     padding-top: 20px;
+    animation-name: animationList;
+    animation-duration: 200ms;
+    animation-timing-function: revert;
+}
+.home-type--mine-list {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+    animation-name: animationList;
+    animation-duration: 200ms;
+    animation-timing-function: revert;
+}
+.home-type-empty {
+    margin-top: 20px;
+    min-height: 80vh;
+    box-sizing: border-box;
+    background-color: #fff;
+    width: 500px;
+    box-shadow: 0 2px 3px rgba(0,0,0,.1);
+    border-bottom: 1px solid #e2e2e2;
+    border-radius: 3px;
+    animation-name: animationListEmpty;
+    animation-duration: 200ms;
+    /*动画结束设置为动画最后一帧的样式*/
+    animation-fill-mode: forwards;
+}
+.home-type-list> :nth-child(1) {
+    margin-right: 10px;
+}
+.home-switch {
+    display: flex;
+    align-items: center;
+    margin: 20px 10px 0;
+    min-height: 80vh;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(0,0,0,.1);
+    border-bottom: 1px solid #e2e2e2;
+    border-radius: 3px;
+    cursor: pointer;
+}
+/* 动画名称 , 动画名称会共享，所以也要唯一 */
+@keyframes animationList {
+    0% {
+        opacity: 0;
+        width: 0;
+    }
+    100% {
+        opacity: 1;
+        width: 500px;
+    }
+}
+@keyframes animationListEmpty {
+    0% {
+        opacity: 1;
+        min-height: 80vh;
+        width: 500px;
+    }
+    100% {
+        opacity: 0.6;
+        width: 0;
+        min-height: 80vh;
+    }
 }

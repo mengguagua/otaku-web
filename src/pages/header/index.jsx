@@ -11,8 +11,6 @@ import {Popconfirm} from "antd";
 let index =() => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
-
-  // const [user, setUser] = useState({});
   const userInfo = useSelector((state) => {
     return state.user;
   });
@@ -34,8 +32,9 @@ let index =() => {
   }
 
   let goLogout = () => {
-
     dispatch(setToken(''));
+    dispatch(fetchData());
+    navigate('home/');
   }
 
 
@@ -47,8 +46,10 @@ let index =() => {
         {
           userInfo?.data?.username ? '' : <div className={'header-register'} onClick={goRegister}>注册</div>
         }
-        <div className={'header-user'} onClick={goLogin}>
-          {userInfo?.data?.username ? `用户 ${userInfo?.data?.username}` : '登录'}
+        <div className={'header-user'}>
+          <div onClick={goLogin}>
+            {userInfo?.data?.username ? `用户 ${userInfo?.data?.username}` : '登录'}
+          </div>
           {userInfo?.data?.username ?
             <Popconfirm
               title="提示"
