@@ -23,6 +23,11 @@
     line-height: 130%;
     word-break: break-word;
     line-break: strict;
+    cursor: pointer;
+}
+.home-list-title:hover {
+    color: #4d5256;
+    text-decoration: underline;
 }
 .home-list-sub {
     display: flex;

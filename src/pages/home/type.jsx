@@ -1,9 +1,8 @@
 import './type.css';
 import {useState} from "react";
-import {linkGetPublic} from "../../service/interface";
-
 
 let type =({changeType , currentKey}) => {
+  // todo 增加最新
   let typeDic = [
     {
       key: 'all',
@@ -25,18 +24,6 @@ let type =({changeType , currentKey}) => {
       label: '问答',
     },
   ];
-
-  // let changeData = async (e)=> {
-  //   let item = JSON.parse(e.target.dataset.item);
-  //   let resp = {};
-  //   if (item.label === '全部') {
-  //     resp = await linkGetPublic();
-  //   } else {
-  //     resp = await linkGetPublic({ type:item.label });
-  //   }
-  //   changeType(resp?.data);
-  //   setCurrentKey(item.label);
-  // };
 
   let menu = typeDic.map((item, index) => {
     return <div key={index} onClick={changeType} data-item={JSON.stringify(item)} className={item.label === currentKey ? 'type-menu-select' :'type-menu'}>{item.label}</div>

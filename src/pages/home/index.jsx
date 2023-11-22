@@ -58,7 +58,7 @@ let home =() => {
             </div> : ''
         }
         {
-          showFlag ?
+          !!userInfo?.data?.sub && showFlag ?
           <div className={'home-type--mine-list'}>
             <List key={mineListData} listData={mineListData} userInfo={userInfo} searchData={searchMineData}/>
           </div> :
