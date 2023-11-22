@@ -20,8 +20,12 @@ let index =() => {
     dispatch(fetchData());
   }, [dispatch]);
 
-  let goLogin = () => {
-    navigate('login/');
+  let goPage = () => {
+    if(userInfo?.data?.username) {
+      navigate('user/');
+    } else {
+      navigate('login/');
+    }
   }
   let goRegister = () => {
     navigate('register/');
@@ -46,9 +50,14 @@ let index =() => {
         {
           userInfo?.data?.username ? '' : <div className={'header-register'} onClick={goRegister}>注册</div>
         }
-        <div className={'header-user'}>
-          <div onClick={goLogin}>
-            {userInfo?.data?.username ? `用户 ${userInfo?.data?.username}` : '登录'}
+        <div className={'header-user root-flex'}>
+          <div onClick={goPage}>
+            {userInfo?.data?.username ?
+              <span className={'root-flex'}>
+                <Icon icon="pixelarticons:user" color="#333" width="20" />
+              {userInfo?.data?.nickName || userInfo?.data?.username}
+              </span>
+              : '登录'}
           </div>
           {userInfo?.data?.username ?
             <Popconfirm

@@ -13,11 +13,19 @@ export function getUserInfo(req) {
 export function authLogin(req) {
   return axios.post(`/otaku-web/auth/login`, req);
 }
-// 注册
+// 注册用户
 export function userCreate(req) {
   return axios.post(`/otaku-web/user/create`, req);
+}
+// 修改用户
+export function userEdit(req) {
+  return axios.post(`/otaku-web/user/edit`, req);
 }
 // 查询某个用户的link列表
 export function linkGetByUserId(req) {
   return axios.post(`/otaku-web/link/getByUserId`, req);
+}
+// 新增链接
+export function linkCreate(req) {
+  return axios.post(`/otaku-web/link/create`, req);
 }

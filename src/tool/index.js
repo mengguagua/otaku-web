@@ -40,3 +40,10 @@ export let downloadFile = (res, type = 'application/pdf;chartset=UTF-8', filenam
   // 在内存中移除URL 对象
   window.URL.revokeObjectURL(herf)
 };
+
+export let checkEmail = (email) => {
+  // 定义邮箱正则表达式
+  let emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+  // 使用正则表达式进行匹配
+  return emailRegex.test(email);
+}
