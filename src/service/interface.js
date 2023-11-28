@@ -29,3 +29,15 @@ export function linkGetByUserId(req) {
 export function linkCreate(req) {
   return axios.post(`/otaku-web/link/create`, req);
 }
+// 修改链接
+export function linkEdit(req) {
+  return axios.post(`/otaku-web/link/edit`, req);
+}
+// 修改链接是否公开
+export function linkChangeIsPublic(req) {
+  return axios.post(`/otaku-web/link/changeIsPublic`, req);
+}
+// 修改个人链接排序
+export function changeRank(req) {
+  return axios.post(`/otaku-web/link/changeRank`, req);
+}
