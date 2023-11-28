@@ -1,7 +1,7 @@
 import './list.css';
 import React, {useEffect, useState} from "react";
 import {Input, Radio, Button, message, Popconfirm} from 'antd';
-import {changeRank, linkChangeIsPublic, linkCreate, linkEdit} from '../../service/interface';
+import {changeGoodNumber, changeRank, linkChangeIsPublic, linkCreate, linkEdit} from '../../service/interface';
 import {Icon} from "@iconify/react";
 
 const { Search } = Input;
@@ -39,7 +39,7 @@ let index =({listData, searchData, userInfo}) => {
                   title=""
                   icon={''}
                   description={`点赞，有点意思~`}
-                  onConfirm={() => {changeGoodNumber(1)}}
+                  onConfirm={() => {changeLike(true, item)}}
                   onCancel={() => {}}
                   okText="Yes"
                   cancelText="No"
@@ -52,7 +52,7 @@ let index =({listData, searchData, userInfo}) => {
                   title=""
                   icon={''}
                   description={`没意思？`}
-                  onConfirm={() => {changeGoodNumber(-1)}}
+                  onConfirm={() => {changeLike(false, item)}}
                   onCancel={() => {}}
                   okText="Yes"
                   cancelText="No"
@@ -148,8 +148,11 @@ let index =({listData, searchData, userInfo}) => {
     });
   };
 
-  let changeGoodNumber = (number) => {
-
+  let changeLike = (type, item) => {
+    changeGoodNumber({id: item.id, likeType: type}).then(() => {
+      messageApi.success(type ? '已点赞' : '已吐槽');
+      searchData();
+    });
   }
 
   let openWindow = (item) => {

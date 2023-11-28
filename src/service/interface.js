@@ -41,3 +41,7 @@ export function linkChangeIsPublic(req) {
 export function changeRank(req) {
   return axios.post(`/otaku-web/link/changeRank`, req);
 }
+// 修改公开链接点赞数
+export function changeGoodNumber(req) {
+  return axios.post(`/otaku-web/link/changeGoodNumber`, req);
+}
