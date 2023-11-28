@@ -19,7 +19,7 @@ import { Provider } from 'react-redux'
 dayjs.locale('zh-cn');
 ReactDOM.createRoot(document.getElementById('root')).render(
   // React.StrictMode说明：https://blog.csdn.net/yuey0809/article/details/126177570
-  <React.StrictMode>
+  // <React.StrictMode>
     <ConfigProvider
       locale={zhCN}
       theme={{
@@ -37,5 +37,5 @@ ReactDOM.createRoot(document.getElementById('root')).render(
         <RouterProvider router={router} />
       </Provider>
     </ConfigProvider>
-  </React.StrictMode>,
+  // {/*</React.StrictMode>*/}
 )

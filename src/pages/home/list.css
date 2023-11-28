@@ -18,6 +18,14 @@
     text-align: left;
     border-bottom: 1px solid #e2e2e2;
 }
+.home-list-user-line {
+    position: relative;
+    padding: 4px 10px 2px;
+    font-size: 14px;
+    line-height: 150%;
+    text-align: left;
+    border-bottom: 1px solid #e2e2e2;
+}
 .home-list-title {
     font-size: 16px;
     line-height: 130%;
@@ -58,6 +66,11 @@
     text-decoration: none;
     word-break: break-all;
 }
+.home-list-public-edit {
+    position: absolute;
+    right: 40px;
+    top: 21px;
+}
 .home-list-empty {
     display: flex;
     justify-content: center;
@@ -80,6 +93,9 @@
     animation-name: animationEmpty;
     animation-duration: 200ms;
     animation-fill-mode: forwards;
+}
+.home-list-edit {
+    cursor: pointer;
 }
 /* 动画名称 */
 @keyframes animationTool {
