@@ -8,7 +8,7 @@ const { Search } = Input;
 
 let isEdit = false;
 
-let index =({listData, searchData, userInfo, isPublic, searchMineData}) => {
+let index =({listData, searchData, userInfo, isPublic, searchMineData, changePage, total}) => {
   let [messageApi, contextHolder] = message.useMessage();
 
   let [listHtml, setListHtml] = useState([]);
@@ -241,12 +241,19 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData}) => {
           // 判断是公开列表还是个人列表。这里是个人列表
           !!userInfo?.data?.sub && !isPublic ?
             <div className={'list-tool-container'}>
-              <div onClick={() => {setShowAdd(!showAdd);isEdit = false;setFormData({type: '乐趣'});}}>
-                {
-                  showAdd ?
-                    <Icon icon="streamline:subtract-square-solid" color="#333" width="22" /> :
-                    <Icon icon="typcn:plus-outline" color="#333" width="26" />
-                }
+              <div className={'root-flex'} style={{justifyContent: "space-between"}}>
+                <div onClick={() => {setShowAdd(!showAdd);isEdit = false;setFormData({type: '乐趣'});}} className={'root-cursor'}>
+                  {
+                    showAdd ?
+                      <Icon icon="streamline:subtract-square-solid" color="#333" width="22" /> :
+                      <Icon icon="typcn:plus-outline" color="#333" width="26" />
+                  }
+                </div>
+                <div className={'root-cursor root-flex'}>
+                  <Icon icon="pixelarticons:next" rotate={2} color="#333" width="24" onClick={() => {changePage(-1)}}/>
+                  <Icon icon="pixelarticons:next" color="#333" width="24" onClick={() => {changePage(1)}}/>
+                  <span>&nbsp; {total} 条</span>
+                </div>
               </div>
               {
                 showAdd ?

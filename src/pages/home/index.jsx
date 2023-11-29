@@ -6,6 +6,10 @@ import {linkGetPublic, linkGetByUserId} from "../../service/interface";
 import { Icon } from '@iconify/react';
 import {useSelector} from "react-redux";
 
+let currentMineListPage = 1;
+let pageSize = 20;
+let originalMineList = []
+
 let home =() => {
   let [showFlag, setShowFlag] = useState(true);
   let [listData, setListData] = useState([]);
@@ -43,7 +47,11 @@ let home =() => {
         }
       })
     });
-    setListData(resp?.data);
+    if (resp?.data.length > pageSize) {
+      setListData(resp?.data.slice(0, pageSize));
+    } else {
+      setListData(resp?.data);
+    }
   }
   let searchMineData = async (e) => {
     let res = await linkGetPublic({name: '', type: '' });
@@ -56,7 +64,25 @@ let home =() => {
         }
       })
     });
-    setMineListData(resp?.data);
+    originalMineList = resp?.data;
+    getCurrentPage(resp?.data, 1);
+  }
+
+  let getCurrentPage = (table, page) => {
+    currentMineListPage = page;
+    // console.log(currentMineListPage);
+    if (table.length > pageSize * currentMineListPage) {
+      setMineListData(table.slice((currentMineListPage-1) * pageSize, pageSize * currentMineListPage));
+    } else {
+      setMineListData(table);
+    }
+  }
+
+  let changePage = (num) => {
+    if (currentMineListPage + num < 1) {
+      return false;
+    }
+    getCurrentPage(originalMineList, currentMineListPage + num);
   }
 
   return(
@@ -78,7 +104,7 @@ let home =() => {
         {
           !!userInfo?.data?.sub && showFlag ?
           <div className={'home-type--mine-list'}>
-            <List key={mineListData} listData={mineListData} userInfo={userInfo} searchData={searchMineData}/>
+            <List key={mineListData} listData={mineListData} userInfo={userInfo} searchData={searchMineData} changePage={changePage} total={originalMineList.length}/>
           </div> :
             <div className={'home-type-empty'}></div>
         }
