@@ -140,6 +140,20 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
     setListHtml(html);
   }
 
+  let showMessage = (content, type = 'success') => {
+    if (type === 'success') {
+      messageApi.success({
+        content: content,
+        icon: <Icon icon="clarity:success-standard-solid" color="#333" style={{marginRight: '4px'}}/>,
+      });
+    } else if (type === 'warning') {
+      messageApi.warning({
+        content: content,
+        icon: <Icon icon="fa:exclamation" color="#333" style={{marginRight: '4px'}}/>,
+      });
+    }
+  }
+
   let toEdit = (item) => {
     isEdit = true;
     setShowAdd(true);
@@ -148,30 +162,30 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
 
   let changePublic = (item) => {
     linkChangeIsPublic({id: item.id, isPublic: !item.isPublic}).then((resp) => {
-      messageApi.success(item.isPublic? '已隐藏' : '已公开');
+      showMessage( item.isPublic? '已隐藏' : '已公开');
       searchData();
     });
   };
   let goDown = (item) => {
     if (item.clickNumber == -1) {
-      messageApi.warning('当前已经置底');
+      showMessage('当前已经置底', 'warning');
       return false;
     }
     changeRank({id: item.id, clickNumber: -1}).then((resp) => {
-      messageApi.success('已置底');
+      showMessage( '已置底');
       searchData();
     });
   };
   let goUp = (item) => {
     changeRank({id: item.id, clickNumber: 10000}).then((resp) => {
-      messageApi.success('已置顶');
+      showMessage( '已置顶');
       searchData();
     });
   };
 
   let changeLike = (type, item) => {
     changeGoodNumber({id: item.id, likeType: type}).then(() => {
-      messageApi.success(type ? '已点赞' : '已吐槽');
+      showMessage(type ? '已点赞' : '已吐槽');
       searchData();
     });
   }

@@ -90,3 +90,7 @@
 .ant-form-item .ant-form-item-label >label {
     min-width: 90px;
 }
+.ant-message-custom-content {
+    display: flex !important;
+    align-items: center !important;
+}

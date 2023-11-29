@@ -22,6 +22,9 @@ let type =({changeType , currentKey}) => {
     }, {
       key: 'qa',
       label: '问答',
+    }, {
+      key: 'other',
+      label: '其它',
     },
   ];
 
