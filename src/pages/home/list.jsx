@@ -42,7 +42,8 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData}) => {
                 okText="Yes"
                 cancelText="No"
               >
-                <Icon icon="typcn:plus-outline" color="#333" width="20" />
+                {/*<Icon icon="typcn:plus-outline" color="#333" width="20" />*/}
+                <Icon icon="ri:star-smile-line" color="#333" width="20" />
               </Popconfirm>
             </div> : ''
         }
@@ -108,7 +109,9 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData}) => {
                 >
                   <Icon icon="material-symbols:thumb-down-outline" color="#333" width="20" />
                 </Popconfirm>
-                <span>&nbsp;&nbsp;</span>
+                {
+                  item.isRepeat ? '' : <span>&nbsp;&nbsp;</span>
+                }
                 <Popconfirm
                   title=""
                   icon={''}
@@ -119,6 +122,7 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData}) => {
                   cancelText="No"
                 >
                   {
+                    item.isRepeat ? '' :
                     item.isPublic ?
                       <Icon icon="icon-park-outline:unlock" color="#333" width="20" /> :
                       <Icon icon="ooui:lock" color="#333" width="20" />

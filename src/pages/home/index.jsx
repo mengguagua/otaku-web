@@ -34,7 +34,7 @@ let home =() => {
   // 默认执行
   let searchData = async (e) => {
     let resp = await linkGetPublic({name: e || '', type: currentKey === '全部' ? '' : currentKey});
-    // 标记公开的链接是不是已经在个人链接里
+    // 标记公开的链接是不是已经在个人链接里，来是否显示收藏按钮
     let res = await linkGetByUserId({name: ''});
     resp?.data.forEach((item) => {
       res?.data.forEach((ret) => {
@@ -46,7 +46,16 @@ let home =() => {
     setListData(resp?.data);
   }
   let searchMineData = async (e) => {
+    let res = await linkGetPublic({name: '', type: '' });
+    // 标记是不是重复的链接，且公开的链接id不是个人的。防止同一个链接，重复出现在公开列表
     let resp = await linkGetByUserId({name: e || ''});
+    resp?.data.forEach((item) => {
+      res?.data.forEach((ret) => {
+        if (item.url === ret.url && item.id !== ret.id) {
+          item.isRepeat = true;
+        }
+      })
+    });
     setMineListData(resp?.data);
   }
 
