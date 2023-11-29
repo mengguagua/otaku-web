@@ -34,6 +34,15 @@ let home =() => {
   // 默认执行
   let searchData = async (e) => {
     let resp = await linkGetPublic({name: e || '', type: currentKey === '全部' ? '' : currentKey});
+    // 标记公开的链接是不是已经在个人链接里
+    let res = await linkGetByUserId({name: ''});
+    resp?.data.forEach((item) => {
+      res?.data.forEach((ret) => {
+        if (item.url === ret.url) {
+          item.isHas = true;
+        }
+      })
+    });
     setListData(resp?.data);
   }
   let searchMineData = async (e) => {
@@ -46,7 +55,7 @@ let home =() => {
       <div className={'home-container'}>
         <div className={'home-type-list'}>
           <Type changeType={changeType} currentKey={currentKey} />
-          <List key={listData} listData={listData} searchData={searchData}/>
+          <List key={listData} listData={listData} userInfo={userInfo} searchData={searchData} searchMineData={searchMineData} isPublic={true}/>
         </div>
         {
           !!userInfo?.data?.sub ?

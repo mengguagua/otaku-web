@@ -66,9 +66,11 @@
     text-decoration: none;
     word-break: break-all;
 }
+
+
 .home-list-public-edit {
     position: absolute;
-    right: 40px;
+    right: 50px;
     top: 21px;
 }
 .home-list-empty {
