@@ -74,12 +74,14 @@ let home =() => {
     if (table.length > pageSize * currentMineListPage) {
       setMineListData(table.slice((currentMineListPage-1) * pageSize, pageSize * currentMineListPage));
     } else {
-      setMineListData(table);
+      setMineListData(table.slice(pageSize * (currentMineListPage-1), table.length));
     }
   }
 
   let changePage = (num) => {
     if (currentMineListPage + num < 1) {
+      return false;
+    } else if (num == 1 && currentMineListPage > originalMineList.length / pageSize ) {
       return false;
     }
     getCurrentPage(originalMineList, currentMineListPage + num);
@@ -104,7 +106,7 @@ let home =() => {
         {
           !!userInfo?.data?.sub && showFlag ?
           <div className={'home-type--mine-list'}>
-            <List key={mineListData} listData={mineListData} userInfo={userInfo} searchData={searchMineData} changePage={changePage} total={originalMineList.length}/>
+            <List key={mineListData} listData={mineListData} userInfo={userInfo} searchData={searchMineData} changePage={changePage} total={originalMineList.length} currentMineListPage={currentMineListPage}/>
           </div> :
             <div className={'home-type-empty'}></div>
         }

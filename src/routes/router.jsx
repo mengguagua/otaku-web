@@ -9,6 +9,7 @@ import Home from '../pages/home/index'
 import Login from '../pages/login/index'
 import Register from '../pages/register/index'
 import User from '../pages/user/index'
+import Technology from '../pages/mdPage/technology'
 
 const router = createBrowserRouter([
   {
@@ -31,6 +32,9 @@ const router = createBrowserRouter([
       }, {
         path: "user",
         element: <User />,
+      }, {
+        path: "technology",
+        element: <Technology />,
       },
     ],
   },

@@ -1,7 +1,10 @@
 import './type.css';
 import {useState} from "react";
+import {Icon} from "@iconify/react";
+import {useNavigate} from "react-router-dom";
 
 let type =({changeType , currentKey}) => {
+  const navigate = useNavigate();
   // todo 增加最新
   let typeDic = [
     {
@@ -32,10 +35,22 @@ let type =({changeType , currentKey}) => {
     return <div key={index} onClick={changeType} data-item={JSON.stringify(item)} className={item.label === currentKey ? 'type-menu-select' :'type-menu'}>{item.label}</div>
   });
 
+  let goPage = () => {
+    navigate('/otaku/technology/');
+  }
+
   return(
     <>
-      <div className={'type-container'}>
-        {menu}
+      <div>
+        <div className={'type-container'}>
+          {menu}
+        </div>
+        <div className={'type-card-coffee'}>
+          <div>请站长一杯</div>
+          <div className={'root-flex'} style={{justifyContent: 'center', marginTop: '4px'}}>咖啡<Icon icon="raphael:coffee" color="#333" width={18}/></div>
+          <img src="/public/code-wx-pay.jpg" alt="二维码" width={80} style={{margin: "10px auto 0"}}/>
+          <div onClick={goPage} style={{fontSize: '13px',marginTop:'10px',textDecoration: "underline", cursor: 'pointer'}}>站点技术框架</div>
+        </div>
       </div>
     </>
   );

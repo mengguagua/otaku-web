@@ -8,12 +8,11 @@ const { Search } = Input;
 
 let isEdit = false;
 
-let index =({listData, searchData, userInfo, isPublic, searchMineData, changePage, total}) => {
+let index =({listData, searchData, userInfo, isPublic, searchMineData, changePage, total, currentMineListPage}) => {
   let [messageApi, contextHolder] = message.useMessage();
 
   let [listHtml, setListHtml] = useState([]);
   let [showAdd, setShowAdd] = useState(false);
-  // let [isEdit, setIsEdit] = useState(false);
   let [formData, setFormData] = useState({type: '乐趣'});
 
   useEffect(()=> {
@@ -23,11 +22,21 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
   let initListHtml = (listData) => {
     let html = listData.map((item,index) => {
       return <div className={!!userInfo?.data?.sub ? 'home-list-user-line' : 'home-list-line'} key={index}>
-        <div className={'home-list-title'} onClick={() => {openWindow(item)}}>{item.name}</div>
+        <div className={'home-list-title root-flex'} onClick={() => {openWindow(item)}}>
+          {
+            isPublic ? <span style={{fontSize: '14px'}}>{index + 1}&nbsp;&nbsp;</span> : ''
+          }
+          {item.name}
+          {
+            index < 3 && isPublic ? <Icon icon="memory:fire" color="#444" width="16"/> : ''
+          }
+        </div>
         <div className={'home-list-sub'}>
           <span>{item.nickName || '无名'}</span>
           <span className={'home-list-circle'}></span>
           <span style={{color: '#ccc', fontWeight: 400}}>{item.updateTime}</span>
+          <span className={'home-list-circle'}></span>
+          <span style={{color: '#ccc', fontWeight: 400}}>{item.type}</span>
         </div>
         {
           // 已经登录可以收藏链接
@@ -85,7 +94,7 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
           // 下面是个人列表的icon按钮
           !!userInfo?.data?.sub && !isPublic ?
             <div>
-              <div className={'home-list-edit'}>
+              <div>
                 <Popconfirm
                   title=""
                   icon={''}
@@ -95,7 +104,7 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
                   okText="Yes"
                   cancelText="No"
                 >
-                  <Icon icon="material-symbols-light:thumb-up" color="#333" width="20" />
+                  <Icon icon="material-symbols-light:thumb-up" color="#333" width="20" className={'home-list-edit'} />
                 </Popconfirm>
                 <span>&nbsp;&nbsp;</span>
                 <Popconfirm
@@ -107,7 +116,7 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
                   okText="Yes"
                   cancelText="No"
                 >
-                  <Icon icon="material-symbols:thumb-down-outline" color="#333" width="20" />
+                  <Icon icon="material-symbols:thumb-down-outline" color="#333" width="20" className={'home-list-edit'} />
                 </Popconfirm>
                 {
                   item.isRepeat ? '' : <span>&nbsp;&nbsp;</span>
@@ -124,13 +133,30 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
                   {
                     item.isRepeat ? '' :
                     item.isPublic ?
-                      <Icon icon="icon-park-outline:unlock" color="#333" width="20" /> :
-                      <Icon icon="ooui:lock" color="#333" width="20" />
+                      <Icon icon="icon-park-outline:unlock" color="#333" width="20" className={'home-list-edit'}/> :
+                      <Icon icon="ooui:lock" color="#333" width="20" className={'home-list-edit'}/>
                   }
                 </Popconfirm>
                 <div  onClick={() => {toEdit(item)}} style={{marginLeft: '8px', display: "inline-block"}}>
-                  <Icon icon="pixelarticons:edit-box" color="#333" width="20"/>
+                  <Icon icon="pixelarticons:edit-box" color="#333" width="20" className={'home-list-edit'}/>
                 </div>
+                {
+                  item.clickNumber >= 10000 ?
+                    <Popconfirm
+                      title=""
+                      icon={''}
+                      description={'取消置顶吗？'}
+                      onConfirm={() => {cancelGoUp(item)}}
+                      onCancel={() => {}}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <div style={{marginLeft: '8px', display: "inline-block", position: "relative"}} className={'home-list-edit'}>
+                        <Icon icon="bxs:arrow-to-top" color="#333" width="20"/> <div style={{position: "absolute", width: '50px', top: 0, left: '16px'}}>已置顶</div>
+                      </div>
+                    </Popconfirm>
+                    : ''
+                }
               </div>
             </div> : ''
         }
@@ -179,6 +205,12 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
   let goUp = (item) => {
     changeRank({id: item.id, clickNumber: 10000}).then((resp) => {
       showMessage( '已置顶');
+      searchData();
+    });
+  };
+  let cancelGoUp = (item) => {
+    changeRank({id: item.id, clickNumber: 0}).then((resp) => {
+      showMessage( '已取消');
       searchData();
     });
   };
@@ -266,7 +298,8 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
                 <div className={'root-cursor root-flex'}>
                   <Icon icon="pixelarticons:next" rotate={2} color="#333" width="24" onClick={() => {changePage(-1)}}/>
                   <Icon icon="pixelarticons:next" color="#333" width="24" onClick={() => {changePage(1)}}/>
-                  <span>&nbsp; {total} 条</span>
+                  <span>&nbsp; 第 {currentMineListPage} 页</span>
+                  <span>&nbsp; 共 {total} 条</span>
                 </div>
               </div>
               {
