@@ -21,7 +21,7 @@ export default defineConfig({
     host: '0.0.0.0',
     proxy: {
       "/otaku-web": {
-        target: "http://localhost:3000/", // 后端ip
+        target: "http://localhost:3100/", // 后端ip
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/otaku-web/, "/"),
       },

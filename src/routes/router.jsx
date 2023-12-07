@@ -10,6 +10,8 @@ import Login from '../pages/login/index'
 import Register from '../pages/register/index'
 import User from '../pages/user/index'
 import Technology from '../pages/mdPage/technology'
+import Article from '../pages/article/index'
+import Text from '../pages/article/text'
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,12 @@ const router = createBrowserRouter([
       }, {
         path: "technology",
         element: <Technology />,
+      }, {
+        path: "article",
+        element: <Article />,
+      }, {
+        path: "article/text",
+        element: <Text />,
       },
     ],
   },
