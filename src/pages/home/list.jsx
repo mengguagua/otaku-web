@@ -262,6 +262,7 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
       });
     } else {
       linkCreate(formData).then((resp) => {
+        setShowAdd(false);
         messageApi.success('已保存');
         searchData();
       });
