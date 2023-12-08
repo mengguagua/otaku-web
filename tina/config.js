@@ -50,14 +50,14 @@ export default defineConfig({
             label: "时间",
             required: true,
           }, {
+            type: "string",
+            name: "url",
+            label: "外链",
+          }, {
             type: "rich-text",
             name: "body",
             label: "文章",
             isBody: true,
-          }, {
-            type: "string",
-            name: "url",
-            label: "外链",
           },
         ],
       }, {

@@ -18,6 +18,7 @@
     "dayjs": "^1.11.9",
     "github-markdown-css": "^5.4.0",
     "md5": "^2.3.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
@@ -27,7 +28,8 @@
     "redux": "^4.2.1",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
-    "tinacms": "^1.5.28"
+    "tinacms": "^1.5.28",
+    "vite-plugin-require": "^1.1.13"
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",
