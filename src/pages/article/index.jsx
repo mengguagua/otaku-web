@@ -48,7 +48,7 @@ let index = () => {
       return { title: post.node.title, time: post.node.time, resume: post.node.resume, url: post.node.url}
     })
     getListHtml(posts);
-    console.log('posts---', posts)
+    // console.log('posts---', posts)
   }
 
   return(

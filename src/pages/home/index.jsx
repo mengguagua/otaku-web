@@ -37,16 +37,19 @@ let home =() => {
 
   // 默认执行
   let searchData = async (e) => {
+
     let resp = await linkGetPublic({name: e || '', type: currentKey === '全部' ? '' : currentKey});
     // 标记公开的链接是不是已经在个人链接里，来是否显示收藏按钮
-    let res = await linkGetByUserId({name: ''});
-    resp?.data.forEach((item) => {
-      res?.data.forEach((ret) => {
-        if (item.url === ret.url) {
-          item.isHas = true;
-        }
-      })
-    });
+    if (userInfo?.data?.sub) {
+      let res = await linkGetByUserId({name: ''});
+      resp?.data.forEach((item) => {
+        res?.data.forEach((ret) => {
+          if (item.url === ret.url) {
+            item.isHas = true;
+          }
+        })
+      });
+    }
     if (resp?.data.length > pageSize) {
       setListData(resp?.data.slice(0, pageSize));
     } else {
