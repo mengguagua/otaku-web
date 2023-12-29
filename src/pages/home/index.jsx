@@ -37,7 +37,6 @@ let home =() => {
 
   // 默认执行
   let searchData = async (e) => {
-
     let resp = await linkGetPublic({name: e || '', type: currentKey === '全部' ? '' : currentKey});
     // 标记公开的链接是不是已经在个人链接里，来是否显示收藏按钮
     if (userInfo?.data?.sub) {

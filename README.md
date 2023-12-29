@@ -1,6 +1,10 @@
 ## vite-react
 ### 运行后，浏览器打开，去要换前缀去router.jsx
 http://localhost:8888/otaku/
+### 运行
+npm run start: 会同步启动tinacms（文章管理）
+npm run dev:单启动前端，文章相关的api无法调用
+
 ### 技术工具
 - react-router-dom：https://reactrouter.com/en/main/start/tutorial
 - ant-design：https://ant.design/components/table-cn#components-table-demo-basic

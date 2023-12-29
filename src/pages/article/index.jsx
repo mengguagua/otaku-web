@@ -29,8 +29,8 @@ let index = () => {
           {index +1 }、{item.title} {item.url? '（外链）' : ''}
         </div>
         <div className={'root-flex article-text'}>
-          <div style={{marginRight: '12px'}}>{moment(item.time).format('yyyy-MM-DD')}</div>
-          <div>{item.resume}</div>
+          <div style={{width: '95px'}}>{moment(item.time).format('yyyy-MM-DD')}</div>
+          <div style={{minWidth: '760px'}}>{item.resume}</div>
         </div>
       </div>
     });
