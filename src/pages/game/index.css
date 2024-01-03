@@ -1,0 +1,84 @@
+.game-top {
+    background-image: url("/public/game/clouds/clouds4.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: calc(100vh - 44px);
+}
+.game-card-line {
+    display: flex;
+    /*align-items: center;*/
+    /*margin-top: 10vh;*/
+}
+.game-card {
+    position: relative;
+    height: 190px;
+    width: 190px;
+    border-radius: 10px;
+    background-color: rgba(0,0,0,0.1);
+    cursor: pointer;
+}
+.game-fate {
+    position: absolute;
+    top: 0;
+    width: 190px;
+    height: 190px;
+    background-repeat: no-repeat;
+    background-size: 1600px 1600px;
+    background-image: url("/public/game/fate/fate.png");
+    border-radius: 10px;
+}
+/*.game-fate:hover {*/
+/*    transition-property: opacity;*/
+/*    transition-duration: 0.3s;*/
+/*    opacity: 0;*/
+/*}*/
+.game-desc {
+    color: #ddd;
+    padding: 10px;
+    font-size: 16px;
+    /*opacity: 1;*/
+}
+.game-fate1 {
+    background-position: -180px -210px;
+}
+.game-fate2 {
+    background-position: -390px -210px;
+}
+.game-fate3 {
+    background-position: -600px -210px;
+}
+
+/*战斗场景*/
+.game-fight-top {
+    position: relative;
+    background-image: url("/public/game/fight/fight-back2.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: calc(100vh - 44px);
+}
+.game-owner {
+    position: absolute;
+    top: 40vh;
+    left: 100px;
+}
+
+
+.game-fire {
+    width: 256px; /* 火球的宽度 */
+    height: 256px; /* 火球的高度 */
+    background-image: url('/public/game/fire/Idle.png');
+    background-repeat: no-repeat;
+    background-position: 0px; /* 从第一个火球开始 */
+    animation: moveFireball 4000ms steps(1) infinite;
+    background-size: 1792px 256px;
+    /*animation: moveFireball 2000ms infinite;*/
+}
+@keyframes moveFireball {
+    0% { background-position: 0px; }
+    16.6% { background-position: -256px; } /* 假设每个火球之间的距离是100像素 */
+    32% { background-position: -512px; } /* 假设每个火球之间的距离是100像素 */
+    48% { background-position: -768px; } /* 假设每个火球之间的距离是100像素 */
+    64% { background-position: -1024px; } /* 假设每个火球之间的距离是100像素 */
+    80% { background-position: -1280px; } /* 假设每个火球之间的距离是100像素 */
+    100% { background-position: -1536px; } /* 假设每个火球之间的距离是100像素 */
+}

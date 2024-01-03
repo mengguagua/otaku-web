@@ -43,11 +43,18 @@ let type =({changeType , currentKey}) => {
     navigate('/otaku/article/');
   }
 
+  let goGame = () => {
+    navigate('/otaku/game/');
+  }
+
   return(
     <>
       <div>
         <div className={'type-container'}>
           {menu}
+        </div>
+        <div className={'type-card-roguelike'} onClick={goGame}>
+          Roguelike
         </div>
         <div className={'type-card-coffee'}>
           <div>请站长一杯</div>
