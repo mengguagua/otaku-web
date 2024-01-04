@@ -13,14 +13,51 @@ let type =({changeType , currentKey}) => {
     init();
   }, []);
 
+  let selectCard = (e) => {
+    let item = JSON.parse(e.currentTarget.dataset.item);
+    console.log('card', item);
+
+    e.currentTarget.parentNode.childNodes.forEach((ret) => {
+      if (e.currentTarget != ret) {
+        ret.classList.remove('game-selected-card');
+      }
+    });
+    // console.log('e.currentTarget.classList', e.currentTarget.classList)
+    if (e.currentTarget.classList.contains('game-selected-card')) {
+      e.currentTarget.classList.remove('game-selected-card');
+    } else {
+      e.currentTarget.classList.add('game-selected-card')
+    }
+  };
+
   let goStart = () => {
     setRound(1);
+    let cardList = [
+      {
+        name: 'attack',
+        type: 1,
+        num: 5,
+      }, {
+        name: 'defend',
+        type: 2,
+        num: 3,
+      }
+    ]
+    let cardListHtml =  cardList.map((item,index) => {
+      return <div className={'game-card-one'} onClick={selectCard} key={index} data-item={JSON.stringify(item)}></div>
+    });
     setPageHtml(
       <div className={'game-fight-top'}>
         <div className={'game-fate game-fate1 game-owner'}></div>
-        <div className={'game-fire game-enemy'}></div>
+        <div className={'game-fire game-enemy1'}></div>
+        <div className={'game-fire game-enemy2'}></div>
+        <div className={'game-fire game-enemy3'}></div>
+        <div className={'game-card-head'}>
+          {cardListHtml}
+        </div>
       </div>
     );
+
   };
 
   let init = () => {

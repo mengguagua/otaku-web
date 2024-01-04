@@ -14,7 +14,7 @@
     height: 190px;
     width: 190px;
     border-radius: 10px;
-    background-color: rgba(0,0,0,0.1);
+    /*background-color: rgba(0,0,0,0.1);*/
     cursor: pointer;
 }
 .game-fate {
@@ -61,24 +61,65 @@
     top: 40vh;
     left: 100px;
 }
+.game-enemy1 {
+    position: absolute;
+    left: 50vw;
+    top: 40vh;
+}
+.game-enemy2 {
+    position: absolute;
+    left: calc(50vw + 240px);
+    top: 40vh;
+}
+.game-enemy3 {
+    position: absolute;
+    left: calc(50vw + 240px + 240px);
+    top: 40vh;
+}
+.game-card-head {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0px;
+    right: 5vw;
+    width: 1300px;
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(0,0,0,0.6);
+}
+.game-card-one {
+    margin-right: 10px;
+    height: 180px;
+    width: 120px;
+    background-color: rgba(255,255,255,1);
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 0;
+    transition-property: margin-top;
+    transition-duration: 0.2s;
+}
+.game-selected-card {
+    margin-top: -40px;
+    transition-property: margin-top;
+    transition-duration: 0.2s;
+}
 
 
 .game-fire {
-    width: 256px; /* 火球的宽度 */
-    height: 256px; /* 火球的高度 */
+    width: 236px; /* 火球的宽度 */
+    height: 140px; /* 火球的高度 */
     background-image: url('/public/game/fire/Idle.png');
     background-repeat: no-repeat;
-    background-position: 0px; /* 从第一个火球开始 */
-    animation: moveFireball 4000ms steps(1) infinite;
+    animation: moveFireball 800ms steps(1) infinite;
     background-size: 1792px 256px;
-    /*animation: moveFireball 2000ms infinite;*/
 }
 @keyframes moveFireball {
-    0% { background-position: 0px; }
-    16.6% { background-position: -256px; } /* 假设每个火球之间的距离是100像素 */
-    32% { background-position: -512px; } /* 假设每个火球之间的距离是100像素 */
-    48% { background-position: -768px; } /* 假设每个火球之间的距离是100像素 */
-    64% { background-position: -1024px; } /* 假设每个火球之间的距离是100像素 */
-    80% { background-position: -1280px; } /* 假设每个火球之间的距离是100像素 */
-    100% { background-position: -1536px; } /* 假设每个火球之间的距离是100像素 */
+    0% { background-position: -30px; }
+    16.6% { background-position: -330px; }
+    32% { background-position: -630px; }
+    48% { background-position: -930px; }
+    64% { background-position: -1230px; }
+    80% { background-position: -1526px; }
+    100% { background-position: -1830px; }
 }
