@@ -61,21 +61,54 @@
     top: 40vh;
     left: 100px;
 }
-.game-enemy1 {
+
+.game-enemy-block {
+    display: flex;
     position: absolute;
     left: 50vw;
     top: 40vh;
 }
-.game-enemy2 {
+
+.game-enemy-arrow {
     position: absolute;
-    left: calc(50vw + 240px);
-    top: 40vh;
+    /*left: 80px;*/
+    top: -20px;
+    width: 80px;
+    height: 80px;
+    background-image: url('/public/game/other/arrow-white.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
 }
-.game-enemy3 {
-    position: absolute;
-    left: calc(50vw + 240px + 240px);
-    top: 40vh;
+
+.game-enemy-arrow0 {
+    left: 75px;
 }
+.game-enemy-arrow1 {
+    left: 275px;
+}
+.game-enemy-arrow2 {
+    left: 475px;
+}
+
+.game-fire {
+    width: 200px; /* 火球的宽度 */
+    height: 140px; /* 火球的高度 */
+    background-image: url('/public/game/fire/Idle.png');
+    background-repeat: no-repeat;
+    animation: moveFireball 800ms steps(1) infinite;
+    background-size: 1792px 256px;
+    cursor: pointer;
+}
+@keyframes moveFireball {
+    0% { background-position: -30px; }
+    16.6% { background-position: -330px; }
+    32% { background-position: -630px; }
+    48% { background-position: -930px; }
+    64% { background-position: -1230px; }
+    80% { background-position: -1526px; }
+    100% { background-position: -1830px; }
+}
+
 .game-card-head {
     display: flex;
     align-items: center;
@@ -103,23 +136,4 @@
     margin-top: -40px;
     transition-property: margin-top;
     transition-duration: 0.2s;
-}
-
-
-.game-fire {
-    width: 236px; /* 火球的宽度 */
-    height: 140px; /* 火球的高度 */
-    background-image: url('/public/game/fire/Idle.png');
-    background-repeat: no-repeat;
-    animation: moveFireball 800ms steps(1) infinite;
-    background-size: 1792px 256px;
-}
-@keyframes moveFireball {
-    0% { background-position: -30px; }
-    16.6% { background-position: -330px; }
-    32% { background-position: -630px; }
-    48% { background-position: -930px; }
-    64% { background-position: -1230px; }
-    80% { background-position: -1526px; }
-    100% { background-position: -1830px; }
 }

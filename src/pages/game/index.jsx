@@ -1,64 +1,109 @@
 import './index.css';
+import { enemyAll, enemyTeam1 } from './enemy.js';
+import {cardAll , fate1} from './card.js';
 import {useEffect, useState} from "react";
 import {Icon} from "@iconify/react";
 import {useNavigate} from "react-router-dom";
 
-let type =({changeType , currentKey}) => {
+let cardAllLength = Object.keys(cardAll).length;
+let fateDic = {
+  1: fate1,
+};
+let enemyTeamDic = {
+  1: enemyTeam1,
+};
+
+let game =() => {
   const navigate = useNavigate();
-  // 轮次
-  let [round, setRound] = useState(0);
-  let [pageHtml, setPageHtml] = useState('');
+  let [round, setRound] = useState(0); // 轮次
+  let [fateCardList, setFateCardList] = useState([]); // 天赋
+  let [enemyTeam, setEnemyTeam] = useState([]); // 敌队
+  let [arrowIndex, setArrowIndex] = useState(0);
+  let [cardIndex, setCardIndex] = useState(0);
+  let [enemyId, setEnemyId] = useState(0);
+
+  let [pageHtml, setPageHtml] = useState(<div/>);
 
   useEffect(() => {
     init();
   }, []);
 
-  let selectCard = (e) => {
-    let item = JSON.parse(e.currentTarget.dataset.item);
-    console.log('card', item);
+  useEffect(() => {
+    if (round !== 0) {
+      drawHtml(fateCardList, enemyTeam);
+    }
+  }, [arrowIndex, cardIndex]);
 
-    e.currentTarget.parentNode.childNodes.forEach((ret) => {
-      if (e.currentTarget != ret) {
-        ret.classList.remove('game-selected-card');
-      }
-    });
-    // console.log('e.currentTarget.classList', e.currentTarget.classList)
-    if (e.currentTarget.classList.contains('game-selected-card')) {
-      e.currentTarget.classList.remove('game-selected-card');
+
+  // 切换卡片
+  let selectCard = (index) => {
+    if (index === cardIndex) {
+      calculation(fateCardList[index]);
     } else {
-      e.currentTarget.classList.add('game-selected-card')
+      setCardIndex(index);
     }
   };
 
-  let goStart = () => {
-    setRound(1);
-    let cardList = [
-      {
-        name: 'attack',
-        type: 1,
-        num: 5,
-      }, {
-        name: 'defend',
-        type: 2,
-        num: 3,
+  // 计算
+  let calculation = (cardInfo) => {
+    let tempEnemyTeam = [...enemyTeam];
+    if (cardInfo.type === 1) { // 攻击卡
+      let currentBlood = enemyTeam[arrowIndex].currentBlood - cardInfo.number
+      if (currentBlood <= 0) {
+        // 血量低于0，销毁对象
+        tempEnemyTeam.splice(arrowIndex, 1)
+        setEnemyTeam(tempEnemyTeam);
+      } else {
+        tempEnemyTeam[arrowIndex].currentBlood = currentBlood;
+        setEnemyTeam(tempEnemyTeam);
       }
-    ]
+    }
+    // 销毁已使用的卡
+    let tempCardList = [...fateCardList];
+    tempCardList.splice(cardIndex, 1)
+    // 设置计算后状态（卡队列和敌人队列）
+    setFateCardList(tempCardList);
+    setEnemyTeam(tempEnemyTeam);
+    // console.log('tempCardList-tempEnemyTeam', tempCardList, tempEnemyTeam);
+    drawHtml(tempCardList, tempEnemyTeam);
+  };
+
+  let goStart = (round, fate) => {
+    setRound(round);
+    setFateCardList(fateDic[fate]);
+    // todo 随机出怪
+    let randomNum = 1;
+    setEnemyTeam(enemyTeamDic[randomNum]);
+    drawHtml(fateDic[fate], enemyTeamDic[randomNum]);
+  };
+
+  let drawHtml = (cardList, enemyList) => {
+    // console.log('cardList', cardList);
     let cardListHtml =  cardList.map((item,index) => {
-      return <div className={'game-card-one'} onClick={selectCard} key={index} data-item={JSON.stringify(item)}></div>
+      return <div
+        className={cardIndex === index ? 'game-card-one game-selected-card' : 'game-card-one'}
+        onClick={ () => {selectCard(index)} }
+        key={index} />
+    });
+    let enemyListHtml = enemyList.map((item,index) => {
+      return <div>
+        <div className={'game-fire'} onClick={ () => {setArrowIndex(index)} } key={index}/>
+        <div className={'game-blood-bar'} key={index}/>
+      </div>
     });
     setPageHtml(
       <div className={'game-fight-top'}>
-        <div className={'game-fate game-fate1 game-owner'}></div>
-        <div className={'game-fire game-enemy1'}></div>
-        <div className={'game-fire game-enemy2'}></div>
-        <div className={'game-fire game-enemy3'}></div>
+        <div className={'game-fate game-fate1 game-owner'}/>
+        <div className={'game-enemy-block'}>
+          <div className={`game-enemy-arrow game-enemy-arrow${arrowIndex}`}/>
+          {enemyListHtml}
+        </div>
         <div className={'game-card-head'}>
           {cardListHtml}
         </div>
       </div>
     );
-
-  };
+  }
 
   let init = () => {
     // 查询接口获取round
@@ -73,13 +118,13 @@ let type =({changeType , currentKey}) => {
                 {/*<div style={{opacity: 0}}>这是描述</div>*/}
                 {/*<div style={{position: "absolute", bottom: '40px',left: '80px'}}>确定</div>*/}
               </div>
-              <div className={'game-fate game-fate1'} onClick={goStart}></div>
+              <div className={'game-fate game-fate1'} onClick={() => goStart(1,1)}/>
             </div>
             <div className={'game-card'} style={{marginRight: '40px'}}>
-              <div className={'game-fate game-fate2'} onClick={goStart}></div>
+              <div className={'game-fate game-fate2'} onClick={goStart}/>
             </div>
             <div className={'game-card'}>
-              <div className={'game-fate game-fate3'} onClick={goStart}></div>
+              <div className={'game-fate game-fate3'} onClick={goStart}/>
             </div>
           </div>
         </div>
@@ -93,4 +138,4 @@ let type =({changeType , currentKey}) => {
     </>
   );
 };
-export default type;
+export default game;
