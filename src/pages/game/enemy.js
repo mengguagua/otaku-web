@@ -1,9 +1,10 @@
 export let enemyAll = {
   1: {
     name: '火',
-    blood: 11, // 血
+    blood: 7, // 血
     shield: 1, // 盾
-    currentBlood: 11,
+    attack: 2,
+    currentBlood: 7,
   },
 };
 
