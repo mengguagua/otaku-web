@@ -17,9 +17,19 @@
     /*background-color: rgba(0,0,0,0.1);*/
     cursor: pointer;
 }
+.game-gamer {
+    position: absolute;
+    bottom: 40vh;
+    width: 190px;
+    height: 190px;
+    background-repeat: no-repeat;
+    background-size: 1600px 1600px;
+    background-image: url("/public/game/fate/fate.png");
+    border-radius: 10px;
+}
 .game-fate {
     position: absolute;
-    /*top: 0;*/
+    top: 0;
     bottom: 40vh;
     width: 190px;
     height: 190px;
