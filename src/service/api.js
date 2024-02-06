@@ -85,7 +85,7 @@ axios.interceptors.response.use(
     return res.data;
   },
   err => {
-    if (err.response.data?.data?.message === "Unauthorized") {
+    if (err?.response?.data?.data?.message === "Unauthorized") {
       // message.warning('请先登录', 3);
     } else {
       message.error('网络拥堵，稍后再试', 5);

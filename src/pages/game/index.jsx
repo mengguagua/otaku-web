@@ -5,6 +5,7 @@ import {gamerAll} from './gamer.js';
 import {useEffect, useState} from "react";
 import {Icon} from "@iconify/react";
 import {useNavigate} from "react-router-dom";
+import { getRandomElementsFromArray } from '../../tool/index';
 
 let cardAllLength = Object.keys(cardAll).length;
 let fateDic = {
@@ -20,7 +21,8 @@ let game =() => {
   const navigate = useNavigate();
   let [gamer, setGamer] = useState({}); // 玩家
   let [round, setRound] = useState(0); // 轮次。 100--游戏失败
-  let [fateCardList, setFateCardList] = useState([]); // 天赋
+  let [handCardList, setHandCardList] = useState([]); // 手牌
+  let [cardPile, setCardPile] = useState([]); // 牌堆
   let [enemyTeam, setEnemyTeam] = useState([]); // 敌队
   let [arrowIndex, setArrowIndex] = useState(0); // 箭头指向
   let [cardIndex, setCardIndex] = useState(0); // 卡牌下标
@@ -34,53 +36,71 @@ let game =() => {
 
   useEffect(() => {
     if (round !== 0) {
-      drawHtml(fateCardList, enemyTeam);
+      drawHtml(handCardList, enemyTeam);
     }
-  }, [arrowIndex, cardIndex, fateCardList, enemyTeam, gamer]);
+  }, [arrowIndex, cardIndex, handCardList, enemyTeam, gamer]);
 
 
   // 切换卡片。 选中当前卡片再点击就触发计算
   let selectCard = (index) => {
     if (index === cardIndex) {
-      // console.log('fateCardList', fateCardList)
-      calculation(fateCardList[index]);
+      calculation(handCardList[index]);
     } else {
       setCardIndex(index);
     }
   };
 
+  let calculationType1 = (cardInfo) => {
+    let tempEnemyTeam = [...enemyTeam];
+    let currentBlood = enemyTeam[arrowIndex].currentBlood - cardInfo.number
+    if (currentBlood <= 0) {
+      // 血量低于0，销毁对象
+      tempEnemyTeam.splice(arrowIndex, 1)
+      setEnemyTeam(tempEnemyTeam);
+    } else {
+      tempEnemyTeam[arrowIndex].currentBlood = currentBlood;
+      setEnemyTeam(tempEnemyTeam);
+    }
+    return tempEnemyTeam
+  }
+
+  let calculationType2 = (cardInfo) => {
+    let shield = Number(gamer.shield) + cardInfo.number
+    setGamer({...gamer, shield: shield});
+    let tempEnemyTeam = [...enemyTeam];
+    return tempEnemyTeam;
+  }
+
+  // // 对应card.js里的type字段
+  let calculationDic = {
+    1: calculationType1,
+    2: calculationType2,
+  };
+
   // 计算
   let calculation = (cardInfo) => {
-    let tempEnemyTeam = [...enemyTeam];
-    if (cardInfo.type === 1) { // 攻击卡
-      let currentBlood = enemyTeam[arrowIndex].currentBlood - cardInfo.number
-      if (currentBlood <= 0) {
-        // 血量低于0，销毁对象
-        tempEnemyTeam.splice(arrowIndex, 1)
-        setEnemyTeam(tempEnemyTeam);
-      } else {
-        tempEnemyTeam[arrowIndex].currentBlood = currentBlood;
-        setEnemyTeam(tempEnemyTeam);
-      }
-    }
+    let tempEnemyTeam = calculationDic[cardInfo.type](cardInfo);
     // 销毁已使用的卡
-    let tempCardList = [...fateCardList];
+    let tempCardList = [...handCardList];
     tempCardList.splice(cardIndex, 1)
     // 设置计算后状态（卡队列和敌人队列）
-    setFateCardList(tempCardList);
+    setHandCardList(tempCardList);
     setEnemyTeam(tempEnemyTeam);
     console.log('tempCardList-tempEnemyTeam', tempCardList, tempEnemyTeam);
-    drawHtml(tempCardList, tempEnemyTeam);
+    // drawHtml(tempCardList, tempEnemyTeam);
   };
 
   let goStart = (round, fate) => {
     setRound(round);
-    setFateCardList(fateDic[fate]);
+    // 牌组中随机取4张
+    let cardList = getRandomElementsFromArray(fateDic[fate], 4);
+    setCardPile(cardList[1]); // 设置牌堆
+    setHandCardList(cardList[0]); // 设置手牌
     setGamer(gamerAll[1]); // 设置玩家信息
     // todo 随机出怪
     let randomNum = 1;
     setEnemyTeam(enemyTeamDic[randomNum]);
-    drawHtml(fateDic[fate], enemyTeamDic[randomNum]);
+    drawHtml(cardList[0], enemyTeamDic[randomNum]);
   };
 
   let actionOver = (stage) => {
@@ -92,14 +112,40 @@ let game =() => {
   let calculationEnemyAction = () => {
     let tempGamer = {...gamer}
     enemyTeam.forEach((item) => {
-      tempGamer.currentBlood = Number(tempGamer.currentBlood) - Number(item.attack);
+      let shield = Number(tempGamer.shield) - Number(item.attack)
+      if (shield >= 0) {
+        tempGamer.shield = shield;
+      } else {
+        tempGamer.currentBlood = Number(tempGamer.currentBlood) + shield;
+        tempGamer.shield = 0;
+      }
     });
     if (tempGamer.currentBlood < 0) {
       setRound(FAIL);
     } else {
-      setGamer(tempGamer);
+      setGamer({...tempGamer, shield: 0});
+      setStage(1); // 玩家回合
+      updateCard(); // 回合开始，更新手牌
     }
   };
+
+  // // 回合开始，更新手牌
+  let updateCard = () => {
+    console.log('cardPile', cardPile)
+    if (cardPile.length >= 2) {
+      let cardList = getRandomElementsFromArray(cardPile, 2);
+      setCardPile(cardList[1]); // 设置牌堆
+      setHandCardList([...handCardList, ...cardList[0]]); // 设置手牌
+    } else if (cardPile.length === 1) {
+      let cardList = getRandomElementsFromArray(fateDic[1], 1);
+      setCardPile(cardList[1]); // 设置牌堆
+      setHandCardList([...handCardList, ...cardPile, ...cardList[0]]); // 设置手牌
+    } else {
+      let cardList = getRandomElementsFromArray(fateDic[1], 2);
+      setCardPile(cardList[1]); // 设置牌堆
+      setHandCardList([...handCardList, ...cardList[0]]); // 设置手牌
+    }
+  }
 
   let drawHtml = (cardList, enemyList) => {
     // console.log('cardList', cardList);
@@ -107,7 +153,7 @@ let game =() => {
       return <div
         className={cardIndex === index ? 'game-card-one game-selected-card' : 'game-card-one'}
         onClick={ () => {selectCard(index)} }
-        key={`card-${index}`} />
+        key={`card-${index}`} >{item.name}-{item.number}</div>
     });
     let enemyListHtml = enemyList.map((item,index) => {
       return <div>
@@ -124,14 +170,19 @@ let game =() => {
     });
     setPageHtml(
       <div className={'game-fight-top'}>
-        <div className={'game-fate game-fate1 game-owner'}>
+        <div className={'game-gamer game-fate1 game-owner'}>
           <div className={`game-blood-gamer`}
                style={
                  gamer?.currentBlood == gamer?.blood ? {} :
-                   {backgroundPosition: `${-200 * (Number(gamer?.currentBlood / Number(gamer?.blood)))}px 0`}
+                   {backgroundPosition: `${200 * (Number(gamer?.currentBlood / Number(gamer?.blood))) - 200}px 0`}
                }
           >
-            <div className={`game-blood-number`}>{gamer?.currentBlood}</div>
+            <div className={`game-blood-number`}>
+              {gamer?.currentBlood}
+              {
+                gamer.shield ? `护甲(${gamer.shield})` : ''
+              }
+            </div>
           </div>
         </div>
         <div className={'game-enemy-block'}>
