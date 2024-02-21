@@ -28,16 +28,19 @@ self.addEventListener("fetch", (event) => {
   event.respondWith(cacheFirst(event.request));
 });
 
+// todo 增加indexedDB的话，可加逻辑读前端数据库；当前是缓存优先，get请求的数据就不会改变了，需要增加缓存刷新
 // 判断缓存中是否存在，不存在则请求后台获取，并判断是否是get请求，是则加入缓存。
 const cacheFirst = async (request) => {
   const responseFromCache = await caches.match(request);
   if (responseFromCache) {
-    console.log('从缓存返回', responseFromCache)
+    // console.log('从缓存返回', responseFromCache)
     return responseFromCache;
   }
   const responseFromNetwork = await fetch(request);
   if (request.method === 'GET') {
-    await putInCache(request, responseFromNetwork.clone());
+    // Response.clone() // 响应可能会被使用, 需要将它的拷贝放入缓存 api说明：https://developer.mozilla.org/zh-CN/docs/Web/API/Response/clone
+    // 不用await等待添加缓存完成，可以直接先返回。
+    putInCache(request, responseFromNetwork.clone());
   }
   // console.log('从接口返回', responseFromNetwork)
   return responseFromNetwork;

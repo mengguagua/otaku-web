@@ -5,6 +5,8 @@ import React, {useEffect, useState} from "react";
 import {linkGetPublic, linkGetByUserId} from "../../service/interface";
 import { Icon } from '@iconify/react';
 import {useSelector} from "react-redux";
+import { useLiveQuery } from "dexie-react-hooks";
+import {db} from  '/db';
 
 let currentMineListPage = 1;
 let pageSize = 20;
@@ -18,6 +20,8 @@ let home =() => {
   const userInfo = useSelector((state) => {
     return state.user;
   });
+  let dbListData = useLiveQuery(() => db.linkList.toArray());
+
   useEffect(()=> {
     searchData();
     searchMineData();
@@ -27,7 +31,7 @@ let home =() => {
     let item = JSON.parse(e.target.dataset.item);
     let resp;
     if (item.label === '全部') {
-      resp = await linkGetPublic();
+      resp = await linkGetPublic({type: ''});
     } else {
       resp = await linkGetPublic({ type:item.label });
     }
@@ -37,24 +41,52 @@ let home =() => {
 
   // 默认执行
   let searchData = async (e) => {
-    let resp = await linkGetPublic({name: e || '', type: currentKey === '全部' ? '' : currentKey});
-    // 标记公开的链接是不是已经在个人链接里，来是否显示收藏按钮
-    if (userInfo?.data?.sub) {
-      let res = await linkGetByUserId({name: ''});
-      resp?.data.forEach((item) => {
-        res?.data.forEach((ret) => {
-          if (item.url === ret.url) {
-            item.isHas = true;
-          }
-        })
-      });
-    }
-    if (resp?.data.length > pageSize) {
-      setListData(resp?.data.slice(0, pageSize));
-    } else {
-      setListData(resp?.data);
+    try {
+      let resp = await linkGetPublic({name: e || '', type: currentKey === '全部' ? '' : currentKey});
+      // 标记公开的链接是不是已经在个人链接里，来是否显示收藏按钮
+      if (userInfo?.data?.sub) {
+        let res = await linkGetByUserId({name: ''});
+        resp?.data.forEach((item) => {
+          res?.data.forEach((ret) => {
+            if (item.url === ret.url) {
+              item.isHas = true;
+            }
+          })
+        });
+      }
+      if (resp?.data.length > pageSize) {
+        setListData(resp?.data.slice(0, pageSize));
+      } else {
+        setListData(resp?.data);
+      }
+      // 查询添加离线数据
+      if (resp?.data) {
+        // console.log('dbListData--', dbListData);
+        addLinkListDB(resp?.data)
+      }
+    } catch (e) {
+      console.log('离线数据：dbListData', dbListData);
+      let list = dbListData.slice(-1)[0].listData; // 取数组最后一个，即最新的缓存数据
+      if (list.length > pageSize) {
+        setListData(list.slice(0, pageSize));
+      } else {
+        setListData(list);
+      }
     }
   }
+
+  // 没有离线数据就插入，有则刷新最新一条数据
+  let addLinkListDB = async(listData) => {
+    // db.delete();
+    if (dbListData?.length === 0) {
+      await db.linkList.add({listData: listData});
+    } else if (dbListData !== undefined){
+      await db.linkList.update(dbListData.slice(-1)[0].id, {listData: listData});
+    } else {
+      console.log('不操作');
+    }
+  }
+
   let searchMineData = async (e) => {
     let res = await linkGetPublic({name: '', type: '' });
     // 标记是不是重复的链接，且公开的链接id不是个人的。防止同一个链接，重复出现在公开列表

@@ -88,7 +88,16 @@ axios.interceptors.response.use(
     if (err?.response?.data?.data?.message === "Unauthorized") {
       // message.warning('请先登录', 3);
     } else {
-      message.error('网络拥堵，稍后再试', 5);
+      console.log('err', err);
+      let offlineDataUrl = [
+        '/otaku-web/auth/userInfo',
+        '/otaku-web/link/getPublic',
+      ];
+      if (offlineDataUrl.includes(err.config.url)) {
+        message.warning('当前为离线状态', 3);
+      } else {
+        message.error('网络拥堵，稍后再试', 5);
+      }
     }
     store.dispatch(closeLoading());
     return Promise.reject(err);

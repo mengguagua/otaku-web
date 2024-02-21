@@ -279,7 +279,7 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
           onSearch={searchData}
           style={{
             marginBottom: '8px',
-            width: 200,
+            width: 300,
           }}
         >
         </Search>
