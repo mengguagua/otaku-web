@@ -38,7 +38,7 @@ let game =() => {
     if (round !== 0) {
       drawHtml(handCardList, enemyTeam);
     }
-  }, [arrowIndex, cardIndex, handCardList, enemyTeam, gamer]);
+  }, [arrowIndex, cardIndex, handCardList, enemyTeam, gamer, stage]);
 
 
   // 切换卡片。 选中当前卡片再点击就触发计算
@@ -92,7 +92,7 @@ let game =() => {
 
   let goStart = (round, fate) => {
     setRound(round);
-    // 牌组中随机取4张
+    // 牌组中随机取4张。将数组随机化，返回指定数量的前count个的数组和剩下的数组
     let cardList = getRandomElementsFromArray(fateDic[fate], 4);
     setCardPile(cardList[1]); // 设置牌堆
     setHandCardList(cardList[0]); // 设置手牌
@@ -120,7 +120,8 @@ let game =() => {
         tempGamer.shield = 0;
       }
     });
-    if (tempGamer.currentBlood < 0) {
+    if (tempGamer.currentBlood <= 0) {
+      console.log('FAIL')
       setRound(FAIL);
     } else {
       setGamer({...tempGamer, shield: 0});
@@ -129,7 +130,7 @@ let game =() => {
     }
   };
 
-  // // 回合开始，更新手牌
+  // 回合开始，更新手牌
   let updateCard = () => {
     console.log('cardPile', cardPile)
     if (cardPile.length >= 2) {
@@ -157,26 +158,38 @@ let game =() => {
     });
     let enemyListHtml = enemyList.map((item,index) => {
       return <div>
+        {/*怪物*/}
         <div className={'game-fire'} onClick={ () => {setArrowIndex(index)} } key={index}/>
+        {/*血条*/}
         <div className={`game-blood-bar game-blood-bar${index}`} key={`enemy-${index}`}
              style={
                item.currentBlood == item.blood ? {} :
                {backgroundPosition: `${-160 * (Number(item.currentBlood / Number(item.blood)))}px 0`}
              }
         >
+          {/*血量*/}
           <div className={`game-blood-number`}>{item.currentBlood}</div>
         </div>
       </div>
     });
     setPageHtml(
       <div className={'game-fight-top'}>
+        {
+          // 游戏失败
+          round == 100 ?<div className={'game-over'}>
+            <div className={'game-over-btn'}/>
+          </div> : ''
+        }
+        {/*角色*/}
         <div className={'game-gamer game-fate1 game-owner'}>
+          {/*角色血条*/}
           <div className={`game-blood-gamer`}
                style={
                  gamer?.currentBlood == gamer?.blood ? {} :
                    {backgroundPosition: `${200 * (Number(gamer?.currentBlood / Number(gamer?.blood))) - 200}px 0`}
                }
           >
+            {/*角色血量/护驾*/}
             <div className={`game-blood-number`}>
               {gamer?.currentBlood}
               {
@@ -186,10 +199,13 @@ let game =() => {
           </div>
         </div>
         <div className={'game-enemy-block'}>
+          {/*怪物选择箭头*/}
           <div className={`game-enemy-arrow game-enemy-arrow${arrowIndex}`}/>
           {enemyListHtml}
         </div>
+        {/*回合结束，进入敌人回合*/}
         <div className={'game-btn-over'} onClick={() => {actionOver(2)}}>结束回合</div>
+        {/*卡牌列表*/}
         <div className={'game-card-head'}>
           {cardListHtml}
         </div>

@@ -207,3 +207,32 @@
     transition-property: margin-top;
     transition-duration: 0.2s;
 }
+.game-over {
+    position: absolute;
+    height: calc(100vh - 44px);
+    width: 100vw;
+    z-index: 100;
+    background-image: url('/public/game/other/game-over.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.game-over-btn {
+    position: absolute;
+    /* border: 1px solid #333344; */
+    height: 23vh;
+    width: 24vw;
+    right: 2vw;
+    top: 24vh;
+    cursor: pointer;
+    z-index: 110;
+    background-image: url('/otaku/public/game/other/game-over.jpg');
+    background-repeat: no-repeat;
+    background-size: 100vw calc(100vh - 44px);
+    background-position: -74vw -24vh;
+    border-radius: 10vw;
+    transition-duration: 0.2s;
+    transition-property: all;
+}
+.game-over-btn:hover {
+    scale: 1.25
+}
