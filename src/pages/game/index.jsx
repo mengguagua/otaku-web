@@ -120,6 +120,7 @@ let game =() => {
         tempGamer.shield = 0;
       }
     });
+    console.log('tempGamer.currentBlood：', tempGamer.currentBlood)
     if (tempGamer.currentBlood <= 0) {
       console.log('FAIL')
       setRound(FAIL);

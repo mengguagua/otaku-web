@@ -40,7 +40,8 @@ let type =({changeType , currentKey}) => {
   }
 
   let goTextPage = () => {
-    navigate('/otaku/article/');
+    // navigate('/otaku/article/');
+    window.open('https://cake-drill-cc0.notion.site/1678faad6d8a80b698e6d301b18170b6')
   }
 
   let goGame = () => {
