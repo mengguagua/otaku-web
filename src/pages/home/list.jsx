@@ -1,19 +1,18 @@
 import './list.css';
 import React, {useEffect, useState} from "react";
 import {Input, Radio, Button, message, Popconfirm} from 'antd';
-import {changeRank, linkChangeIsPublic, linkCreate, linkEdit} from '../../service/interface';
+import {changeGoodNumber, changeRank, linkChangeIsPublic, linkCreate, linkEdit} from '../../service/interface';
 import {Icon} from "@iconify/react";
 
 const { Search } = Input;
 
 let isEdit = false;
 
-let index =({listData, searchData, userInfo}) => {
+let index =({listData, searchData, userInfo, isPublic, searchMineData, changePage, total, currentMineListPage}) => {
   let [messageApi, contextHolder] = message.useMessage();
 
   let [listHtml, setListHtml] = useState([]);
   let [showAdd, setShowAdd] = useState(false);
-  // let [isEdit, setIsEdit] = useState(false);
   let [formData, setFormData] = useState({type: '乐趣'});
 
   useEffect(()=> {
@@ -23,15 +22,43 @@ let index =({listData, searchData, userInfo}) => {
   let initListHtml = (listData) => {
     let html = listData.map((item,index) => {
       return <div className={!!userInfo?.data?.sub ? 'home-list-user-line' : 'home-list-line'} key={index}>
-        <div className={'home-list-title'} onClick={() => {openWindow(item)}}>{item.name}</div>
+        <div className={'home-list-title root-flex'} onClick={() => {openWindow(item)}}>
+          {
+            isPublic ? <span style={{fontSize: '14px'}}>{index + 1}&nbsp;&nbsp;</span> : ''
+          }
+          {item.name}
+          {
+            index < 3 && isPublic ? <Icon icon="memory:fire" color="#444" width="16"/> : ''
+          }
+        </div>
         <div className={'home-list-sub'}>
           <span>{item.nickName || '无名'}</span>
           <span className={'home-list-circle'}></span>
           <span style={{color: '#ccc', fontWeight: 400}}>{item.updateTime}</span>
+          <span className={'home-list-circle'}></span>
+          <span style={{color: '#ccc', fontWeight: 400}}>{item.type}</span>
         </div>
         {
+          // 已经登录可以收藏链接
+          !!userInfo?.data?.sub && !item.isHas && isPublic ?
+            <div className={'home-list-public-edit'} style={{right: '98px', top:'25px'}}>
+              <Popconfirm
+                title=""
+                icon={''}
+                description={`收藏？`}
+                onConfirm={() => {toAddLink(item)}}
+                onCancel={() => {}}
+                okText="Yes"
+                cancelText="No"
+              >
+                {/*<Icon icon="typcn:plus-outline" color="#333" width="20" />*/}
+                <Icon icon="ri:star-smile-line" color="#333" width="20" />
+              </Popconfirm>
+            </div> : ''
+        }
+        {
           // 下面公开列表的icon按钮
-          !!userInfo?.data?.sub ? '' :
+          !isPublic ? '' :
             <div>
               <div className={'home-list-public-edit'}>
                 {/* 这个ant Popconfirm组件在reat严格模式下会报警告， */}
@@ -39,7 +66,7 @@ let index =({listData, searchData, userInfo}) => {
                   title=""
                   icon={''}
                   description={`点赞，有点意思~`}
-                  onConfirm={() => {changeGoodNumber(1)}}
+                  onConfirm={() => {changeLike(true, item)}}
                   onCancel={() => {}}
                   okText="Yes"
                   cancelText="No"
@@ -47,12 +74,12 @@ let index =({listData, searchData, userInfo}) => {
                   <Icon icon="material-symbols-light:thumb-up" color="#333" width="20" />
                 </Popconfirm>
               </div>
-              <div className={'home-list-public-edit'} style={{right: '64px', top:'25px'}}>
+              <div className={'home-list-public-edit'} style={{right: '74px', top:'25px'}}>
                 <Popconfirm
                   title=""
                   icon={''}
                   description={`没意思？`}
-                  onConfirm={() => {changeGoodNumber(-1)}}
+                  onConfirm={() => {changeLike(false, item)}}
                   onCancel={() => {}}
                   okText="Yes"
                   cancelText="No"
@@ -65,9 +92,9 @@ let index =({listData, searchData, userInfo}) => {
         <div className={'home-list-number'}>{item.goodNumber}</div>
         {
           // 下面是个人列表的icon按钮
-          !!userInfo?.data?.sub ?
+          !!userInfo?.data?.sub && !isPublic ?
             <div>
-              <div className={'home-list-edit'}>
+              <div>
                 <Popconfirm
                   title=""
                   icon={''}
@@ -77,7 +104,7 @@ let index =({listData, searchData, userInfo}) => {
                   okText="Yes"
                   cancelText="No"
                 >
-                  <Icon icon="material-symbols-light:thumb-up" color="#333" width="20" />
+                  <Icon icon="material-symbols-light:thumb-up" color="#333" width="20" className={'home-list-edit'} />
                 </Popconfirm>
                 <span>&nbsp;&nbsp;</span>
                 <Popconfirm
@@ -89,9 +116,11 @@ let index =({listData, searchData, userInfo}) => {
                   okText="Yes"
                   cancelText="No"
                 >
-                  <Icon icon="material-symbols:thumb-down-outline" color="#333" width="20" />
+                  <Icon icon="material-symbols:thumb-down-outline" color="#333" width="20" className={'home-list-edit'} />
                 </Popconfirm>
-                <span>&nbsp;&nbsp;</span>
+                {
+                  item.isRepeat ? '' : <span>&nbsp;&nbsp;</span>
+                }
                 <Popconfirm
                   title=""
                   icon={''}
@@ -102,14 +131,32 @@ let index =({listData, searchData, userInfo}) => {
                   cancelText="No"
                 >
                   {
+                    item.isRepeat ? '' :
                     item.isPublic ?
-                      <Icon icon="icon-park-outline:unlock" color="#333" width="20" /> :
-                      <Icon icon="ooui:lock" color="#333" width="20" />
+                      <Icon icon="icon-park-outline:unlock" color="#333" width="20" className={'home-list-edit'}/> :
+                      <Icon icon="ooui:lock" color="#333" width="20" className={'home-list-edit'}/>
                   }
                 </Popconfirm>
                 <div  onClick={() => {toEdit(item)}} style={{marginLeft: '8px', display: "inline-block"}}>
-                  <Icon icon="pixelarticons:edit-box" color="#333" width="20"/>
+                  <Icon icon="pixelarticons:edit-box" color="#333" width="20" className={'home-list-edit'}/>
                 </div>
+                {
+                  item.clickNumber >= 10000 ?
+                    <Popconfirm
+                      title=""
+                      icon={''}
+                      description={'取消置顶吗？'}
+                      onConfirm={() => {cancelGoUp(item)}}
+                      onCancel={() => {}}
+                      okText="Yes"
+                      cancelText="No"
+                    >
+                      <div style={{marginLeft: '8px', display: "inline-block", position: "relative"}} className={'home-list-edit'}>
+                        <Icon icon="bxs:arrow-to-top" color="#333" width="20"/> <div style={{position: "absolute", width: '50px', top: 0, left: '16px'}}>已置顶</div>
+                      </div>
+                    </Popconfirm>
+                    : ''
+                }
               </div>
             </div> : ''
         }
@@ -117,6 +164,20 @@ let index =({listData, searchData, userInfo}) => {
     });
     // console.log('html-',html)
     setListHtml(html);
+  }
+
+  let showMessage = (content, type = 'success') => {
+    if (type === 'success') {
+      messageApi.success({
+        content: content,
+        icon: <Icon icon="clarity:success-standard-solid" color="#333" style={{marginRight: '4px'}}/>,
+      });
+    } else if (type === 'warning') {
+      messageApi.warning({
+        content: content,
+        icon: <Icon icon="fa:exclamation" color="#333" style={{marginRight: '4px'}}/>,
+      });
+    }
   }
 
   let toEdit = (item) => {
@@ -127,29 +188,38 @@ let index =({listData, searchData, userInfo}) => {
 
   let changePublic = (item) => {
     linkChangeIsPublic({id: item.id, isPublic: !item.isPublic}).then((resp) => {
-      messageApi.success(item.isPublic? '已隐藏' : '已公开');
+      showMessage( item.isPublic? '已隐藏' : '已公开');
       searchData();
     });
   };
   let goDown = (item) => {
     if (item.clickNumber == -1) {
-      messageApi.warning('当前已经置底');
+      showMessage('当前已经置底', 'warning');
       return false;
     }
     changeRank({id: item.id, clickNumber: -1}).then((resp) => {
-      messageApi.success('已置底');
+      showMessage( '已置底');
       searchData();
     });
   };
   let goUp = (item) => {
     changeRank({id: item.id, clickNumber: 10000}).then((resp) => {
-      messageApi.success('已置顶');
+      showMessage( '已置顶');
+      searchData();
+    });
+  };
+  let cancelGoUp = (item) => {
+    changeRank({id: item.id, clickNumber: 0}).then((resp) => {
+      showMessage( '已取消');
       searchData();
     });
   };
 
-  let changeGoodNumber = (number) => {
-
+  let changeLike = (type, item) => {
+    changeGoodNumber({id: item.id, likeType: type}).then(() => {
+      showMessage(type ? '已点赞' : '已吐槽');
+      searchData();
+    });
   }
 
   let openWindow = (item) => {
@@ -163,6 +233,18 @@ let index =({listData, searchData, userInfo}) => {
 
   let initData = async () => {
     initListHtml(listData);
+  }
+
+  let toAddLink = (item) => {
+    linkCreate({
+      name: item.name,
+      type: item.type,
+      url: item.url,
+    }).then((resp) => {
+      messageApi.success('已收藏');
+      searchData();
+      searchMineData();
+    });
   }
 
   let doSave = () => {
@@ -180,6 +262,7 @@ let index =({listData, searchData, userInfo}) => {
       });
     } else {
       linkCreate(formData).then((resp) => {
+        setShowAdd(false);
         messageApi.success('已保存');
         searchData();
       });
@@ -196,21 +279,29 @@ let index =({listData, searchData, userInfo}) => {
           onSearch={searchData}
           style={{
             marginBottom: '8px',
-            width: 200,
+            width: 300,
           }}
         >
         </Search>
         <div style={{backgroundColor: '#e2e2e2', height: '1px'}}></div>
         {
           // 判断是公开列表还是个人列表。这里是个人列表
-          !!userInfo?.data?.sub ?
+          !!userInfo?.data?.sub && !isPublic ?
             <div className={'list-tool-container'}>
-              <div onClick={() => {setShowAdd(!showAdd);isEdit = false;setFormData({type: '乐趣'});}}>
-                {
-                  showAdd ?
-                    <Icon icon="streamline:subtract-square-solid" color="#333" width="22" /> :
-                    <Icon icon="typcn:plus-outline" color="#333" width="26" />
-                }
+              <div className={'root-flex'} style={{justifyContent: "space-between"}}>
+                <div onClick={() => {setShowAdd(!showAdd);isEdit = false;setFormData({type: '乐趣'});}} className={'root-cursor'}>
+                  {
+                    showAdd ?
+                      <Icon icon="streamline:subtract-square-solid" color="#333" width="22" /> :
+                      <Icon icon="typcn:plus-outline" color="#333" width="26" />
+                  }
+                </div>
+                <div className={'root-cursor root-flex'}>
+                  <Icon icon="pixelarticons:next" rotate={2} color="#333" width="24" onClick={() => {changePage(-1)}}/>
+                  <Icon icon="pixelarticons:next" color="#333" width="24" onClick={() => {changePage(1)}}/>
+                  <span>&nbsp; 第 {currentMineListPage} 页</span>
+                  <span>&nbsp; 共 {total} 条</span>
+                </div>
               </div>
               {
                 showAdd ?

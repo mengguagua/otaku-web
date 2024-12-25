@@ -1,5 +1,5 @@
 import './index.css';
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import { Icon } from '@iconify/react';
 import {useNavigate} from "react-router-dom";
 import {Form, Input, Button, Alert, message} from "antd";
@@ -24,14 +24,32 @@ let index =() => {
     navigate('/otaku/home/');
   }
 
+  let showMessage = (content, type = 'success') => {
+    if (type === 'success') {
+      messageApi.success({
+        content: content,
+        icon: <Icon icon="clarity:success-standard-solid" color="#333" style={{marginRight: '4px'}}/>,
+      });
+    } else if (type === 'warning') {
+      messageApi.warning({
+        content: content,
+        icon: <Icon icon="fa:exclamation" color="#333" style={{marginRight: '4px'}}/>,
+      });
+    }
+  }
+
   const onFinish = async (values) => {
     if (values.email && !checkEmail(values.email)) {
       setWarningMessage('邮箱格式错误');
       return false;
     }
     await userEdit(values);
-    messageApi.success('已修改，重新登录后生效');
+    showMessage('已修改，重新登录后生效');
     goHome();
+  }
+
+  let goBack = () => {
+    history.go(-1);
   }
 
   return(
@@ -75,6 +93,7 @@ let index =() => {
                 </div>
               </Form.Item>
               <Button type="primary" htmlType="submit" style={{marginLeft: '90px'}}> 保 存 </Button>
+              <Button onClick={goBack} style={{marginLeft: '10px'}}> 返 回 </Button>
             </div>
           </Form>
         </div>

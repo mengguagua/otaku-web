@@ -1,0 +1,238 @@
+.game-top {
+    background-image: url("/public/game/clouds/clouds4.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: calc(100vh - 44px);
+}
+.game-card-line {
+    display: flex;
+    /*align-items: center;*/
+    /*margin-top: 10vh;*/
+}
+.game-card {
+    position: relative;
+    height: 190px;
+    width: 190px;
+    border-radius: 10px;
+    /*background-color: rgba(0,0,0,0.1);*/
+    cursor: pointer;
+}
+.game-gamer {
+    position: absolute;
+    bottom: 40vh;
+    width: 190px;
+    height: 190px;
+    background-repeat: no-repeat;
+    background-size: 1600px 1600px;
+    background-image: url("/public/game/fate/fate.png");
+    border-radius: 10px;
+}
+.game-fate {
+    position: absolute;
+    top: 0;
+    bottom: 40vh;
+    width: 190px;
+    height: 190px;
+    background-repeat: no-repeat;
+    background-size: 1600px 1600px;
+    background-image: url("/public/game/fate/fate.png");
+    border-radius: 10px;
+}
+/*.game-fate:hover {*/
+/*    transition-property: opacity;*/
+/*    transition-duration: 0.3s;*/
+/*    opacity: 0;*/
+/*}*/
+.game-desc {
+    color: #ddd;
+    padding: 10px;
+    font-size: 16px;
+    /*opacity: 1;*/
+}
+.game-fate1 {
+    background-position: -180px -210px;
+}
+.game-fate2 {
+    background-position: -390px -210px;
+}
+.game-fate3 {
+    background-position: -600px -210px;
+}
+
+/*战斗场景*/
+.game-fight-top {
+    position: relative;
+    background-image: url("/public/game/fight/fight-back2.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    height: calc(100vh - 44px);
+}
+.game-owner {
+    position: absolute;
+    bottom: 40vh;
+    left: 100px;
+}
+
+.game-enemy-block {
+    display: flex;
+    position: absolute;
+    left: 50vw;
+    bottom: 40vh;
+}
+
+.game-blood-bar {
+    position: absolute;
+    bottom: -24px;
+    width: 160px;
+    height: 22px;
+    background-image: url('/public/game/other/blood-bar.png');
+    background-repeat: no-repeat;
+    background-size: 160px 20px;
+    background-position: 0 0;
+    transition-property: background-position;
+    transition-duration: 0.2s;
+}
+.game-blood-gamer {
+    position: absolute;
+    bottom: -24px;
+    width: 200px;
+    height: 22px;
+    background-image: url('/public/game/other/blood-bar.png');
+    background-repeat: no-repeat;
+    background-size: 200px 20px;
+    background-position: 0 0;
+    transition-property: background-position;
+    transition-duration: 0.2s;
+}
+.game-blood-number {
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.game-blood-bar0 {
+    left: 46px;
+    /*background-position: -130px 0;*/
+}
+.game-blood-bar1 {
+    left: 246px;
+}
+.game-blood-bar2 {
+    left: 446px;
+}
+
+.game-enemy-arrow {
+    position: absolute;
+    /*left: 80px;*/
+    top: -20px;
+    width: 80px;
+    height: 80px;
+    background-image: url('/public/game/other/arrow-white.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+.game-enemy-arrow0 {
+    left: 75px;
+}
+.game-enemy-arrow1 {
+    left: 275px;
+}
+.game-enemy-arrow2 {
+    left: 475px;
+}
+
+.game-fire {
+    width: 200px; /* 火球的宽度 */
+    height: 140px; /* 火球的高度 */
+    background-image: url('/public/game/fire/Idle.png');
+    background-repeat: no-repeat;
+    animation: moveFireball 800ms steps(1) infinite;
+    background-size: 1792px 256px;
+    cursor: pointer;
+}
+@keyframes moveFireball {
+    0% { background-position: -30px; }
+    16.6% { background-position: -330px; }
+    32% { background-position: -630px; }
+    48% { background-position: -930px; }
+    64% { background-position: -1230px; }
+    80% { background-position: -1526px; }
+    100% { background-position: -1830px; }
+}
+
+.game-btn-over {
+    position: absolute;
+    bottom: 210px;
+    right: 5vw;
+    width: 160px;
+    height: 46px;
+    background-image: url('/public/game/other/btn1.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-weight: 500;
+    font-size: 18px;
+    cursor: pointer;
+}
+.game-card-head {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: absolute;
+    bottom: 0px;
+    right: 5vw;
+    width: 1300px;
+    height: 200px;
+    border-radius: 10px 10px 0 0;
+    background-color: rgba(0,0,0,0.6);
+}
+.game-card-one {
+    margin-right: 10px;
+    height: 180px;
+    width: 120px;
+    background-color: rgba(255,255,255,1);
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 0;
+    transition-property: margin-top;
+    transition-duration: 0.2s;
+}
+.game-selected-card {
+    margin-top: -40px;
+    transition-property: margin-top;
+    transition-duration: 0.2s;
+}
+.game-over {
+    position: absolute;
+    height: calc(100vh - 44px);
+    width: 100vw;
+    z-index: 100;
+    background-image: url('/public/game/other/game-over.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.game-over-btn {
+    position: absolute;
+    /* border: 1px solid #333344; */
+    height: 23vh;
+    width: 24vw;
+    right: 2vw;
+    top: 24vh;
+    cursor: pointer;
+    z-index: 110;
+    background-image: url('/otaku/public/game/other/game-over.jpg');
+    background-repeat: no-repeat;
+    background-size: 100vw calc(100vh - 44px);
+    background-position: -74vw -24vh;
+    border-radius: 10vw;
+    transition-duration: 0.2s;
+    transition-property: all;
+}
+.game-over-btn:hover {
+    scale: 1.25
+}

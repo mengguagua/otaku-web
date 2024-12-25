@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "npx tinacms dev -c \"npm run dev\""
   },
   "dependencies": {
     "@pansy/smart-captcha": "^2.1.2",
@@ -15,15 +16,26 @@
     "antd": "^5.11.1",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
+    "dexie": "^3.2.5",
+    "dexie-react-hooks": "^1.1.7",
+    "github-markdown-css": "^5.4.0",
     "md5": "^2.3.0",
+    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-markdown": "^9.0.1",
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.12.0",
-    "redux": "^4.2.1"
+    "react-syntax-highlighter": "^15.5.0",
+    "redux": "^4.2.1",
+    "rehype-raw": "^7.0.0",
+    "remark-gfm": "^4.0.0",
+    "tinacms": "^1.5.28",
+    "vite-plugin-require": "^1.1.13"
   },
   "devDependencies": {
     "@iconify/react": "^4.1.1",
+    "@tinacms/cli": "^1.5.39",
     "@types/react": "^18.0.37",
     "@types/react-dom": "^18.0.11",
     "@vitejs/plugin-react-swc": "^3.0.0",

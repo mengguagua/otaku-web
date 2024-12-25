@@ -1,0 +1,12 @@
+{
+  "name": "gccLink",
+  "icons": [
+    {
+      "src": "./icons.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "http://localhost:8899/otaku/home/",
+  "display": "standalone"
+}

@@ -47,3 +47,15 @@ export let checkEmail = (email) => {
   // 使用正则表达式进行匹配
   return emailRegex.test(email);
 }
+
+// 将数组随机化，返回指定数量的前count个的数组和剩下的数组
+export let getRandomElementsFromArray = (array, count) => {
+  // 随机排序数组
+  const shuffledArray = array.sort(() => Math.random() - 0.5);
+  // 从随机排序的数组中截取前count个元素
+  const selectedElements = shuffledArray.slice(0, count);
+  const otherElements = shuffledArray.slice(count, shuffledArray.length);
+
+  return [selectedElements, otherElements];
+}
+

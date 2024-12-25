@@ -45,7 +45,8 @@ let index =() => {
   return(
     <>
       <div className={'header-container'}>
-        <Icon icon="line-md:coffee-half-empty-twotone-loop" color="#333" width={40} />
+        {/*<Icon icon="line-md:coffee-half-empty-twotone-loop" color="#333" width={40} />*/}
+        <div className={'header-loading'}></div>
         <div style={{fontSize: '24px',cursor: 'pointer'}} onClick={goHome}>LINK</div>
         {
           userInfo?.data?.username ? '' : <div className={'header-register'} onClick={goRegister}>注册</div>

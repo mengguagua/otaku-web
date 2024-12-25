@@ -1,6 +1,10 @@
 ## vite-react
 ### 运行后，浏览器打开，去要换前缀去router.jsx
 http://localhost:8888/otaku/
+### 运行
+npm run start: 会同步启动tinacms（文章管理）
+npm run dev:单启动前端，文章相关的api无法调用
+
 ### 技术工具
 - react-router-dom：https://reactrouter.com/en/main/start/tutorial
 - ant-design：https://ant.design/components/table-cn#components-table-demo-basic
@@ -76,7 +80,7 @@ http://localhost:8888/otaku/
 - 表格类型默认size="small"
 - 查询栏都使用'search-module'统一样式
 - 组件命名，业务组件在pages下以文件夹命名，jsx用index命名。公共组件用组件名命名如header；文件小写，但代码里import名字大写开头。
-- 取名要求，英文单词，且望文生义(图片名称可加数字区分)。其它如shouye，index2，TABLE，等取名都不允许
+- 取名要求，英文单词，且望文生义(图片名称可加数字区分)。其它如shouye，index，TABLE，等取名都不允许
 - 全局变量使用redux规则处理，具体处理逻辑使用Redux Toolkit封装一层的写法。要求阅读一下快速开始示例和redux原则
     > https://cn.redux.js.org/tutorials/quick-start // 加全局参数步骤
     > https://cn.redux.js.org/understanding/thinking-in-redux/three-principles

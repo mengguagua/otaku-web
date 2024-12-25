@@ -6,10 +6,18 @@ import store from '../store/store';
 // 通过loading防止重复点击
 import { openLoading, closeLoading } from '../store/loadingSlice'
 
+// 查询类接口不加载loading框
+let ignoreUrl = [
+  '/otaku-web/link/getPublic',
+  '/otaku-web/link/getByUserId',
+];
+
 // request请求拦截处理
 axios.interceptors.request.use(
   config => {
-    store.dispatch(openLoading());
+    if (!ignoreUrl.includes(config.url)) {
+      store.dispatch(openLoading());
+    }
     if (config.method === 'get') {
       config.params = Object.assign({ t: Date.now() }, config.params);
     }
@@ -67,16 +75,29 @@ axios.interceptors.response.use(
         errorMessage = res.data.message.slice(0,58) + '...'
         console.log('ERROR：', res.data.message)
       }
-      message.error(errorMessage || '网络拥堵，稍后再试', 5);
+      if (res.data.status == 1004) {
+        message.warning(errorMessage || '网络拥堵，稍后再试', 3);
+      } else {
+        message.error(errorMessage || '网络拥堵，稍后再试', 5);
+      }
       return Promise.reject(res.data);
     }
     return res.data;
   },
   err => {
-    if (err.response.data?.data?.message === "Unauthorized") {
+    if (err?.response?.data?.data?.message === "Unauthorized") {
       // message.warning('请先登录', 3);
     } else {
-      message.error('网络拥堵，稍后再试', 5);
+      console.log('err', err);
+      let offlineDataUrl = [
+        '/otaku-web/auth/userInfo',
+        '/otaku-web/link/getPublic',
+      ];
+      if (offlineDataUrl.includes(err.config.url)) {
+        message.warning('当前为离线状态', 3);
+      } else {
+        message.error('网络拥堵，稍后再试', 5);
+      }
     }
     store.dispatch(closeLoading());
     return Promise.reject(err);

@@ -9,6 +9,33 @@
     color: #555;
     border-radius: 3px;
 }
+.type-card-coffee {
+    margin-top: 10px;
+    height: 220px !important;
+    padding: 10px;
+    font-size: 14px;
+    width: 100px;
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(0,0,0,.1);
+    border-bottom: 1px solid #e2e2e2;
+    color: #555;
+    border-radius: 3px;
+    text-align: center;
+}
+.type-card-roguelike {
+    margin-top: 10px;
+    height: 36px !important;
+    padding: 10px;
+    font-size: 14px;
+    width: 100px;
+    background-color: #fff;
+    box-shadow: 0 2px 3px rgba(0,0,0,.1);
+    border-bottom: 1px solid #e2e2e2;
+    color: #555;
+    border-radius: 3px;
+    text-align: center;
+    cursor: pointer;
+}
 .type-menu {
     padding: 12px 0;
     text-align: center;
