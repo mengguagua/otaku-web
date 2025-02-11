@@ -30,6 +30,7 @@
     "redux": "^4.2.1",
     "rehype-raw": "^7.0.0",
     "remark-gfm": "^4.0.0",
+    "rxjs": "^7.8.1",
     "tinacms": "^1.5.28",
     "vite-plugin-require": "^1.1.13"
   },
