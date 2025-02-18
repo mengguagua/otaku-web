@@ -48,9 +48,6 @@ let index =() => {
         {/*<Icon icon="line-md:coffee-half-empty-twotone-loop" color="#333" width={40} />*/}
         <div className={'header-loading'}></div>
         <div style={{fontSize: '24px',cursor: 'pointer'}} onClick={goHome}>LINK</div>
-        {
-          userInfo?.data?.username ? '' : <div className={'header-register'} onClick={goRegister}>注册</div>
-        }
         <div className={'header-user root-flex'}>
           <div onClick={goPage}>
             {userInfo?.data?.username ?
@@ -60,6 +57,11 @@ let index =() => {
               </span>
               : '登录'}
           </div>
+
+          {
+            userInfo?.data?.username ? '' : <div style={{marginLeft: '4px'}} onClick={goRegister}>注册</div>
+          }
+
           {userInfo?.data?.username ?
             <Popconfirm
               title="提示"

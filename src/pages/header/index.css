@@ -13,13 +13,13 @@
 .header-user {
     display: flex;
     position: absolute;
-    right: 100px;
+    right: 10vw;
     font-weight: 400;
     cursor: pointer;
 }
 .header-register {
     position: absolute;
-    right: 60px;
+    right: 1.2vw;
     font-weight: 400;
     cursor: pointer;
 }

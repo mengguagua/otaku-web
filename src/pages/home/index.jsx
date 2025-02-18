@@ -126,7 +126,9 @@ let home =() => {
       <div className={'home-container'}>
         <div className={'home-type-list'}>
           <Type changeType={changeType} currentKey={currentKey} />
-          <List key={listData} listData={listData} userInfo={userInfo} searchData={searchData} searchMineData={searchMineData} isPublic={true}/>
+          <div data-info={userInfo?.data?.sub ? 'show' : ''}>
+            <List key={listData} listData={listData} userInfo={userInfo} searchData={searchData} searchMineData={searchMineData} isPublic={true}/>
+          </div>
         </div>
         {
           !!userInfo?.data?.sub ?

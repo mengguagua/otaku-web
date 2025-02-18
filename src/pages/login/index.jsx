@@ -86,7 +86,7 @@ let index =() => {
               </Form.Item>
               {/* 严格模式，会渲染两次。上线后就正常 */}
               <SmartCaptcha style={{marginLeft: '90px', marginBottom: '10px'}} onSuccess={isSuccess}/>
-              <Button type="primary" htmlType="submit" style={{marginLeft: '90px'}} disabled={!canLogin}> 登 录 </Button>
+              <Button type="primary" htmlType="submit" style={{marginLeft: '90px'}} className={'submit-btn'} disabled={!canLogin}> 登 录 </Button>
               <div className={'login-forget'}>我忘记了密码</div>
             </div>
           </Form>
