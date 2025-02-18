@@ -1,0 +1,17 @@
+.top-layer {
+    padding: 20px 15vw;
+    display: flex
+}
+
+@media only screen and (max-width: 768px) {
+    .top-layer {
+        padding: 4vw !important;
+    }
+    .markdown-text {
+        width: 90vw !important;
+        font-size: 3vw;
+    }
+    .left {
+        display: none !important;
+    }
+}

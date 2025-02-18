@@ -37,3 +37,32 @@
     color: #4d5256;
     text-decoration: underline;
 }
+
+@media only screen and (max-width: 768px) {
+    /* 在屏幕宽度小于或等于 768px 时应用此样式 */
+    .login-container {
+        width: 90vw !important;
+    }
+    .form-block input {
+        width: 58vw !important;
+    }
+    .login-label {
+        width: 12vw !important;
+    }
+    div[id="smart-captcha"] {
+        margin: 0 !important;
+    }
+    .submit-btn {
+        display: block;
+        margin: 4vw auto !important;
+    }
+    .login-label + span {
+        width: 58vw !important;
+    }
+    .login-forget {
+        display: block;
+        text-align: right !important;
+        margin: 0 4vw 0 0 !important;
+    }
+}
+

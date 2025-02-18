@@ -13,7 +13,7 @@
   "dependencies": {
     "@pansy/smart-captcha": "^2.1.2",
     "@reduxjs/toolkit": "^1.9.5",
-    "antd": "^5.11.1",
+    "antd": "^5.24.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
     "dexie": "^3.2.5",
@@ -21,6 +21,7 @@
     "github-markdown-css": "^5.4.0",
     "md5": "^2.3.0",
     "moment": "^2.29.4",
+    "openai": "^4.83.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",

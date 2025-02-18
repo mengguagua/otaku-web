@@ -79,7 +79,7 @@ let index =() => {
                 </div>
               </Form.Item>
               <SmartCaptcha style={{marginLeft: '90px', marginBottom: '10px'}} onSuccess={isSuccess}/>
-              <Button type="primary" htmlType="submit" style={{marginLeft: '90px'}} disabled={!canLogin}> 注 册 </Button>
+              <Button type="primary" htmlType="submit" style={{marginLeft: '90px', marginTop: '10px'}} className={'submit-btn'} disabled={!canLogin}> 注 册 </Button>
             </div>
           </Form>
         </div>

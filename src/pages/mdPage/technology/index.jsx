@@ -6,6 +6,7 @@ import {tomorrow} from 'react-syntax-highlighter/dist/esm/styles/prism' // 代�
 import rehypeRaw from 'rehype-raw' // 支持md里的html标签
 import {useEffect, useState} from "react";
 import { Anchor } from "antd";
+import styles from './index.module.css';
 
 let index = () => {
   const [titles, setTitles] = useState([])
@@ -121,19 +122,21 @@ Iconify：https://iconify.design/
 
   return(
     <>
-      <div style={{padding: '20px 15vw', display: "flex"}}>
-        <Anchor
-          items={titles}
-          className='markdown-nav'
-          affix={false}
-          onClick={handleClickFun}
-          style={{
-            margin: '50px 20px 0 0'
-          }}
-        />
+      <div className={styles['top-layer']}>
+        <div className={styles['left']}>
+          <Anchor
+            items={titles}
+            className='markdown-nav'
+            affix={false}
+            onClick={handleClickFun}
+            style={{
+              margin: '50px 20px 0 0'
+            }}
+          />
+        </div>
         <Markdown remarkPlugins={[remarkGfm]}
                   rehypePlugins={[rehypeRaw]}
-                  className='markdown-body'
+                  className={`markdown-body ${styles['markdown-text']}`}
                   components={{
                     code(props) {
                       const {children, className, node, ...rest} = props

@@ -73,6 +73,10 @@
     right: 50px;
     top: 21px;
 }
+.point-down {
+    right: 98px !important;
+    top:25px !important;
+}
 .home-list-empty {
     display: flex;
     justify-content: center;
@@ -121,3 +125,31 @@
         height: 0;
     }
 }
+
+@media only screen and (max-width: 768px) {
+    /* 在屏幕宽度小于或等于 768px 时应用此样式 */
+    .home-list-container {
+        width: 76vw;
+    }
+    .home-list-title {
+        font-size: 3.2vw;
+    }
+    .home-list-sub {
+        font-size: 2.5vw;
+    }
+    .home-list-number {
+        position: absolute;
+        right: 1vw;
+        top: 2.8vh;
+        font-size: 3vw;
+        line-height: 12px;
+        padding: 2px 8px;
+    }
+    .home-list-public-edit {
+        display: none;
+    }
+    .home-list-container >span {
+        width: 60vw !important;
+    }
+}
+

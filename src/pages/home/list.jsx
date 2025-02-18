@@ -41,7 +41,7 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
         {
           // 已经登录可以收藏链接
           !!userInfo?.data?.sub && !item.isHas && isPublic ?
-            <div className={'home-list-public-edit'} style={{right: '98px', top:'25px'}}>
+            <div className={'home-list-public-edit point-down'}>
               <Popconfirm
                 title=""
                 icon={''}
@@ -74,7 +74,7 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
                   <Icon icon="material-symbols-light:thumb-up" color="#333" width="20" />
                 </Popconfirm>
               </div>
-              <div className={'home-list-public-edit'} style={{right: '74px', top:'25px'}}>
+              <div className={'home-list-public-edit point-down'}>
                 <Popconfirm
                   title=""
                   icon={''}
@@ -279,7 +279,7 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
           onSearch={searchData}
           style={{
             marginBottom: '8px',
-            width: 300,
+            width: '300px',
           }}
         >
         </Search>

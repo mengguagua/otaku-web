@@ -48,6 +48,10 @@ let type =({changeType , currentKey}) => {
     navigate('/otaku/game/');
   }
 
+  let goAIPage = () => {
+    navigate('/otaku/ai/');
+  }
+
   return(
     <>
       <div>
@@ -60,9 +64,10 @@ let type =({changeType , currentKey}) => {
         <div className={'type-card-coffee'}>
           <div>请站长一杯</div>
           <div className={'root-flex'} style={{justifyContent: 'center', marginTop: '4px'}}>咖啡<Icon icon="raphael:coffee" color="#333" width={18}/></div>
-          <img src="/public/code-wx-pay.jpg" alt="二维码" width={80} style={{margin: "10px auto 0"}}/>
+          <img src="/public/code-wx-pay.jpg" alt="二维码" style={{margin: "10px auto 0", width: '80px'}}/>
           <div onClick={goPage} style={{fontSize: '13px',marginTop:'10px',textDecoration: "underline", cursor: 'pointer'}}>站点技术框架</div>
           <div onClick={goTextPage} style={{fontSize: '13px',marginTop:'10px',textDecoration: "underline", cursor: 'pointer'}}>推荐文章</div>
+          <div onClick={goAIPage} style={{fontSize: '11px',margin:'10px 0',textDecoration: "underline", cursor: 'pointer'}}>DeepSeek</div>
         </div>
       </div>
     </>

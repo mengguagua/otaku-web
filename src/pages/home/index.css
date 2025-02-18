@@ -75,3 +75,17 @@
         min-height: 80vh;
     }
 }
+
+@media only screen and (max-width: 768px) {
+    /* 在屏幕宽度小于或等于 768px 时应用此样式 */
+    .home-type-list> :nth-child(1) {
+        margin-right: 2vw;
+    }
+    .home-switch {
+        display: none;
+    }
+    /* 选择属性值不为空的元素 */
+    div[data-info="show"] {
+        display: none;
+    }
+}

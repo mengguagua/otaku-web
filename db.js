@@ -4,7 +4,8 @@ import Dexie from 'dexie';
 
 export const db = new Dexie('otaku');
 console.log('这是indexDB')
-db.version(1).stores({
+db.version(2).stores({
   // ++自增主键 &唯一索引
-  linkList: '++id, name' // 声明主键和索引。注意：与 SQL 不同，不需要指定所有属性，而只需指定索引的属性。
+  linkList: '++id, name', // 声明主键和索引。注意：与 SQL 不同，不需要指定所有属性，而只需指定索引的属性。
+  aiList: '++id',
 });

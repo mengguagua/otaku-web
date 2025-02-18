@@ -11,7 +11,7 @@
 }
 .type-card-coffee {
     margin-top: 10px;
-    height: 220px !important;
+    min-height: 220px !important;
     padding: 10px;
     font-size: 14px;
     width: 100px;
@@ -55,4 +55,20 @@
     background-color: #334;
     color: #fff;
     cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    /* 在屏幕宽度小于或等于 768px 时应用此样式 */
+    .type-container {
+        width: 18vw;
+    }
+    .type-card-roguelike {
+        display: none;
+    }
+    .type-card-coffee {
+        width: 18vw;
+    }
+    .type-card-coffee img {
+        width: 13vw !important;
+    }
 }

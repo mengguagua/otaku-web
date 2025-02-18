@@ -13,6 +13,7 @@ import Technology from '../pages/mdPage/technology'
 import Article from '../pages/article/index'
 import Text from '../pages/article/text'
 import Game from '../pages/game/index'
+import Ai from '../pages/ai/home'
 
 const router = createBrowserRouter([
   {
@@ -47,6 +48,9 @@ const router = createBrowserRouter([
       }, {
         path: "game",
         element: <Game />,
+      },  {
+        path: "ai",
+        element: <Ai />,
       },
     ],
   },
