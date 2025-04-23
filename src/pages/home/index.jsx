@@ -1,3 +1,4 @@
+// 首页-处理登录和未登录的查询操作。具体列表取List组件，分类模块取Type组件
 import './index.css';
 import Type from './type';
 import List from './list';

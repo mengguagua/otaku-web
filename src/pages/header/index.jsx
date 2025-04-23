@@ -41,6 +41,10 @@ let index =() => {
     navigate('home/');
   }
 
+  let goGithub = () => {
+    window.open('https://github.com/mengguagua/otaku-web');
+  };
+
 
   return(
     <>
@@ -48,6 +52,7 @@ let index =() => {
         {/*<Icon icon="line-md:coffee-half-empty-twotone-loop" color="#333" width={40} />*/}
         <div className={'header-loading'}></div>
         <div style={{fontSize: '24px',cursor: 'pointer'}} onClick={goHome}>LINK</div>
+        <div className={'header-github'} onClick={goGithub}></div>
         <div className={'header-user root-flex'}>
           <div onClick={goPage}>
             {userInfo?.data?.username ?

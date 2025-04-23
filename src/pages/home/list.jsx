@@ -1,3 +1,4 @@
+// 列表组件。处理点赞，排序，私有链接公开，链接创建，链接修改
 import './list.css';
 import React, {useEffect, useState} from "react";
 import {Input, Radio, Button, message, Popconfirm} from 'antd';
@@ -41,7 +42,7 @@ let index =({listData, searchData, userInfo, isPublic, searchMineData, changePag
         {
           // 已经登录可以收藏链接
           !!userInfo?.data?.sub && !item.isHas && isPublic ?
-            <div className={'home-list-public-edit point-down'}>
+            <div className={'home-list-public-edit point-save'}>
               <Popconfirm
                 title=""
                 icon={''}

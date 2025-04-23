@@ -1,3 +1,4 @@
+// 左侧分类栏。提供分类，和其它功能的跳转
 import './type.css';
 import {useState} from "react";
 import {Icon} from "@iconify/react";
@@ -45,6 +46,7 @@ let type =({changeType , currentKey}) => {
   }
 
   let goGame = () => {
+    return false; // 暂时不开放
     navigate('/otaku/game/');
   }
 

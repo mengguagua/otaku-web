@@ -1,6 +1,7 @@
 ## vite-react
 ### 运行后，浏览器打开，去要换前缀去router.jsx
-http://localhost:8888/otaku/
+演示地址：
+http://otaku.gaocc.cc/otaku/home/
 ### 运行
 npm run start: 会同步启动tinacms（文章管理）
 npm run dev:单启动前端，文章相关的api无法调用
@@ -22,7 +23,7 @@ npm run dev:单启动前端，文章相关的api无法调用
 
 2、src/routes/router.jsx 文件内引入index.jsx，且声明路由
 
-// 3、src/routes/menu/menu.jsx 文件内声明新页面的菜单(若调用接口，则在数据库内添加)
+3、src/routes/menu/menu.jsx 文件内声明新页面的菜单(若调用接口，则在数据库内添加)
 
 ### 添加redux全局状态顺序
 1、在src/store下新增一个xxxSlice.js的状态切片(可参考loadingSlice) // 命名规则xxx为state状态名字
