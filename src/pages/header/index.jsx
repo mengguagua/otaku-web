@@ -1,5 +1,5 @@
 import './index.css';
-import {useState, useEffect} from "react";
+import React, {useState, useEffect} from "react";
 import { Icon } from '@iconify/react';
 // 导入redux切片的reducers
 import {fetchData, setToken} from '../../store/userSlice'
@@ -35,6 +35,10 @@ let index =() => {
     navigate('home/');
   }
 
+  let goBlog = () => {
+    navigate('animate/demo');
+  }
+
   let goLogout = () => {
     dispatch(setToken(''));
     dispatch(fetchData());
@@ -50,7 +54,7 @@ let index =() => {
     <>
       <div className={'header-container'}>
         {/*<Icon icon="line-md:coffee-half-empty-twotone-loop" color="#333" width={40} />*/}
-        <div className={'header-loading'}></div>
+        <div className={'header-loading'} onClick={goBlog}></div>
         <div style={{fontSize: '24px',cursor: 'pointer'}} onClick={goHome}>LINK</div>
         <div className={'header-github'} onClick={goGithub}></div>
         <div className={'header-user root-flex'}>

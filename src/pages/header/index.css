@@ -34,7 +34,8 @@
     height: 60px;
     aspect-ratio: 1;
     position: relative;
-    scale: 0.6
+    scale: 0.6;
+    cursor: pointer;
 }
 .header-loading::before,
 .header-loading::after {

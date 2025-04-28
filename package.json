@@ -13,6 +13,7 @@
   "dependencies": {
     "@pansy/smart-captcha": "^2.1.2",
     "@reduxjs/toolkit": "^1.9.5",
+    "animejs": "^4.0.1",
     "antd": "^5.24.0",
     "axios": "^1.4.0",
     "dayjs": "^1.11.9",
