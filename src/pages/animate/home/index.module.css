@@ -1,0 +1,31 @@
+.top-layout {
+    /* 电子数字效果 */
+    font-family: Orbitron, monospace;
+    width: 100vw;
+    overflow: hidden;
+}
+.first-screen {
+    position: relative;
+    height: 100vh;   /* dvh不支持就回退：所有浏览器都支持 */
+    /*height: 100dvh; !* 始终等于动态视口高度 *!*/
+    background-color: rgba(0,0,0,0.85);
+}
+.road {
+    position: absolute;
+    top: 0;
+    background-color: rgba(0,0,0,0.3);
+    width: 100vw;
+    height: 40vh;
+}
+.notion-obj {
+    position: absolute;
+    top: 40vh;
+    width: 20vh;
+    height: 20vh;
+    background-color: #fff;
+    border-radius: 8px;
+    /* 两层阴影：近处深、远处淡，模拟光源在上方的投射 */
+    /*box-shadow:*/
+    /*        -20px -20px 6px rgba(192,244,232,0.4),   !* 主阴影 *!*/
+    /*        -40px -40px 20px rgba(192,244,232,0.2); !* 次级扩散阴影 *!*/
+}

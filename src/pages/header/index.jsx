@@ -36,7 +36,8 @@ let index =() => {
   }
 
   let goBlog = () => {
-    navigate('animate/demo');
+    // navigate('animate/demo');
+    navigate('animate/home');
   }
 
   let goLogout = () => {

@@ -15,6 +15,7 @@ import Text from '../pages/article/text'
 import Game from '../pages/game/index'
 import Ai from '../pages/ai/home'
 import Demo from '../pages/animate/demo/index'
+import AnimateHome from '../pages/animate/home/index'
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
         element: <Demo />,
       },
     ],
+  },
+  {
+    path: "/otaku/animate/home",
+    element: <AnimateHome />,
   },
 ]);
 export default router;
