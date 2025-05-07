@@ -1,3 +1,6 @@
+:root {
+    --middle-road-text-left: 220px;
+}
 .top-layout {
     /* 电子数字效果 */
     font-family: Orbitron, monospace;
@@ -10,12 +13,32 @@
     /*height: 100dvh; !* 始终等于动态视口高度 *!*/
     background-color: rgba(0,0,0,0.85);
 }
-.road {
+.black-area {
     position: absolute;
     top: 0;
     background-color: rgba(0,0,0,0.3);
     width: 100vw;
     height: 40vh;
+}
+.middle-road {
+    position: absolute;
+    top: 40vh;
+    height: 20vh;
+    /*background-color: #76c884;*/
+    /*色相、饱和度、亮度。色相是一个环，0是红，然后按红，橙，黄，绿，青，蓝，紫渐变，360又是红。饱和度是颜色强度，0就是灰色(亮度不是0)。亮度是亮暗，0就是黑色，100是白色*/
+    background-color: hsla(140, 48%, 54%, 1);
+    width: 0;
+}
+.middle-road-text {
+    display: flex;
+    align-items: center;
+    margin-left: var(--middle-road-text-left);
+    font-size: 15vh;
+    font-weight: 700;
+    width: 0;
+    height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
 }
 .notion-obj {
     position: absolute;
@@ -23,7 +46,7 @@
     width: 20vh;
     height: 20vh;
     background-color: #fff;
-    border-radius: 8px;
+    border-radius: 0 8px 8px 0;
     /* 两层阴影：近处深、远处淡，模拟光源在上方的投射 */
     /*box-shadow:*/
     /*        -20px -20px 6px rgba(192,244,232,0.4),   !* 主阴影 *!*/
