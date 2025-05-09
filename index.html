@@ -8,6 +8,13 @@
     <title>Link</title>
   </head>
   <body>
+    <!--  高德交互依赖外网，所以本地引用和外网引用js区别不大  -->
+    <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=90260d58b9d27669ec8736269258ecce&plugin=AMap.Geocoder,AMap.CircleEditor,AMap.PolygonEditor,AMap.PolylineEditor"></script>
+    <script>
+        window._AMapSecurityConfig = {
+          securityJsCode: "1f43a82a29b07978b066ea557dda8437",
+        };
+    </script>
 <!--    <script src="https://cdn.jsdelivr.net/npm/animejs/lib/anime.iife.min.js"></script>-->
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
