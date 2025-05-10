@@ -1,11 +1,16 @@
 :root {
     --middle-road-text-left: 220px;
 }
+/* 整个滚动条轨道的宽度和高度（水平滚动条高度） */
+::-webkit-scrollbar {
+}
+
 .top-layout {
     /* 电子数字效果 */
     font-family: Orbitron, monospace;
     width: 100vw;
     overflow: hidden;
+    background-color: #eaeaea;
 }
 /*第一屏------------------------------------------------*/
 .first-screen {
@@ -120,5 +125,5 @@
     position: relative;
     height: 100vh;   /* dvh不支持就回退：所有浏览器都支持 */
     /*height: 100dvh; !* 始终等于动态视口高度 *!*/
-    background-color: rgba(255,255,255,1);
+    /*background-color: #eaeaea;*/
 }

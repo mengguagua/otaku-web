@@ -5,15 +5,25 @@ import {animate, createDraggable, createScope, utils} from 'animejs';
 
 const START_POSITION = 1300; // 右滑距离，触发卡片显示的位置
 
+let handleWheel = null;
+let totalDeltaY = 0;
+
 let index = () => {
   let [deltaYDistance, setDeltaYDistance] = useState(0);
   let [cardOpacity, setCardOpacity] = useState(0);
   let [middleRoadTextWidth, setMiddleRoadTextWidth] = useState(0);
   let [areaLeftWidth, setAreaLeftWidth] = useState(1300); // 首屏浮现文案
   let [leftWidth, setLeftWidth] = useState(220); // 首屏中间绿带
+  let [screenSize, setScreenSize] = useState(1); // 首屏和第二屏的切换效果，缩放1屏
   const containerRef = useRef(null);
   const animateRef = useRef(null);
   let draggableFirstScreen = useRef(() => {});
+
+  useEffect(() => {
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual'; // 关闭自动恢复位置。在“前进/后退”或刷新时是否恢复滚动位置
+    }
+  }, [])
 
   // 首屏交互
   useEffect(() => {
@@ -21,8 +31,8 @@ let index = () => {
     console.log('可视窗口宽度：', winWidth);
     // 创建可以x轴横移的物体
     initDraggableFirstScreen();
-    let totalDeltaY = 0;
-    const handleWheel = e => {
+    totalDeltaY = 0;
+    handleWheel = e => {
       e.preventDefault();
       // console.log('wheel', e.deltaY);
       // e.deltaY: 滚轮动作希望滚动的“距离”。正值时向下，负值时向上
@@ -61,12 +71,39 @@ let index = () => {
     };
   }, []);
 
+  // 首屏和第二屏来回切换的效果
+  useEffect(() => {
+    const onScroll = () => {
+      const winHeight =  window.innerHeight;
+      console.log('页面滚动 Y:', window.scrollY)
+      let scalePosition = winHeight * 3 / 5 // 缩放大小的滚动位置
+      if (window.scrollY < winHeight && window.scrollY > scalePosition) {
+        setScreenSize(1 - ( (window.scrollY - scalePosition) / winHeight ) * 0.2)
+      }
+      if (window.scrollY < winHeight / 2) {
+        setScreenSize(1);
+      }
+      // 回复横屏滚动效果，totalDeltaY多减一点，避免偶发再次removeEventListener('wheel', handleWheel)
+      if (window.scrollY == 0) {
+        containerRef.current.addEventListener('wheel', handleWheel, { passive: false });
+        totalDeltaY = totalDeltaY - 100;
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
   let initDraggableFirstScreen = () => {
     draggableFirstScreen.current = createDraggable(`.${styles['notion-obj']}`, {
       x: true,
       y: false,
     });
   }
+
+  const handleScroll = e => {
+    const scrollTop = e.currentTarget.scrollTop;
+    console.log('div 滚动距离：', scrollTop);
+  };
 
   let initRoad = () => {
     animate(`.${styles['middle-road']}`,{
@@ -78,7 +115,7 @@ let index = () => {
     <>
       <div  ref={animateRef} className={styles['top-layout']}>
         {/*第一屏*/}
-        <div ref={containerRef} className={styles['first-screen']}>
+        <div ref={containerRef} className={styles['first-screen']} style={{transform: `scale(${screenSize})`, borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}>
           <div className={styles['black-area']}/>
           <div className={styles['middle-road']} style={{width: deltaYDistance}}>
             <div className={styles['middle-road-text']} style={{
@@ -88,7 +125,7 @@ let index = () => {
             }}>Hello, GAOCC. You can do this.</div>
           </div>
           <div className={styles['notion-obj']}/>
-          <div className={styles['black-area']} style={{top: '60vh'}}/>
+          <div className={styles['black-area']} style={{top: '60vh', borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}/>
           <div className={styles['introduce-area']} style={{left: `${areaLeftWidth}px`}}>
             <div className={styles['introduce-block1']} style={{opacity: cardOpacity}}>
               <div>JS</div>
@@ -122,7 +159,7 @@ let index = () => {
           </div>
         </div>
         {/*第二屏*/}
-        <div className={styles['second-screen']}></div>
+        <div className={styles['second-screen']} onScroll={handleScroll}></div>
       </div>
     </>
   )
