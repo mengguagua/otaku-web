@@ -105,3 +105,6 @@ npm run dev:单启动前端，文章相关的api无法调用
 - 这是 antd Table 组件需要给一个rowKey，作为每一行的唯一标识。取接口返回的一个唯一值就行，一般是id
 2、加了上下文之后，测试环境访问次级路由出现404
 - nginx修改配置: try_files $uri $uri/ /上下文地址/index.html;
+3、sass2.0之后 / 作为分隔符而不是除以，所以sass样式的除法逻辑要修改，或者版本使用2.O以下的
+官方地址：https://sass-lang.com/documentation/breaking-changes/slash-div/
+可以使用sass-migrator division **/*.scss，自动更新文档

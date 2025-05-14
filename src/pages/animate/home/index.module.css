@@ -19,6 +19,11 @@
     /*height: 100dvh; !* 始终等于动态视口高度 *!*/
     background-color: rgba(0,0,0,0.85);
 }
+.eye-svg {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+}
 .black-area {
     position: absolute;
     top: 0;
@@ -127,3 +132,4 @@
     /*height: 100dvh; !* 始终等于动态视口高度 *!*/
     /*background-color: #eaeaea;*/
 }
+

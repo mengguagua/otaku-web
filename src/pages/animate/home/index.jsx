@@ -2,6 +2,9 @@
 import React, {useState, useEffect, useRef} from "react";
 import styles from './index.module.css';
 import {animate, createDraggable, createScope, utils} from 'animejs';
+import OwlIcon from "../../../components/OwlIcon/OwlIcon";
+import AnimateMenu from "../../../components/AnimateMenu/AnimateMenu";
+import '../../../components/AnimateMenu/index.scss';
 
 const START_POSITION = 1300; // 右滑距离，触发卡片显示的位置
 
@@ -67,7 +70,7 @@ let index = () => {
     // 加上 { passive: false } 才能阻止默认滚动
     containerRef.current.addEventListener('wheel', handleWheel, { passive: false });
     return () => {
-      containerRef.current.removeEventListener('wheel', handleWheel);  // options 可省略 capture 默认为 false
+      containerRef.current?.removeEventListener('wheel', handleWheel);  // options 可省略 capture 默认为 false
     };
   }, []);
 
@@ -116,6 +119,14 @@ let index = () => {
       <div  ref={animateRef} className={styles['top-layout']}>
         {/*第一屏*/}
         <div ref={containerRef} className={styles['first-screen']} style={{transform: `scale(${screenSize})`, borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}>
+          {/*右上角菜单*/}
+          <div style={{position: "absolute", zIndex: '1000', right: '-20px', top: '-20px', transform: 'scale(.7)'}}>
+            <AnimateMenu/>
+          </div>
+          {/*左上角icon*/}
+          <div className={styles['eye-svg']}>
+            <OwlIcon/>
+          </div>
           <div className={styles['black-area']}/>
           <div className={styles['middle-road']} style={{width: deltaYDistance}}>
             <div className={styles['middle-road-text']} style={{
