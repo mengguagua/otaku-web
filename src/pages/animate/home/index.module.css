@@ -24,7 +24,6 @@
     left: 20px;
     top: 20px;
 }
-/*首屏文字动画----start------*/
 .black-area {
     position: absolute;
     top: 0;
@@ -32,42 +31,6 @@
     width: 100vw;
     height: 40vh;
 }
-.line-letter {
-    position: absolute;
-    color: #fdfdfd;
-    /* 手写字母数字效果 */
-    font-family: Knewave, monospace;
-    top: 50%;              /* 垂直移动到容器高度的 50% */
-    left: 50%;             /* 水平移动到容器宽度的 50% */
-    /*用 transform: translate(-50%, -50%) 来抵消自身的一半宽高，从而实现精确居中*/
-    transform: translate(-50%, -50%);
-    font-weight: 400;
-    font-size: 90px;
-    --base-delay: 0.05s;
-}
-.line-letter-second .letter{
-    animation-delay: calc(var(--base-delay) * var(--i) + .6s);
-}
-.letter {
-    display: inline-block;
-    transform: translateX(1600px);
-    animation-name: letter-move;
-    animation-duration: .2s;
-    /*animation-delay: 0.2s;*/
-    /* 计算延迟：--i 从 0、1、2 … 递增 */
-    animation-delay: calc(var(--base-delay) * var(--i));
-    animation-fill-mode: forwards;
-    animation-timing-function: ease-in-out;
-}
-@keyframes letter-move {
-    0% {
-       transform: translateX(1600px);
-    }
-    100% {
-        transform: translateX(0px);
-    }
-}
-/*首屏文字动画----end------*/
 .middle-road {
     position: absolute;
     top: 40vh;

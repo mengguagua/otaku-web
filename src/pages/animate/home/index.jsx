@@ -5,6 +5,7 @@ import {animate, createDraggable, createScope, utils} from 'animejs';
 import OwlIcon from "../../../components/OwlIcon/OwlIcon";
 import AnimateMenu from "../../../components/AnimateMenu/AnimateMenu";
 import '../../../components/AnimateMenu/index.scss';
+import Letters, {LettersSecond} from "../../../components/Letters/Letters";
 
 const START_POSITION = 1300; // 右滑距离，触发卡片显示的位置
 
@@ -128,20 +129,8 @@ let index = () => {
             <OwlIcon/>
           </div>
           <div className={styles['black-area']}>
-            <div className={styles['line-letter']}>
-              {/*Exploring My Digital Universe*/}
-              <span className={styles['letter']} style={{'--i':0}}>E</span>
-              <span className={styles['letter']} style={{'--i':1}}>x</span>
-              <span className={styles['letter']} style={{'--i':2}}>p</span>
-              <span className={styles['letter']} style={{'--i':3}}>l</span>
-              <span className={styles['letter']} style={{'--i':4}}>o</span>
-              <span className={styles['letter']} style={{'--i':5}}>r</span>
-              <span className={styles['letter']} style={{'--i':6}}>i</span>
-              <span className={styles['letter']} style={{'--i':7}}>n</span>
-              <span className={styles['letter']} style={{'--i':8}}>g</span>
-              <span className={styles['letter']} style={{marginLeft: '60px', '--i':9}}>M</span>
-              <span className={styles['letter']} style={{'--i':10}}>y</span>
-            </div>
+            {/*文字动画*/}
+            <Letters letters={'ExploringMy'} marginLeftIndex={9}/>
           </div>
           <div className={styles['middle-road']} style={{width: deltaYDistance}}>
             <div className={styles['middle-road-text']} style={{
@@ -152,29 +141,13 @@ let index = () => {
           </div>
           <div className={styles['notion-obj']}/>
           <div className={styles['black-area']} style={{top: '60vh', borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}>
-            <div className={`${styles['line-letter']} ${styles['line-letter-second']}`}>
-              {/*Exploring My Digital Universe*/}
-              <span className={styles['letter']} style={{'--i':0}}>D</span>
-              <span className={styles['letter']} style={{'--i':1}}>i</span>
-              <span className={styles['letter']} style={{'--i':2}}>g</span>
-              <span className={styles['letter']} style={{'--i':3}}>i</span>
-              <span className={styles['letter']} style={{'--i':4}}>t</span>
-              <span className={styles['letter']} style={{'--i':5}}>a</span>
-              <span className={styles['letter']} style={{'--i':6}}>l</span>
-              <span className={styles['letter']} style={{marginLeft: '60px', '--i':7}}>U</span>
-              <span className={styles['letter']} style={{'--i':8}}>n</span>
-              <span className={styles['letter']} style={{'--i':9}}>i</span>
-              <span className={styles['letter']} style={{'--i':10}}>v</span>
-              <span className={styles['letter']} style={{'--i':11}}>e</span>
-              <span className={styles['letter']} style={{'--i':12}}>r</span>
-              <span className={styles['letter']} style={{'--i':13}}>s</span>
-              <span className={styles['letter']} style={{'--i':14}}>e</span>
-            </div>
+            {/*文字动画*/}
+            <LettersSecond letters={'DigitalUniverse'} marginLeftIndex={7}/>
           </div>
           <div className={styles['introduce-area']} style={{left: `${areaLeftWidth}px`}}>
             <div className={styles['introduce-block1']} style={{opacity: cardOpacity}}>
               <div>JS</div>
-              <div style={{fontSize: '20px'}}>
+              <div style={{fontSize: '20px',color:'#636363',marginLeft: '4px'}}>
                 <div>Versatile</div>
                 <div>Dynamic</div>
               </div>

@@ -61,7 +61,7 @@ npm run dev:单启动前端，文章相关的api无法调用
 - jsx里引用的组件一定要首字母大写
 - antDesign form表单特殊要求：https://ant.design/components/form-cn
     例如：注意 initialValues 不能被 setState 动态更新，你需要用 setFieldsValue 来更新。另外提供useWatch 允许你监听字段变化，同时仅当该字段变化时重新渲染
-    可参考代码：src/pages/discountConfig/userDiscount/index.jsx
+    可参考代码：src/pages/discountConfig/userDiscount/Letters.jsx
 - 冷知识：空值合并操作符：??
   是一个逻辑操作符，当左侧的操作数为 null 或者 undefined 时，返回其右侧操作数，否则返回左侧操作数。
 - 冷知识：可选链接运算符：?. （ES2020语法）
