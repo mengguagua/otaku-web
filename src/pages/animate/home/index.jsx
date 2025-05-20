@@ -48,7 +48,7 @@ let index = () => {
       const elem = document.documentElement; // 1、获取全局document元素
       let cssVar = getComputedStyle(elem).getPropertyValue('--middle-road-text-left').trim(); // 2、获取css里的变量
       cssVar = cssVar.slice(0, -2) // 去掉尾部的'px'
-      setMiddleRoadTextWidth(totalDeltaY + 80 - cssVar); // 设置具体距离
+      setMiddleRoadTextWidth(totalDeltaY + 90 - cssVar); // 设置具体距离
       // 设置物体右滑结束后，后续内容的位置移动
       if (totalDeltaY > 1200 && totalDeltaY < 2420) {
         setLeftWidth(1200 - totalDeltaY + 220);
@@ -127,7 +127,22 @@ let index = () => {
           <div className={styles['eye-svg']}>
             <OwlIcon/>
           </div>
-          <div className={styles['black-area']}/>
+          <div className={styles['black-area']}>
+            <div className={styles['line-letter']}>
+              {/*Exploring My Digital Universe*/}
+              <span className={styles['letter']} style={{'--i':0}}>E</span>
+              <span className={styles['letter']} style={{'--i':1}}>x</span>
+              <span className={styles['letter']} style={{'--i':2}}>p</span>
+              <span className={styles['letter']} style={{'--i':3}}>l</span>
+              <span className={styles['letter']} style={{'--i':4}}>o</span>
+              <span className={styles['letter']} style={{'--i':5}}>r</span>
+              <span className={styles['letter']} style={{'--i':6}}>i</span>
+              <span className={styles['letter']} style={{'--i':7}}>n</span>
+              <span className={styles['letter']} style={{'--i':8}}>g</span>
+              <span className={styles['letter']} style={{marginLeft: '60px', '--i':9}}>M</span>
+              <span className={styles['letter']} style={{'--i':10}}>y</span>
+            </div>
+          </div>
           <div className={styles['middle-road']} style={{width: deltaYDistance}}>
             <div className={styles['middle-road-text']} style={{
               width: `${middleRoadTextWidth}px`,
@@ -136,7 +151,26 @@ let index = () => {
             }}>Hello, GAOCC. You can do this.</div>
           </div>
           <div className={styles['notion-obj']}/>
-          <div className={styles['black-area']} style={{top: '60vh', borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}/>
+          <div className={styles['black-area']} style={{top: '60vh', borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}>
+            <div className={`${styles['line-letter']} ${styles['line-letter-second']}`}>
+              {/*Exploring My Digital Universe*/}
+              <span className={styles['letter']} style={{'--i':0}}>D</span>
+              <span className={styles['letter']} style={{'--i':1}}>i</span>
+              <span className={styles['letter']} style={{'--i':2}}>g</span>
+              <span className={styles['letter']} style={{'--i':3}}>i</span>
+              <span className={styles['letter']} style={{'--i':4}}>t</span>
+              <span className={styles['letter']} style={{'--i':5}}>a</span>
+              <span className={styles['letter']} style={{'--i':6}}>l</span>
+              <span className={styles['letter']} style={{marginLeft: '60px', '--i':7}}>U</span>
+              <span className={styles['letter']} style={{'--i':8}}>n</span>
+              <span className={styles['letter']} style={{'--i':9}}>i</span>
+              <span className={styles['letter']} style={{'--i':10}}>v</span>
+              <span className={styles['letter']} style={{'--i':11}}>e</span>
+              <span className={styles['letter']} style={{'--i':12}}>r</span>
+              <span className={styles['letter']} style={{'--i':13}}>s</span>
+              <span className={styles['letter']} style={{'--i':14}}>e</span>
+            </div>
+          </div>
           <div className={styles['introduce-area']} style={{left: `${areaLeftWidth}px`}}>
             <div className={styles['introduce-block1']} style={{opacity: cardOpacity}}>
               <div>JS</div>
