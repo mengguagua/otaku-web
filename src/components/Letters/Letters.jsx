@@ -1,4 +1,4 @@
-// 动画效果菜单，适用于门户，博客，个人网站
+// 文字跟随进入的动画效果
 import React, {useEffect, useState} from "react";
 import styles from "./index.module.css";
 
@@ -9,7 +9,7 @@ function Letters({letters = 'hello', marginLeftIndex = 100}) {
 
   let lettersHtml = Array.from(letters).map((item, index) => {
     if (marginLeftIndex === index) {
-      return <span className={styles['letter']} style={{marginLeft: '60px', '--i': index}} key={index}>{item}</span>
+      return <span className={styles['letter']} style={{marginLeft: '30px', '--i': index}} key={index}>{item}</span>
     } else {
       return <span className={styles['letter']} style={{'--i': index}} key={index}>{item}</span>
     }
@@ -27,7 +27,7 @@ function Letters({letters = 'hello', marginLeftIndex = 100}) {
 export function LettersSecond({letters = 'hello', marginLeftIndex = 100}) {
   let lettersHtml = Array.from(letters).map((item, index) => {
     if (marginLeftIndex === index) {
-      return <span className={styles['letter']} style={{marginLeft: '60px', '--i': index}} key={index}>{item}</span>
+      return <span className={styles['letter']} style={{marginLeft: '30px', '--i': index}} key={index}>{item}</span>
     } else {
       return <span className={styles['letter']} style={{'--i': index}} key={index}>{item}</span>
     }
@@ -35,7 +35,7 @@ export function LettersSecond({letters = 'hello', marginLeftIndex = 100}) {
 
   return(
     <>
-      <div className={styles['line-letter']}>
+      <div className={styles['line-letter']} style={{marginTop: '80px'}}>
         {/*Exploring My Digital Universe*/}
         {lettersHtml}
       </div>

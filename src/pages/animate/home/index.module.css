@@ -70,6 +70,7 @@
     width: 600px;
     /*background-color: #000;*/
     height: 100vh;
+    top: 0;
 }
 .introduce-block1 {
     position: absolute;

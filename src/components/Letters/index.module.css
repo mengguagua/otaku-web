@@ -8,7 +8,7 @@
     /*用 transform: translate(-50%, -50%) 来抵消自身的一半宽高，从而实现精确居中*/
     transform: translate(-50%, -50%);
     font-weight: 400;
-    font-size: 90px;
+    font-size: 60px;
     --base-delay: 0.05s;
 }
 .line-letter-second .letter{

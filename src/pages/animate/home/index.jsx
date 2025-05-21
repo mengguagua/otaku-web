@@ -6,6 +6,7 @@ import OwlIcon from "../../../components/OwlIcon/OwlIcon";
 import AnimateMenu from "../../../components/AnimateMenu/AnimateMenu";
 import '../../../components/AnimateMenu/index.scss';
 import Letters, {LettersSecond} from "../../../components/Letters/Letters";
+import MouseFollow from "../../../components/MouseFollow/MouseFollow";
 
 const START_POSITION = 1300; // 右滑距离，触发卡片显示的位置
 
@@ -120,6 +121,7 @@ let index = () => {
       <div  ref={animateRef} className={styles['top-layout']}>
         {/*第一屏*/}
         <div ref={containerRef} className={styles['first-screen']} style={{transform: `scale(${screenSize})`, borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}>
+          <MouseFollow/>
           {/*右上角菜单*/}
           <div style={{position: "absolute", zIndex: '1000', right: '-20px', top: '-20px', transform: 'scale(.7)'}}>
             <AnimateMenu/>
@@ -131,7 +133,10 @@ let index = () => {
           <div className={styles['black-area']}>
             {/*文字动画*/}
             <Letters letters={'ExploringMy'} marginLeftIndex={9}/>
+            {/*文字动画*/}
+            <LettersSecond letters={'DigitalUniverse'} marginLeftIndex={7}/>
           </div>
+          {/*中间横向滚动文字*/}
           <div className={styles['middle-road']} style={{width: deltaYDistance}}>
             <div className={styles['middle-road-text']} style={{
               width: `${middleRoadTextWidth}px`,
@@ -139,11 +144,11 @@ let index = () => {
               left: `${leftWidth}px`,
             }}>Hello, GAOCC. You can do this.</div>
           </div>
+          {/*滚动的方块*/}
           <div className={styles['notion-obj']}/>
           <div className={styles['black-area']} style={{top: '60vh', borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}>
-            {/*文字动画*/}
-            <LettersSecond letters={'DigitalUniverse'} marginLeftIndex={7}/>
           </div>
+          {/*滚动后展示的方块和内容*/}
           <div className={styles['introduce-area']} style={{left: `${areaLeftWidth}px`}}>
             <div className={styles['introduce-block1']} style={{opacity: cardOpacity}}>
               <div>JS</div>
