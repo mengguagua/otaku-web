@@ -9,7 +9,7 @@ function MouseFollow() {
 
   const gridArray = Array(400).fill(0);
   let cellHtml = gridArray.map((item, index) => {
-    return <div className={"mouse-follow-cell"}/>
+    return <div className={"mouse-follow-cell"} key={index}/>
   });
 
   return(
