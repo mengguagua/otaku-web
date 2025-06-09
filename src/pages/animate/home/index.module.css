@@ -189,13 +189,13 @@
     z-index: 10;
 }
 .img-url1 {
-    background-image: url("/public/home/IMG_0049.PNG");
+    background-image: url("/public/home/IMG_0049.png");
 }
 .img-url2 {
-    background-image: url("/public/home/IMG_0050.PNG");
+    background-image: url("/public/home/IMG_0050.png");
 }
 .img-url3 {
-    background-image: url("/public/home/IMG_0051.PNG");
+    background-image: url("/public/home/IMG_0051.png");
 }
 .git-flag {
     position: absolute;
