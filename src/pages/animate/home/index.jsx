@@ -60,7 +60,7 @@ let index = () => {
       if (totalDeltaY > 1200 && totalDeltaY < 2420) {
         setLeftWidth(1200 - totalDeltaY + 220);
       }
-      let moveDistance = 1600 - winWidth / 2; // 模块居中的位置
+      let moveDistance = 1710 - winWidth / 2; // 模块居中的位置
       if (totalDeltaY > START_POSITION && totalDeltaY < (START_POSITION + moveDistance)) {
         setAreaLeftWidth( START_POSITION - (totalDeltaY - START_POSITION));
         setCardOpacity((totalDeltaY - START_POSITION) / 200); // 透明渐变出现
@@ -68,6 +68,7 @@ let index = () => {
       if (totalDeltaY < START_POSITION) {
         setCardOpacity(0);
       }
+      // console.log('totalDeltaY - winWidth - 1000----', totalDeltaY - winWidth - 1000)
       // 滚动到一定距离后删除横向滚动，进行竖向滚动
       if (totalDeltaY - winWidth - 1000 > 0) {
         containerRef.current.removeEventListener('wheel', handleWheel);
@@ -84,6 +85,7 @@ let index = () => {
   // 首屏和第二屏来回切换的效果
   useEffect(() => {
     const onScroll = () => {
+      // console.log('window.scrollY----', window.scrollY)
       const winHeight =  window.innerHeight;
       // console.log('页面滚动 Y:', window.scrollY)
       let scalePosition = winHeight * 3 / 5 // 缩放大小的滚动位置
@@ -93,7 +95,7 @@ let index = () => {
       if (window.scrollY < winHeight / 2) {
         setScreenSize(1);
       }
-      // 回复横屏滚动效果，totalDeltaY多减一点，避免偶发再次removeEventListener('wheel', handleWheel)
+      // 恢复横屏滚动效果，totalDeltaY多减一点，避免偶发再次removeEventListener('wheel', handleWheel)
       if (window.scrollY == 0) {
         containerRef.current.addEventListener('wheel', handleWheel, { passive: false });
         totalDeltaY = totalDeltaY - 100;
@@ -101,6 +103,31 @@ let index = () => {
     };
     window.addEventListener('scroll', onScroll);
     return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  // 视频，自动播放等设置
+  useEffect(() => {
+    const video = document.getElementById("fourthVideo");
+    // const videoFlag = document.getElementById("secondVideo");
+    const observer = new IntersectionObserver( // 浏览器提供的API，用户异步观察目标元素和指定元素（默认根元素即浏览器窗口）的交叉情况
+      (entries) => {
+        // entries 参数是一个对象数组。每个对象有多个属性，常用是：1、isIntersecting：一个布尔值，指示目标元素是否与根容器发生了交叉（即是否可见）。2、intersectionRatio：目标元素与根容器交叉区域的比例，范围从 0（完全不可见）到 1（完全可见）。
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.play();
+            // videoFlag.play();
+          } else {
+            video.pause();
+            video.currentTime = 0; // 重制的最开始
+            // videoFlag.pause();
+            // videoFlag.currentTime = 0; // 重制的最开始
+          }
+        });
+      },
+      { threshold: 0.1 } // threshold: 0.5：当视频有 50% 可见时触发回调。root：指定根元素，默认为浏览器视口。
+    );
+    observer.observe(video); // 设置观察对象
+    // observer.observe(videoFlag); // 设置观察对象
   }, []);
 
   const handleScroll = e => {
@@ -129,17 +156,17 @@ let index = () => {
   return (
     <>
       <div  ref={animateRef} className={styles['top-layout']}>
+        {/*右上角菜单*/}
+        <div style={{position: "fixed", zIndex: '1000', right: '-20px', top: '-20px', transform: 'scale(.7)'}}>
+          <AnimateMenu/>
+        </div>
+        {/*左上角icon*/}
+        <div className={styles['eye-svg']}>
+          <OwlIcon color={'#459582'}/>
+        </div>
         {/*第一屏*/}
         <div ref={containerRef} className={styles['first-screen']} style={{transform: `scale(${screenSize})`, borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}>
           <MouseFollow/>
-          {/*右上角菜单*/}
-          <div style={{position: "absolute", zIndex: '1000', right: '-20px', top: '-20px', transform: 'scale(.7)'}}>
-            <AnimateMenu/>
-          </div>
-          {/*左上角icon*/}
-          <div className={styles['eye-svg']}>
-            <OwlIcon/>
-          </div>
           <div className={styles['black-area']}>
             {/*文字动画*/}
             <Letters letters={'ExploringMy'} marginLeftIndex={9}/>
@@ -191,8 +218,43 @@ let index = () => {
             </div>
           </div>
         </div>
-        {/*第二屏*/}
-        <div className={styles['second-screen']} onScroll={handleScroll}></div>
+        {/*第二屏图文*/}
+        <div className={styles['second-screen']} onScroll={handleScroll}>
+          {/*<div className={styles['git-flag']}/>*/}
+          {/*<video*/}
+          {/*  id="secondVideo"*/}
+          {/*  src="/public/home/flag-black.mp4"*/}
+          {/*  muted*/}
+          {/*  loop*/}
+          {/*  playsInline*/}
+          {/*  preload="auto"*/}
+          {/*  className={styles['git-flag']}*/}
+          {/*  style={{display: 'block', pointerEvents: 'none', objectPosition: 'center top', objectFit: 'cover'}}*/}
+          {/*/>*/}
+          <div className={styles['big-title']}>My Temperament</div>
+          <div className={styles['img-row']}>
+            <div className={`${styles['img-base']} ${styles['img-url1']}`}/>
+            <div className={`${styles['img-base']} ${styles['img-url2']}`}/>
+            <div className={`${styles['img-base']} ${styles['img-url3']}`}/>
+          </div>
+        </div>
+        {/* 第三屏图片 */}
+        <div className={styles['third-screen']}/>
+        {/* 第四屏视频 */}
+        {/*muted：静音播放，允许视频在某些浏览器中自动播放。playsinline：在移动设备上防止视频全屏播放。preload="auto"：提前加载视频数据，减少播放延迟。pointer-events: none;：防止用户与视频交互，隐藏右键菜单等。*/}
+        <div style={{height: '100vh', scrollSnapAlign: 'start'}}>
+          <video
+            id="fourthVideo"
+            src="/public/home/iLoveTheWorld.mp4"
+            muted
+            playsInline
+            preload="auto"
+            style={{width: '100%', height: '100vh', display: 'block', pointerEvents: 'none', objectPosition: 'center top', objectFit: 'cover'}}
+          />
+        </div>
+        {/*todo 第二到第三屏开始，每次滑动都用整屏显示，不好实现1、2屏之间的切换*/}
+        {/*<div className={styles['full-screen']}>*/}
+        {/*</div>*/}
       </div>
     </>
   )
