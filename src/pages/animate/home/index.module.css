@@ -218,3 +218,26 @@
     background-repeat: no-repeat;
     background-size: 100% 100%;
 }
+.img-text-block {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    width: 250px;
+    color: #112233;
+    text-align: justify;
+    font-size: 13px;
+}
+.game-img {
+    background-image: url("/public/home/dendy.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 240px;
+    height: 240px;
+    transform: scale(1);
+    cursor: pointer;
+    transition-duration: .15s;
+    transition-property: transform;
+}
+.game-img:hover {
+    transform: scale(1.1);
+}

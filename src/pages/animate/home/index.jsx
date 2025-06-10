@@ -7,6 +7,7 @@ import AnimateMenu from "../../../components/AnimateMenu/AnimateMenu";
 import '../../../components/AnimateMenu/index.scss';
 import Letters, {LettersSecond} from "../../../components/Letters/Letters";
 import MouseFollow from "../../../components/MouseFollow/MouseFollow";
+import { Image } from 'antd';
 
 const START_POSITION = 1300; // 右滑距离，触发卡片显示的位置
 
@@ -21,6 +22,7 @@ let index = () => {
   let [leftWidth, setLeftWidth] = useState(220); // 首屏中间绿带
   let [screenSize, setScreenSize] = useState(1); // 首屏和第二屏的切换效果，缩放1屏
   let [windowScrollY, setWindowScrollY] = useState(0);
+  const [preImgVisible, setPreImgVisible] = useState(false);
   const containerRef = useRef(null);
   const animateRef = useRef(null);
   const characterRef = useRef(null); // 首屏人物动画
@@ -170,7 +172,7 @@ let index = () => {
           <AnimateMenu/>
         </div>
         {/*左上角icon*/}
-        <div className={styles['eye-svg']}>
+        <div className={styles['eye-svg']} style={{zIndex: '1000'}}>
           <OwlIcon color={'#459582'}/>
         </div>
         {/*第一屏*/}
@@ -237,7 +239,23 @@ let index = () => {
           </div>
         </div>
         {/* 第三屏图片 */}
-        <div className={styles['third-screen']} style={{zIndex: 10}}/>
+        <div className={styles['third-screen']} style={{zIndex: 10}}>
+          <div className={styles['img-text-block']}>
+            <div className={styles['game-img']} onClick={() => setPreImgVisible(true)}/>
+            <div style={{padding: '0 10px'}}>Hi,我是一个来自杭州的coder，工作上擅长前端，当然也能全栈。想看具体技能，点击上方游戏机来打开吧</div>
+            <Image
+              width={400}
+              style={{ display: 'none' }}
+              preview={{
+                visible: preImgVisible,
+                src: '/public/home/tech.png',
+                onVisibleChange: value => {
+                  setPreImgVisible(value);
+                },
+              }}
+            />
+          </div>
+        </div>
         {/* 第四屏视频 */}
         {/*muted：静音播放，允许视频在某些浏览器中自动播放。playsinline：在移动设备上防止视频全屏播放。preload="auto"：提前加载视频数据，减少播放延迟。pointer-events: none;：防止用户与视频交互，隐藏右键菜单等。*/}
         <div style={{height: '100vh', zIndex: 10}}>
