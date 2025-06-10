@@ -1,4 +1,4 @@
-// animateJS, 网站首页
+// gaocc网站首页
 import React, {useState, useEffect, useRef} from "react";
 import styles from './index.module.css';
 import {animate, createDraggable, createScope, utils} from 'animejs';
@@ -23,10 +23,18 @@ let index = () => {
   let [screenSize, setScreenSize] = useState(1); // 首屏和第二屏的切换效果，缩放1屏
   let [windowScrollY, setWindowScrollY] = useState(0);
   const [preImgVisible, setPreImgVisible] = useState(false);
+  const [loading, setLoading] = useState(true);
   const containerRef = useRef(null);
   const animateRef = useRef(null);
   const characterRef = useRef(null); // 首屏人物动画
-  // const windowScrollY = useRef(0); // 滚动距离
+
+
+  // 等待页面资源加载
+  useEffect(() => {
+    setTimeout(() => {
+      setLoading(false);
+    }, 3000)
+  }, []);
 
   useEffect(() => {
     if ('scrollRestoration' in history) {
@@ -85,11 +93,10 @@ let index = () => {
     };
   }, []);
 
-  // 首屏和第二屏来回切换的效果
+  // 首屏和第二屏来回切换，圆角效果
   useEffect(() => {
     const onScroll = () => {
       const winHeight =  window.innerHeight;
-      // windowScrollY.current = window.scrollY;
       setWindowScrollY(window.scrollY)
       // console.log('页面滚动 Y:', window.scrollY)
       let scalePosition = winHeight * 3 / 5 // 缩放大小的滚动位置
@@ -139,13 +146,14 @@ let index = () => {
           }
         });
       },
-      { threshold: 0.1 } // threshold: 0.5：当视频有 50% 可见时触发回调。root：指定根元素，默认为浏览器视口。
+      { threshold: .01 } // threshold: 0.5：当视频有 50% 可见时触发回调。root：指定根元素，默认为浏览器视口。
     );
     observer.observe(video); // 设置观察对象
     observer.observe(fiveVideo);
     observer.observe(sixVideo);
   }, []);
 
+  // 首屏宇航员图片动画
   let walk = (scrollAccum, deltaY) => {
     const pixelsPerFrame = 70; // 每滚动 n个px 切换一帧
     const totalFrames = 4; // 总的动画帧数
@@ -166,7 +174,12 @@ let index = () => {
 
   return (
     <>
-      <div  ref={animateRef} className={styles['top-layout']}>
+      {
+        loading? <div className={styles['loading-screen']}>
+          <div className={styles['loader']}></div>
+        </div>:''
+      }
+      <div ref={animateRef} className={styles['top-layout']} style={loading? {display: "none"}: {display: "block"}}>
         {/*右上角菜单*/}
         <div style={{position: "fixed", zIndex: '1000', right: '-20px', top: '-20px', transform: 'scale(.7)'}}>
           <AnimateMenu/>
@@ -180,7 +193,7 @@ let index = () => {
           <MouseFollow/>
           <div className={styles['black-area']}>
             {/*文字动画*/}
-            <Letters letters={'ExploringMy'} marginLeftIndex={9}/>
+            <Letters letters={'ExploringGaocc'} marginLeftIndex={9}/>
             {/*文字动画*/}
             <LettersSecond letters={'DigitalUniverse'} marginLeftIndex={7}/>
           </div>

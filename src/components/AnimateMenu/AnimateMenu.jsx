@@ -10,6 +10,10 @@ function AnimateMenu() {
     navigate('/otaku/home');
   }
 
+  let goTextPage = () => {
+    window.open('https://cake-drill-cc0.notion.site/1678faad6d8a80b698e6d301b18170b6')
+  }
+
   return(
     <div>
       <nav className="menu">
@@ -29,7 +33,7 @@ function AnimateMenu() {
           <div className={'fluent-emoji-high-contrast--alien-monster'}/>
         </a>
         <a className="menu-item div-center">
-          <div className={'codicon--book'}/>
+          <div className={'codicon--book'} onClick={goTextPage}/>
         </a>
         <a className="menu-item div-center">
           <div className={'ph--rainbow-cloud-bold'}/>
