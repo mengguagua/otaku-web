@@ -14,6 +14,9 @@ import Article from '../pages/article/index'
 import Text from '../pages/article/text'
 import Game from '../pages/game/index'
 import Ai from '../pages/ai/home'
+import Demo from '../pages/animate/demo/index'
+import AnimateHome from '../pages/animate/home/index'
+import Pipa from '../pages/h5/pipa/index'
 
 const router = createBrowserRouter([
   {
@@ -48,11 +51,22 @@ const router = createBrowserRouter([
       }, {
         path: "game",
         element: <Game />,
-      },  {
+      }, {
         path: "ai",
         element: <Ai />,
+      }, {
+        path: "animate/demo",
+        element: <Demo />,
       },
     ],
+  },
+  {
+    path: "/otaku/animate/home",
+    element: <AnimateHome />,
+  },
+  {
+    path: "/otaku/h5/pipa",
+    element: <Pipa />,
   },
 ]);
 export default router;

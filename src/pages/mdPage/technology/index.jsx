@@ -1,3 +1,4 @@
+// 站点技术框架页面
 import Markdown from 'react-markdown' // 转化md
 import 'github-markdown-css'; // 引入美化md样式
 import remarkGfm from 'remark-gfm' // 支持删除线等样式

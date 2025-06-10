@@ -1,6 +1,7 @@
 ## vite-react
 ### 运行后，浏览器打开，去要换前缀去router.jsx
-http://localhost:8888/otaku/
+演示地址：
+http://otaku.gaocc.cc/otaku/home/
 ### 运行
 npm run start: 会同步启动tinacms（文章管理）
 npm run dev:单启动前端，文章相关的api无法调用
@@ -22,7 +23,7 @@ npm run dev:单启动前端，文章相关的api无法调用
 
 2、src/routes/router.jsx 文件内引入index.jsx，且声明路由
 
-// 3、src/routes/menu/menu.jsx 文件内声明新页面的菜单(若调用接口，则在数据库内添加)
+3、src/routes/menu/menu.jsx 文件内声明新页面的菜单(若调用接口，则在数据库内添加)
 
 ### 添加redux全局状态顺序
 1、在src/store下新增一个xxxSlice.js的状态切片(可参考loadingSlice) // 命名规则xxx为state状态名字
@@ -60,7 +61,7 @@ npm run dev:单启动前端，文章相关的api无法调用
 - jsx里引用的组件一定要首字母大写
 - antDesign form表单特殊要求：https://ant.design/components/form-cn
     例如：注意 initialValues 不能被 setState 动态更新，你需要用 setFieldsValue 来更新。另外提供useWatch 允许你监听字段变化，同时仅当该字段变化时重新渲染
-    可参考代码：src/pages/discountConfig/userDiscount/index.jsx
+    可参考代码：src/pages/discountConfig/userDiscount/Letters.jsx
 - 冷知识：空值合并操作符：??
   是一个逻辑操作符，当左侧的操作数为 null 或者 undefined 时，返回其右侧操作数，否则返回左侧操作数。
 - 冷知识：可选链接运算符：?. （ES2020语法）
@@ -104,3 +105,6 @@ npm run dev:单启动前端，文章相关的api无法调用
 - 这是 antd Table 组件需要给一个rowKey，作为每一行的唯一标识。取接口返回的一个唯一值就行，一般是id
 2、加了上下文之后，测试环境访问次级路由出现404
 - nginx修改配置: try_files $uri $uri/ /上下文地址/index.html;
+3、sass2.0之后 / 作为分隔符而不是除以，所以sass样式的除法逻辑要修改，或者版本使用2.O以下的
+官方地址：https://sass-lang.com/documentation/breaking-changes/slash-div/
+可以使用sass-migrator division **/*.scss，自动更新文档

@@ -1,0 +1,114 @@
+.top-layer {
+    width: 80vw;
+    padding: 20px 0;
+    margin: 0 auto;
+    color: rgba(255,131,51,1);
+    /*text-shadow: 0.5 0 rgba(255,131,51,.1);*/
+}
+.time-block {
+    margin-top: 12px;
+    position: relative;
+    padding: 20px;
+    border-radius: 4px;
+    background-color: rgba(255,131,51,.1);
+}
+.time-back {
+    margin-top: 4px;
+    font-size: 32px;
+    /* 电子数字效果 */
+    font-family: Orbitron, monospace;
+    background-color: rgba(255,131,51,.4);
+    padding: 10px 20px;
+    width: 40%;
+    border-radius: 2px;
+    text-align: right;
+}
+.time-back-short {
+    width: 10ch;
+    margin-right: 4px;
+}
+.rang-block {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+.rang-speed {
+    text-align: center;
+    width: 5ch;
+    background-color: rgba(255,131,51,0.3);
+    border-radius: .25rem;
+    padding: 9px 10px;
+    margin-right: 4px;
+}
+/*轨道样式*/
+.rang-block input[type=range] {
+    -webkit-appearance: none; /* 必须关闭默认样式 */
+    position: relative;
+    width: 60vw;
+    padding: 10px;
+    background-color: rgba(255,131,51,0.3);
+    /*background-color: transparent;*/
+    border-radius: .25rem;
+}
+.rang-block input[type=range]::after {
+    position: absolute;
+    top: 16px;
+    content: '';
+    display: inline-block;
+    width: calc(60vw - 20px);
+    height: 4px;
+    background-color: rgba(255,131,51,1);
+    border-radius: .25rem;
+}
+/* 滑块（拖拽按钮） */
+.rang-block input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 16px;
+    height: 16px;
+    border-radius: 16px;
+    background-color: rgba(255,131,51,1);
+}
+.btn-reload {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    display: inline-block;
+    width: 22px;
+    height: 22px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='rgba(255,131,51,1)' stroke-linecap='round' stroke-linejoin='round' stroke-width='2'%3E%3Cpath d='M19.933 13.041a8 8 0 1 1-9.925-8.788c3.899-1 7.935 1.007 9.425 4.747'/%3E%3Cpath d='M20 4v5h-5'/%3E%3C/g%3E%3C/svg%3E");
+}
+.btn-handle {
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 12ch;
+    height: 28px;
+    color: rgba(255,131,51,1);
+    background-color: rgba(255,131,51,.3);
+    border-radius: .25rem;
+    margin: 2px 0;
+    cursor: pointer;
+}
+.motion-block {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-color: rgba(255,131,51,.3);
+    border-radius: .25rem;
+}
+.normal-row {
+    display: flex;
+    align-items: center;
+}
+.three-part >div {
+    margin-right: 4px;
+}
+.four-part >div {
+    margin-right: 4px;
+}

@@ -1,0 +1,57 @@
+.mouse-follow-top {
+  height: 100vh;
+  width: 100vw;
+  //background-color: #fff;
+  //z-index: 9999;
+  display: grid;
+  /* 20行，20列 */
+  grid-template: repeat(20, 1fr) / repeat(20, 1fr);
+}
+.mouse-follow-cell {
+  width: 100%;
+  height: 100%;
+  //border: 1px solid #fff;
+  z-index: 100;
+}
+@for $i from 0 to 20 {
+  // ~选择器是，选择同级且跟在后面的所有节点生效
+  .mouse-follow-cell:nth-child(20n + #{$i + 1}):hover ~ .mouse-follow-content {
+    --positionX: #{$i};
+  }
+  .mouse-follow-cell:nth-child(n + #{20 * $i + 1}):nth-child(-n + #{20 * ($i + 1)}):hover ~ .mouse-follow-content {
+    --positionY: #{$i};
+  }
+}
+.mouse-follow-content {
+  // 默认情况下，SCSS变量在‌声明后的所有位置‌均可访问（包括同级元素）。注意css不是，需要父子关系才能方位
+  --positionX: 10;
+  --positionY: 10;
+  /* top/right/bottom/left: 0将元素四边‌锚定至包含块的内边界‌，实现全屏覆盖 */
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
+  //border: 10px solid red;
+}
+.mouse-follow-square {
+  position: absolute;
+  left: calc(var(--positionX) * 5vw);
+  top: calc(var(--positionY) * 5vh);
+  border: 1px solid #fff;
+  transition: all 1.2s;
+  width: 30vw;
+  height: 30vw;
+  background: radial-gradient(
+                  circle at 30% 30%,
+                  rgba(255, 255, 255, 0.9) 0%,
+                  rgba(255, 255, 255, 0.3) 50%,
+                  transparent 70%
+  );
+  filter: blur(10px);
+  border-radius: 50%;
+  transform: translate(-50%, -50%); /* 将圆心对齐到父容器的中心 */
+}

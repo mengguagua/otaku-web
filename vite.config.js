@@ -10,6 +10,7 @@ export default defineConfig({
     vitePluginRequire.default()
   ],
   minify: true, // 是否压缩代码
+  sourcemap: true,
   build: {
     rollupOptions: {
       output: {

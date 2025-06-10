@@ -1,0 +1,243 @@
+:root {
+    --middle-road-text-left: 220px;
+}
+/* 整个滚动条轨道的宽度和高度（水平滚动条高度） */
+::-webkit-scrollbar {
+    /*谷歌浏览器，可滚动也隐藏滚动条*/
+    display: none;
+}
+
+
+.top-layout {
+    position: relative;
+    /* 电子数字效果 */
+    font-family: Orbitron, monospace;
+    width: 100vw;
+    overflow: hidden;
+    background-color: #eaeaea;
+}
+/*第二屏开始是整屏切换*/
+.full-screen {
+    height: 100vh;
+    /*设置滚动容器的滚动吸附行为，y：垂直方向吸附，mandatory：强制吸附，滚动操作必须停留在吸附点上。（proximity：近似吸附，滚动操作在接近吸附点时才会吸附）*/
+    scroll-snap-type: y mandatory;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+}
+/*第一屏start------------------------------------------------*/
+.first-screen {
+    /*scroll-snap-align: start;*/
+    position: relative;
+    height: 100vh;   /* dvh不支持就回退：所有浏览器都支持 */
+    /*height: 100dvh; !* 始终等于动态视口高度 *!*/
+    background-color: rgba(0,0,0,0.85);
+    z-index: 1;
+    overflow: hidden;
+}
+.eye-svg {
+    position: fixed;
+    left: 20px;
+    top: 20px;
+    z-index: 10;
+    opacity: 0.9;
+}
+.black-area {
+    position: absolute;
+    top: 0;
+    background-color: rgba(0,0,0,0.3);
+    width: 100vw;
+    height: 40vh;
+}
+.middle-road {
+    position: absolute;
+    top: 40vh;
+    left: 0;
+    height: 20vh;
+    /*background-color: #76c884;*/
+    /*色相、饱和度、亮度。色相是一个环，0是红，然后按红，橙，黄，绿，青，蓝，紫渐变，360又是红。饱和度是颜色强度，0就是灰色(亮度不是0)。亮度是亮暗，0就是黑色，100是白色*/
+    /*background-color: hsla(140, 48%, 54%, 1);*/
+    background-color: rgba(0,0,0,0.3);
+    width: 0;
+    z-index: 10;
+}
+.middle-road-text {
+    color: #fff;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    left: var(--middle-road-text-left);
+    font-size: 15vh;
+    font-weight: 700;
+    width: 0;
+    height: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    z-index: 10;
+}
+.notion-obj {
+    position: absolute;
+    top: 40vh;
+    /*width: 20vh;*/
+    /*height: 20vh;*/
+    /*background-color: #fff;*/
+    /*border-radius: 0 8px 8px 0;*/
+
+    width: 12.26vh; /* 每帧宽度 */
+    height: 20vh;
+    background-image: url("/public/home/astronaut-walk-cycle.png");
+    background-repeat: no-repeat;
+    background-size: 49.35vh 20vh; /* 防止缩放错误 */
+    z-index: 10;
+    /*filter: blur(1px);*/
+}
+.introduce-area {
+    position: absolute;
+    left: 1300px;
+    width: 600px;
+    /*background-color: #000;*/
+    height: 100vh;
+    top: 0;
+}
+.introduce-block1 {
+    position: absolute;
+    top: calc(40vh - 4vw - 100px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 320px;
+    padding: 2vw;
+    /*background-color: hsla(63, 77.47%, 67.76%, 0.98);*/
+    background-color: rgba(255,255,255,0.98);
+    color: #1a1a1a;
+    font-size: 60px;
+    font-weight: 700;
+    border-radius: 10px;
+}
+.introduce-block2 {
+    position: absolute;
+    top: calc(60vh + 20px);
+    left: -20px;
+    width: 260px;
+    padding: 2vw;
+    /*background-color: hsla(195, 97.47%, 67.76%, 0.9);*/
+    background-color: rgba(255,255,255,0.98);
+    color: #1a1a1a;
+    font-size: 60px;
+    font-weight: 700;
+    border-radius: 10px;
+}
+.introduce-block3 {
+    position: absolute;
+    top: calc(60vh + 20px);
+    left: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    padding: 2vw;
+    /*background-color: hsla(23, 97.47%, 47.76%, 0.9);*/
+    background-color: rgba(69,149,130, 0.95);
+    /*background-color: rgba(255,255,255,0.98);*/
+    color: #fff;
+    font-size: 60px;
+    font-weight: 700;
+    border-radius: 10px;
+}
+.introduce-block4 {
+    position: absolute;
+    top: calc(40vh - 4vw - 160px);
+    left: 400px;
+    width: 400px;
+    padding: 2vw;
+    background-color: rgba(255,255,255,0.98);
+    color: #1a1a1a;
+    font-size: 50px;
+    font-weight: 700;
+    border-radius: 10px;
+    line-height: 24px;
+}
+/*第一屏end------------------------------------------------*/
+/*第二屏start------------------------------------------------*/
+.second-screen {
+    scroll-snap-align: start;
+    position: relative;
+    height: 100vh;   /* dvh不支持就回退：所有浏览器都支持 */
+    /*height: 100dvh; !* 始终等于动态视口高度 *!*/
+    /*background-color: #eaeaea;*/
+}
+.big-title {
+    text-align: center;
+    font-size: 64px;
+    padding-top: 100px;
+    font-weight: bold;
+    z-index: 10;
+    position: relative;
+}
+.img-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.img-base {
+    height: 500px;
+    width: 375px;
+    background-repeat: no-repeat;
+    background-size: 440px;
+    background-position: -32px 0px;
+    margin: 40px 10px;
+    border-radius: 2px;
+    z-index: 10;
+}
+.img-url1 {
+    background-image: url("/public/home/IMG_0049.png");
+}
+.img-url2 {
+    background-image: url("/public/home/IMG_0050.png");
+}
+.img-url3 {
+    background-image: url("/public/home/IMG_0051.png");
+}
+.git-flag {
+    position: absolute;
+    right: 200px;
+    top: -160px;
+    /*background-image: url("/public/home/flag-black.gif");*/
+    /*background-repeat: no-repeat;*/
+    /*background-size: 100% 100%;*/
+    width: 1000px;
+    height: 500px;
+}
+/*第三屏*/
+.third-screen {
+    scroll-snap-stop: always;
+    scroll-snap-align: start;
+    position: relative;
+    height: 100vh;   /* dvh不支持就回退：所有浏览器都支持 */
+    width: 100vw;
+    background-image: url("/public/home/STGpowStatic.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.img-text-block {
+    position: absolute;
+    left: 40px;
+    bottom: 40px;
+    width: 250px;
+    color: #112233;
+    text-align: justify;
+    font-size: 13px;
+}
+.game-img {
+    background-image: url("/public/home/dendy.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    width: 240px;
+    height: 240px;
+    transform: scale(1);
+    cursor: pointer;
+    transition-duration: .15s;
+    transition-property: transform;
+}
+.game-img:hover {
+    transform: scale(1.1);
+}

@@ -59,3 +59,11 @@ export let getRandomElementsFromArray = (array, count) => {
   return [selectedElements, otherElements];
 }
 
+export function isEmptyFunction(func) {
+  if (typeof func !== 'function') return false;
+  const body = func.toString()
+    .replace(/\/\/.*|\/\*[\s\S]*?\*\//g, '') // 去注释:ml-citation{ref="7" data="citationList"}
+    .replace(/\s+/g, '') // 去空格:ml-citation{ref="6" data="citationList"}
+    .split(/{|}/)[1]; // 提取函数体内容:ml-citation{ref="5" data="citationList"}
+  return body.trim() === '';
+}

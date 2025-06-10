@@ -1,0 +1,106 @@
+.top-layout {
+    /* 电子数字效果 */
+    font-family: Orbitron, monospace;
+    width: 100vw;
+    overflow: hidden;
+    padding-top: 1px;
+    /*background-color: #000;*/
+    min-height: 100vh;
+    background: radial-gradient(circle, transparent 20%, #fff 20%, #fff 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, #fff 20%, #fff 80%, transparent 80%, transparent) 25px 25px, linear-gradient(#f1891b 2px, transparent 2px) 0 -1px, linear-gradient(90deg, #f1891b 2px, #fff 2px) -1px 0;
+    background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+    padding-bottom: 6vw;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    /*background: moccasin;*/
+    mix-blend-mode: multiply;
+    background-color: rgba(255,255,255,0.8);
+}
+.display-area {
+    position: relative;
+    width: 94vw;
+    background-color: rgba(255,255,255,0.8);
+    margin: 1vh auto;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.09) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.display-area-back {
+    filter: brightness(1.2) contrast(1.2);
+    background-color:rgba(255,255,255,0.8);
+    /*background-image: url("/public/pipa/fabric-surface.jpg");*/
+    background-size: 150% 100%;
+    background-repeat: no-repeat;
+}
+.top-img {
+    background-image: url("/public/pipa/pipa3.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 94vw;
+    height: 60vw;
+    margin: 1vh auto;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.top-img2 {
+    background-image: url("/public/pipa/pipa6.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 94vw;
+    height: 60vw;
+    margin: 1vh auto;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.top-img3 {
+    background-image: url("/public/pipa/pipa4.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 94vw;
+    height: 60vw;
+    margin: 1vh auto;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset, rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset, rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset, rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px, rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px, rgba(0, 0, 0, 0.09) 0px 32px 16px;
+}
+.title {
+    padding: 3vw 4vw 1vh;
+    font-size: 4vw;
+    font-weight: 500;
+}
+.text {
+    padding: 0.5vw 4vw;
+    font-size: 3.5vw;
+}
+.middle-img {
+    background-image: url("/public/pipa/pipa2.png");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 94vw;
+    height: 60vw;
+    margin: 1vh auto;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+.qr-img {
+    background-image: url("/public/pipa/pipa7.jpg");
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    width: 94vw;
+    height: 127vw;
+    margin: 1vh auto;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+}
+.btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1f1f1f;
+    border-radius: 80px;
+    border: none;
+    color: #fff;
+    padding: 1vw 2vw;
+    margin-left: 1vw;
+}

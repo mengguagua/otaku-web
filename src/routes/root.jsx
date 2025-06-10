@@ -1,3 +1,4 @@
+// 最外层页面，包含头部组件
 import { Outlet } from "react-router-dom";
 import './root.css';
 // 加载框

@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css?family=Nunito+Sans');
+@font-face {
+  font-family: 'Orbitron';
+  src: url('/public/font/Orbitron/static/Orbitron-Regular.ttf') format('opentype');
+}
+@font-face {
+  font-family: 'Knewave';
+  src: url('/public/font/Knewave/Knewave-Regular.ttf') format('opentype');
+}
 a {
   font-weight: 500;
   color: #0050b3;
