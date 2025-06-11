@@ -225,6 +225,10 @@
     align-items: center;
     justify-content: center;
 }
+.second-screen-row {
+    max-width: 1440px;
+    display: flex;
+}
 .mine-img {
     width: 540px;
     height: 637px;
@@ -320,3 +324,79 @@
     width: 53vh;
 }
 /*第五屏----end*/
+
+@media only screen and (max-width: 767px) {
+    /* 在屏幕宽度小于或等于 767px 时应用此样式 */
+    .second-screen {
+        scroll-snap-align: start;
+        position: relative;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .second-screen-row {
+        display: block;
+        max-width: 100vw;
+    }
+    .mine-img {
+        background-image: url('/otaku/public/home/mine.jpg');
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 100vw;
+        height: 118vw;
+        border-radius: 0;
+        margin-right: 0;
+    }
+    .mine-text {
+        margin-top: 6px;
+        width: 100vw;
+        height: 100%;
+        padding: 0 6vw 6vw;
+        color: #141414;
+        font-size: 16px;
+    }
+    .third-screen {
+        scroll-snap-stop: always;
+        scroll-snap-align: start;
+        position: relative;
+        height: 30vh;
+        width: 100vw;
+        background-image: url('/otaku/public/home/STGpowStatic.jpg');
+        background-repeat: no-repeat;
+        background-size: 150% 100%;
+        background-position-x: -25vw;
+    }
+    .img-text-block {
+        position: absolute;
+        left: 2vw;
+        bottom: -6vw;
+        width: 40vw;
+        color: #112233;
+        text-align: justify;
+        font-size: 13px;
+    }
+    .game-img {
+        background-image: url("/public/home/dendy.png");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        width: 30vw;
+        height: 30vw;
+        transform: scale(1);
+        cursor: pointer;
+        transition-duration: .15s;
+        transition-property: transform;
+    }
+    .five-screen {
+        position: relative;
+        height: 30vh;
+        width: 100vw;
+        z-index: 10;
+        background-image: url("/public/home/mv-ketakuma.webp");
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+    }
+    .baby-text {
+        display: none;
+    }
+}

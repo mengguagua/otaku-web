@@ -13,6 +13,8 @@ const START_POSITION = 1300; // 右滑距离，触发卡片显示的位置
 
 let handleWheel = null;
 let totalDeltaY = 0;
+// 判断是否是移动端
+const isMobileScreen = window.matchMedia("(max-width: 767px)").matches;
 
 let index = () => {
   let [deltaYDistance, setDeltaYDistance] = useState(0);
@@ -189,7 +191,7 @@ let index = () => {
           <OwlIcon color={'#459582'}/>
         </div>
         {/*第一屏*/}
-        <div ref={containerRef} className={styles['first-screen']} style={{transform: `scale(${screenSize})`, borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}>
+        <div ref={containerRef} className={styles['first-screen']} style={isMobileScreen? {display: "none"} : {transform: `scale(${screenSize})`, borderRadius: `0 0 ${(1-screenSize)*1000}px ${(1-screenSize)*1000}px`}}>
           <MouseFollow/>
           <div className={styles['black-area']}>
             {/*文字动画*/}
@@ -247,7 +249,7 @@ let index = () => {
         </div>
         {/*第二屏图文*/}
         <div className={styles['second-screen']} style={{zIndex: 10,backgroundColor: '#eaeaea'}}>
-          <div style={{maxWidth: '1440px', display: "flex"}}>
+          <div className={styles['second-screen-row']}>
             <div className={styles['mine-img']}/>
             <div className={styles['mine-text']}>
               <div style={{fontSize: 'var(--title-01)'}}>Gaocc</div>
@@ -289,7 +291,7 @@ let index = () => {
         </div>
         {/* 第四屏视频 */}
         {/*muted：静音播放，允许视频在某些浏览器中自动播放。playsinline：在移动设备上防止视频全屏播放。preload="auto"：提前加载视频数据，减少播放延迟。pointer-events: none;：防止用户与视频交互，隐藏右键菜单等。*/}
-        <div style={{height: '100vh', zIndex: 10}}>
+        <div style={isMobileScreen? {display: "none"} : {height: '100vh', zIndex: 10}}>
           <video
             id="fourthVideo"
             src="/public/home/iLoveTheWorld.mp4"
@@ -308,7 +310,7 @@ let index = () => {
             loop
             playsInline
             preload="auto"
-            style={{
+            style={isMobileScreen? {display: "none"} : {
               width: '53vh', height: '30vh', display: 'block',
               position: "absolute", zIndex: 10, pointerEvents: 'none',
               objectPosition: 'center top', objectFit: 'cover',
@@ -330,7 +332,7 @@ let index = () => {
             playsInline
             preload="auto"
             className={styles['video-loop']}
-            style={windowScrollY > 2000 ? {width: '100%', height: '100vh', display: 'block', pointerEvents: 'none', objectPosition: 'center top', objectFit: 'cover'} : {display: "none"}}
+            style={isMobileScreen || windowScrollY > 2000 ? {width: '100%', height: '100vh', display: 'block', pointerEvents: 'none', objectPosition: 'center top', objectFit: 'cover'} : {display: "none"}}
           />
         </div>
         {/*todo 第二到第三屏开始，每次滑动都用整屏显示，不好实现1、2屏之间的切换*/}
