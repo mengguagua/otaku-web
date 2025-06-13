@@ -307,23 +307,23 @@
 /*第五屏----start*/
 .five-screen {
     position: relative;
-    height: 100vh;
+    height: 62.5vw;
     width: 100vw;
     z-index: 10;
     background-image: url("/public/home/mv-ketakuma.webp");
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     background-size: 100% 100%;
 }
 .baby-text {
-    position: absolute;
-    left: 17vw;
-    top: 66vh;
     color: #5e6d90;
     line-height: 40px;
-    font-size: 24px;
+    font-size: 18px;
     width: 53vh;
 }
 /*第五屏----end*/
+
+
+
 
 @media only screen and (max-width: 767px) {
     /* 在屏幕宽度小于或等于 767px 时应用此样式 */

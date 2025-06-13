@@ -303,23 +303,25 @@ let index = () => {
         </div>
         {/* 第五屏视频 */}
         <div className={styles['five-screen']}>
-          <video
-            id="fiveVideo"
-            src="/public/home/baby.mov"
-            muted
-            loop
-            playsInline
-            preload="auto"
-            style={isMobileScreen? {display: "none"} : {
-              width: '53vh', height: '30vh', display: 'block',
-              position: "absolute", zIndex: 10, pointerEvents: 'none',
-              objectPosition: 'center top', objectFit: 'cover',
-              left: '17vw', top: '32vh', borderRadius: '10px 0 0 10px',
-              opacity: 0.88, maskImage: 'linear-gradient(to right, black 85%, transparent 100%)',
-              maskRepeat: 'no-repeat'
-            }}
-          />
-          <div className={styles['baby-text']}>2025年3月，我的生活中多出了一个小生命.</div>
+          <div style={{position: "absolute", left: '15vw', top: '24vw'}}>
+            <video
+              id="fiveVideo"
+              src="/public/home/baby.mov"
+              muted
+              loop
+              playsInline
+              preload="auto"
+              style={isMobileScreen? {display: "none"} : {
+                height: '40vh', display: 'block',
+                zIndex: 10, pointerEvents: 'none',
+                objectPosition: 'center top', objectFit: 'cover',
+                borderRadius: '10px 0 0 10px',
+                opacity: 0.88, maskImage: 'linear-gradient(to right, black 85%, transparent 100%)',
+                maskRepeat: 'no-repeat'
+              }}
+            />
+            <div className={styles['baby-text']}>2025年3月，我的生活中多出了一个小生命.</div>
+          </div>
         </div>
         <div style={{height: '100vh', backgroundColor: "transparent", zIndex: 10}}/>
         {/* 第六屏视频 */}
