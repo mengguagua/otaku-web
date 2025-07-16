@@ -265,11 +265,23 @@ let index = () => {
                 </div>
               </div>
               <div style={{padding: '16px 0', lineHeight: '24px'}}>作为一名经验丰富的web工程师，拥有扎实的web工程背景，我专注于设计和实现各类系统，如政府门户、货车系统、加油系统、券商系统、公示大屏等等。并为 普通开发者 定制专业搭建工具，以革新开发流程，规范系统风格。我常驻杭州，擅长处理产品与后端开发的交界任务，拥有软件全生命周期开发能力和经验。</div>
-              <div style={{padding: '0 0 16px 0', lineHeight: '24px'}}>凭借前端、服务端、运维环境的混合专业能力，我善于搭建前端、后端团队和运维团队之间的桥梁，提升三方在系统研发过程中的流畅性。我通过创建将 github和cli 集成的搭建工具，实现一键搭建前端工程的效果，加速开发，今早交付项目给客户。</div>
+              <div style={{padding: '0 0 16px 0', lineHeight: '24px'}}>凭借前端、服务端、运维环境的混合专业能力，我善于搭建前端、后端团队和运维团队之间的桥梁，提升三方在系统研发过程中的流畅性。我通过创建将 github和cli 集成的搭建工具，实现一键搭建前端工程的效果，加速开发，尽早交付项目给客户。</div>
               <div style={{padding: '0 0 16px 0', lineHeight: '24px'}}>在我的职业生涯中，我成功领导过前端团队，目前也是公司前端负责人，完成过高技术复杂度和业务复杂度的项目，协同项目经理和服务端开发负责人，将大型项目拆解为可执行的工作任务。通过对资源的合理管理与分配，我确保项目的顺利推进，并交付超出预期的成果。</div>
               <div style={{padding: '0 0 16px 0', lineHeight: '24px'}}>如果你对开发充满热情，愿意探索协作机会，欢迎随时联系我！我期待与志同道合的人士交流，迎接Web+AI时代新篇章。</div>
             </div>
           </div>
+        </div>
+        {/* 第四屏视频 */}
+        {/*muted：静音播放，允许视频在某些浏览器中自动播放。playsinline：在移动设备上防止视频全屏播放。preload="auto"：提前加载视频数据，减少播放延迟。pointer-events: none;：防止用户与视频交互，隐藏右键菜单等。*/}
+        <div style={isMobileScreen? {display: "none"} : {height: '100vh', zIndex: 10}}>
+          <video
+            id="fourthVideo"
+            src="/public/home/iLoveTheWorld.mp4"
+            muted
+            playsInline
+            preload="auto"
+            style={{width: '100%', height: '100vh', display: 'block',position: 'relative', zIndex: 10, pointerEvents: 'none', objectPosition: 'center top', objectFit: 'cover'}}
+          />
         </div>
         {/* 第三屏图片 */}
         <div className={styles['third-screen']} style={{zIndex: 10}}>
@@ -289,20 +301,8 @@ let index = () => {
             />
           </div>
         </div>
-        {/* 第四屏视频 */}
-        {/*muted：静音播放，允许视频在某些浏览器中自动播放。playsinline：在移动设备上防止视频全屏播放。preload="auto"：提前加载视频数据，减少播放延迟。pointer-events: none;：防止用户与视频交互，隐藏右键菜单等。*/}
-        <div style={isMobileScreen? {display: "none"} : {height: '100vh', zIndex: 10}}>
-          <video
-            id="fourthVideo"
-            src="/public/home/iLoveTheWorld.mp4"
-            muted
-            playsInline
-            preload="auto"
-            style={{width: '100%', height: '100vh', display: 'block',position: 'relative', zIndex: 10, pointerEvents: 'none', objectPosition: 'center top', objectFit: 'cover'}}
-          />
-        </div>
         {/* 第五屏视频 */}
-        <div className={styles['five-screen']}>
+        <div className={styles['five-screen']} style={{visibility: "hidden"}}>
           <div style={{position: "absolute", left: '15vw', top: '24vw'}}>
             <video
               id="fiveVideo"
@@ -334,7 +334,7 @@ let index = () => {
             playsInline
             preload="auto"
             className={styles['video-loop']}
-            style={isMobileScreen || windowScrollY > 2000 ? {width: '100%', height: '100vh', display: 'block', pointerEvents: 'none', objectPosition: 'center top', objectFit: 'cover'} : {display: "none"}}
+            style={isMobileScreen || windowScrollY > 2000 ? {width: '100vw', height: '100vh', display: 'block', pointerEvents: 'none', objectPosition: 'center top', objectFit: 'cover'} : {display: "none"}}
           />
         </div>
         {/*todo 第二到第三屏开始，每次滑动都用整屏显示，不好实现1、2屏之间的切换*/}
