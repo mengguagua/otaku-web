@@ -1,6 +1,6 @@
 .line-letter {
     position: absolute;
-    color: #fdfdfd;
+    color: rgb(250, 249, 246);
     /* 手写字母数字效果 */
     font-family: Knewave, monospace;
     top: 50%;              /* 垂直移动到容器高度的 50% */

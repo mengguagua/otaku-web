@@ -66,6 +66,7 @@ let index = () => {
       const openai = new OpenAI(
         {
           // 若没有配置环境变量，请用百炼API Key将下行替换为：apiKey: "sk-xxx",
+          // 免费key已经不能用了，需要自己申请2025-08-29
           apiKey: 'sk-dafcc84db78b42ba95e0f573adaa2a4a',
           baseURL: "https://dashscope.aliyuncs.com/compatible-mode/v1",
           dangerouslyAllowBrowser: true
@@ -223,6 +224,7 @@ let index = () => {
         这是一个<span style={{fontWeight: 500, color: '#000'}}>实验性</span>的页面，数据来源于阿里云百炼API，平台支持DeepSeek，通义千问等，提供免费Token，支持有限次数的问答。
         {/*<div style={{marginTop: '10px'}}>AI模型不联网！</div>*/}
         <div style={{marginTop: '10px'}}>未登陆可提问<span style={{fontWeight: 500, color: '#000'}}>10次</span></div>
+        <div style={{marginTop: '10px'}}>免费key已经不能用了，需要自己申请(自2025-08-29开始)</div>
       </div>
 
       <div className={styles['ai-box']} style={{top: '20px'}}>
