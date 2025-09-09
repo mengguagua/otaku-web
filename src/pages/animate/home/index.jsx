@@ -88,8 +88,10 @@ let index = () => {
       }
     };
     // 创建滚轮监听的对象
-    // 加上 { passive: false } 才能阻止默认滚动
-    containerRef.current.addEventListener('wheel', handleWheel, { passive: false });
+    // 加上 { passive: false } 才能阻止默认滚动; 宽度小就是手机，不禁止滚动
+    if (winWidth > 700) {
+      containerRef.current.addEventListener('wheel', handleWheel, { passive: false });
+    }
     return () => {
       containerRef.current?.removeEventListener('wheel', handleWheel);  // options 可省略 capture 默认为 false
     };
@@ -99,6 +101,7 @@ let index = () => {
   useEffect(() => {
     const onScroll = () => {
       const winHeight =  window.innerHeight;
+      const winWidth = window.innerWidth;
       setWindowScrollY(window.scrollY)
       // console.log('页面滚动 Y:', window.scrollY)
       let scalePosition = winHeight * 3 / 5 // 缩放大小的滚动位置
@@ -109,7 +112,7 @@ let index = () => {
         setScreenSize(1);
       }
       // 恢复横屏滚动效果，totalDeltaY多减一点，避免偶发再次removeEventListener('wheel', handleWheel)
-      if (window.scrollY == 0) {
+      if (window.scrollY == 0 && winWidth > 700) {
         containerRef.current.addEventListener('wheel', handleWheel, { passive: false });
         totalDeltaY = totalDeltaY - 100;
       }
@@ -183,7 +186,7 @@ let index = () => {
       }
       <div ref={animateRef} className={styles['top-layout']} style={loading? {display: "none"}: {display: "block"}}>
         {/*右上角菜单*/}
-        <div style={{position: "fixed", zIndex: '1000', right: '-20px', top: '-20px', transform: 'scale(.7)'}}>
+        <div className={styles['top-menu']}  style={{position: "fixed", zIndex: '1000', right: '-20px', top: '-20px', transform: 'scale(.7)'}}>
           <AnimateMenu/>
         </div>
         {/*左上角icon*/}

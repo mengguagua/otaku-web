@@ -327,6 +327,15 @@
 
 @media only screen and (max-width: 767px) {
     /* 在屏幕宽度小于或等于 767px 时应用此样式 */
+    .eye-svg {
+        left: 18vw;
+    }
+    .top-menu {
+        right: -10vw !important;
+    }
+    .first-screen {
+        display: none;
+    }
     .second-screen {
         scroll-snap-align: start;
         position: relative;
