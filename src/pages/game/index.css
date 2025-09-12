@@ -225,7 +225,7 @@
     top: 24vh;
     cursor: pointer;
     z-index: 110;
-    background-image: url('/otaku/public/game/other/game-over.jpg');
+    background-image: url('/public/game/other/game-over.jpg');
     background-repeat: no-repeat;
     background-size: 100vw calc(100vh - 44px);
     background-position: -74vw -24vh;
