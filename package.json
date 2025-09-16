@@ -11,6 +11,8 @@
     "start": "npx tinacms dev -c \"npm run dev\""
   },
   "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/react": "^0.1.21",
     "@pansy/smart-captcha": "^2.1.2",
     "@reduxjs/toolkit": "^1.9.5",
     "animejs": "^4.0.1",

@@ -17,6 +17,7 @@ import Ai from '../pages/ai/home'
 import Demo from '../pages/animate/demo/index'
 import AnimateHome from '../pages/animate/home/index'
 import Pipa from '../pages/h5/pipa/index'
+import ImgPuzzle from '../pages/imgPuzzle/index'
 
 const router = createBrowserRouter([
   {
@@ -57,6 +58,9 @@ const router = createBrowserRouter([
       }, {
         path: "animate/demo",
         element: <Demo />,
+      }, {
+        path: "imgPuzzle",
+        element: <ImgPuzzle />,
       },
     ],
   },
