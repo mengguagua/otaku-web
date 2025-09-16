@@ -67,3 +67,75 @@ export function isEmptyFunction(func) {
     .split(/{|}/)[1]; // 提取函数体内容:ml-citation{ref="5" data="citationList"}
   return body.trim() === '';
 }
+
+// 图片分块，然后返回每一块图的url和下标
+export function splitImage(imgUrl, rows = 4, cols = 4) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.crossOrigin = "anonymous"; // 解决跨域问题（如果是同源图片可以去掉）
+    img.src = imgUrl;
+
+    img.onload = () => {
+      // body 默认16px == 1rem, 图片长/宽 太大要按窗口比例折算成rem
+      const pieceWidth = img.width / cols;
+      const pieceHeight = img.height / rows;
+      let {shwoWidht, showHeight} = dealRem(pieceWidth, pieceHeight, cols);
+      let result = {
+        urls: [], // key:url的映射，key为`row,col`
+        width: shwoWidht,
+        height: showHeight,
+      };
+      console.log('width', shwoWidht, 'height', showHeight, 'rows', rows, 'cols', cols);
+
+      for (let row = 0; row < rows; row++) {
+        for (let col = 0; col < cols; col++) {
+          const canvas = document.createElement("canvas");
+          canvas.width = pieceWidth;
+          canvas.height = pieceHeight;
+          const ctx = canvas.getContext("2d");
+
+          ctx.drawImage(
+            img,
+            col * pieceWidth, // 裁剪区域的起点x（根据列数计算）
+            row * pieceHeight, // 裁剪区域的起点y（根据行数计算）
+            pieceWidth, // 裁剪区域宽度
+            pieceHeight, // 裁剪区域高度
+            0, // 绘制到canvas的x坐标（放在左上角）
+            0, // 绘制到canvas的y坐标
+            pieceWidth, // 绘制宽度（缩放到这个大小）
+            pieceHeight  // 绘制高度（缩放到这个大小）
+          );
+
+          let key = `${row},${col}`;
+          result.urls.push({
+            [key]: canvas.toDataURL("image/png")
+          });
+        }
+      }
+
+      resolve(result);
+    };
+
+    img.onerror = (err) => reject(err);
+  });
+}
+let dealRem = (width, height, cols) => {
+  // innerWidth小于768 认为是移动端（12px），否则是pc(16px)
+  // pc的话，总显示宽度最大为，内容宽度的1/3; 移动端暂不考虑
+  let maxWidth =  window.innerWidth / 3;
+  let shwoWidht = maxWidth / cols;
+  let showHeight = (height * shwoWidht) / width;
+  console.log('maxWidth', maxWidth, 'shwoWidht', shwoWidht, 'showHeight', showHeight);
+  if (window.innerWidth < 768) {
+    return {
+      shwoWidht: shwoWidht / 12,
+      showHeight: showHeight / 12,
+    }
+  } else {
+    return {
+      shwoWidht: shwoWidht / 16,
+      showHeight: showHeight / 16,
+    }
+  }
+  
+}

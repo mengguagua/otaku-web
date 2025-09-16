@@ -349,7 +349,7 @@
         max-width: 100vw;
     }
     .mine-img {
-        background-image: url('/otaku/public/home/mine.jpg');
+        background-image: url('/public/home/mine.jpg');
         background-repeat: no-repeat;
         background-size: 100% 100%;
         width: 100vw;
@@ -371,7 +371,7 @@
         position: relative;
         height: 30vh;
         width: 100vw;
-        background-image: url('/otaku/public/home/STGpowStatic.jpg');
+        background-image: url('/public/home/STGpowStatic.jpg');
         background-repeat: no-repeat;
         background-size: 150% 100%;
         background-position-x: -25vw;

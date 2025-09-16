@@ -1,0 +1,22 @@
+.img-puzzle-container {
+  color: #333;
+}
+.row-disorder-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.row-disorder-item > div {
+  margin: 0.5rem;
+}
+.row-drop-item {
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  /* width: 22rem; */
+}
+.row-drop-item > div {
+  margin: 0.1rem;
+}

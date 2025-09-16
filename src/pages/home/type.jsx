@@ -50,6 +50,10 @@ let type =({changeType , currentKey}) => {
     navigate('/otaku/game/');
   }
 
+  let goImgPuzzle = () => {
+    navigate('/otaku/imgPuzzle');
+  }
+
   let goAIPage = () => {
     navigate('/otaku/ai/');
   }
@@ -60,8 +64,11 @@ let type =({changeType , currentKey}) => {
         <div className={'type-container'}>
           {menu}
         </div>
-        <div className={'type-card-roguelike'} onClick={goGame}>
+        {/* <div className={'type-card-roguelike'} onClick={goGame}>
           Roguelike
+        </div> */}
+        <div className={'type-card-roguelike'} onClick={goImgPuzzle}>
+          拼图
         </div>
         <div className={'type-card-coffee'}>
           <div>请站长一杯</div>
