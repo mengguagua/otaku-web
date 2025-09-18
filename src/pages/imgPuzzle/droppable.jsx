@@ -6,7 +6,7 @@ export default function Droppable({id, children, itemHeight, itemWidth}) {
   });
 
   return (
-    <div ref={ref} style={{width: `${itemWidth}rem`, height: `${itemHeight}rem`, border: '1px solid #e5e5e5'}}>
+    <div ref={ref} style={{width: `${itemWidth}rem`, height: `${itemHeight}rem`, border: '1px solid #e5e5e5', boxSizing: 'border-box'}}>
       {children}
     </div>
   );
