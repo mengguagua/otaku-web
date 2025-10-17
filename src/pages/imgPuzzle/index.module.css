@@ -3,14 +3,17 @@
 }
 .btn-container {
   margin: 1rem auto;
+  display: flex;
+  align-items: center;
+  font-size: 0.75rem;
+  color: #333;
 }
 .btn {
   display: inline-block;
-  padding: 0.5rem 1rem;
+  padding: 0.55rem 1rem;
   border-radius: 0.5rem;
   background-color: #333;
   color: #fff;
-  font-size: 0.75rem;
   cursor: pointer;
 }
 .row-disorder-item {
