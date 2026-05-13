@@ -1,7 +1,7 @@
 import {client} from "../../../tina/__generated__/client";
 import React, {useEffect, useState} from "react";
 import "./index.css";
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 import {getQueryStringArgs} from "../../tool/index";
 import { TinaMarkdown } from "tinacms/dist/rich-text";
 import { Icon } from '@iconify/react';

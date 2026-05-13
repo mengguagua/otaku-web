@@ -1,7 +1,7 @@
 import {client} from "../../../tina/__generated__/client";
 import {useEffect, useState} from "react";
 import "./index.css";
-import {useNavigate} from "react-router";
+import {useNavigate} from "react-router-dom";
 import {Icon} from "@iconify/react";
 import moment from "moment";
 

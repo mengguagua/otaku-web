@@ -3,8 +3,8 @@ import {useState, useEffect} from "react";
 import { Icon } from '@iconify/react';
 import {useNavigate} from "react-router-dom";
 import {Form, Input, Button, Alert} from "antd";
-// 暂时用阿里智慧验证码
-import { SmartCaptcha } from '@pansy/smart-captcha';
+// 使用自定义图形验证码
+import Captcha from '../../components/Captcha';
 import { authLogin } from "../../service/interface";
 import md5 from 'md5';
 import { setToken, fetchData } from '../../store/userSlice'
@@ -84,8 +84,10 @@ let index =() => {
                   <Input.Password style={{width: 320}} placeholder={'输入密码'}/>
                 </div>
               </Form.Item>
-              {/* 严格模式，会渲染两次。上线后就正常 */}
-              <SmartCaptcha style={{marginLeft: '90px', marginBottom: '10px'}} onSuccess={isSuccess}/>
+              {/* 使用自定义图形验证码 */}
+              <div style={{marginLeft: '90px', marginBottom: '10px'}}>
+                <Captcha onSuccess={() => setCanLogin(true)} />
+              </div>
               <Button type="primary" htmlType="submit" style={{marginLeft: '90px'}} className={'submit-btn'} disabled={!canLogin}> 登 录 </Button>
               <div className={'login-forget'}>我忘记了密码</div>
             </div>

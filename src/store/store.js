@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import loadingReducer from './loadingSlice';
 import userReducer from './userSlice';
-import thunk from 'redux-thunk';
 
 
 export default configureStore({
@@ -9,5 +8,4 @@ export default configureStore({
     loading: loadingReducer,
     user: userReducer,
   },
-  middleware: [thunk],
 })
